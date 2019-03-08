@@ -44,7 +44,6 @@
 #define SCL_PORT                PORTC
 
 #define FAN_CTRL_PIN            0
-#define FAN_CTRL_PINR           PINB
 #define FAN_CTRL_DDR            DDRB
 #define FAN_CTRL_PORT           PORTB
 

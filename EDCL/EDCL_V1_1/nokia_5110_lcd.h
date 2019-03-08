@@ -19,13 +19,13 @@
 #define LCD_CONTRAST      0x40
 
 
-void PCD8544_init(void);
-void PCD8544_send_data(char data);
-void PCD8544_send_command(char data);
-void PCD8544_send_char(char character);
-void PCD8544_send_string(char *character);
-void set_x_y(char x,char y);
-void PCD8544_RAM_Clear(void);
+void NokiaLCD_init(void);
+void NokiaLCD_send_data(char data);
+void NokiaLCD_send_command(char data);
+void NokiaLCD_send_char(char character);
+void NokiaLCD_send_string(char *character);
+void NokiaLCD_goto_x_y(char x,char y);
+void NokiaLCD_Clear(void);
 //void PCD8544_Image();
 
 #endif /* INC_NOKIA_5110_LCD_H_ */

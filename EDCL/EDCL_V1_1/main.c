@@ -29,12 +29,13 @@ typedef enum{RUN, CAL} State_t;
 #define MAX_VOLTAGE		1200.0
 #define ADC_REF			5.0
 #define ADC_FULL_SCALE	4095.0
-#define VOLTAGE_DIVIDER	5.714
+#define VOLTAGE_DIVIDER	5.7143
+
+#define PWM_OFFSET	0.005
+#define MAX_DUTY	84
 
 
 void progressBar(uint8_t x, uint8_t y);
-void homeLayout(void);
-void lcdSetupLayout(void);
 
 uint8_t cursor_index = 0;
 uint8_t contrast = LCD_CONTRAST;
@@ -42,10 +43,17 @@ uint8_t contrast = LCD_CONTRAST;
 uint16_t adcRead = 0;
 uint8_t adc_offset = 0;
 float adc_gain = 1.0;
-float voltage = 0/*, new_voltage = 0.0*/;
+float voltage = 0.0, current = 0.0, power = 0.0;
 char adcStr[5];
-char str_number[6], volt_str[6];
-//int timOut = 0;
+char str_number[6], volt_str[6], current_str[6], power_str[6];
+
+uint8_t duty = 0;
+char duty_str[4];
+float pwm_Voltage = 0.0;
+
+void adc_Read_Volt(void);
+void adc_Read_Current(void);
+void adc_Power_Calc(void);
 
 int main(void)
 {
@@ -56,75 +64,77 @@ int main(void)
     MCP3202_Init();
     I2C_Master_Init();
     PWM0_init();
-    UART_Send_String("EDCL V1.0\nBy/ Ahmed Osama\n");
-
-    PCD8544_init();
-    //homeLayout();
-    EEWriteByte(0, 0xAD);
+    NokiaLCD_init();
+    NokiaLCD_goto_x_y(0,0);
+    NokiaLCD_send_string(" Electronic");
+    NokiaLCD_goto_x_y(0,1);
+    NokiaLCD_send_string("  DC Load");
+    NokiaLCD_goto_x_y(0,2);
+    NokiaLCD_send_string("Ver : 1.1");
+    _delay_ms(2000);
+    NokiaLCD_Clear();
+    NokiaLCD_goto_x_y(0,0);
+    NokiaLCD_send_string("V :");
+    NokiaLCD_goto_x_y(0,1);
+    NokiaLCD_send_string("I :");
+    NokiaLCD_goto_x_y(0,2);
+    NokiaLCD_send_string("D :");
+    //NokiaLCD_goto_x_y(0,3);
+    //NokiaLCD_send_string("P :");
+    //UART_Send_String("EDCL V1.0\nBy/ Ahmed Osama\n");
+    PWM2_init();
+    PWM2_Start();
 
     while(1)
     {
     	switch(MCU_State){
     	case RUN:
-    		adcRead = MCP3202_read(ADC_VOLT_CH) - adc_offset;
-			voltage = ((adcRead * ADC_REF) / ADC_FULL_SCALE) * VOLTAGE_DIVIDER * adc_gain;
-			voltage *= 100;
-			if(voltage <= MAX_VOLTAGE){
-				sprintf(str_number, "%04d", (uint16_t)voltage);
-				volt_str[0] = str_number[0];
-				volt_str[1] = str_number[1];
-				volt_str[2] = '.';
-				volt_str[3] = str_number[2];
-				volt_str[4] = str_number[3];
-				set_x_y(35,1);
-				PCD8544_send_string(volt_str);
-				PCD8544_send_char('V');
+    		adc_Read_Volt();
+    		_delay_ms(2);
+    		adc_Read_Current();
+    		_delay_ms(2);
+    		//adc_Power_Calc();
+			if(GetKeyPressed() != NO_KEY_PRESSED){
+				if(GetKeyPressed() == OK)
+					MCU_State = CAL;
+				if(GetKeyPressed() == UP){
+					if(duty >= MAX_DUTY)
+						duty = 0;
+					else
+						duty++;
+					PWM2_Set_Duty(duty);
+				}
+				if(GetKeyPressed() == DOWN){
+					if(duty <= 0)
+						duty = MAX_DUTY;
+					else
+						duty--;
+					PWM2_Set_Duty(duty);
+				}
 			}
-			if(voltage > MAX_VOLTAGE){
-				set_x_y(35,1);
-				PCD8544_send_string("OL    ");
-			}
-			if(GetKeyPressed() == OK)
-				//new_voltage = voltage;
-				MCU_State = CAL;
+			NokiaLCD_goto_x_y(35,2);
+			//pwm_Voltage = (duty * 0.02) + PWM_OFFSET;
+			//pwm_Voltage *= 1000;
+			sprintf(duty_str, "%04d", /*(uint16_t)pwm_Voltage*/duty);
+			/*duty_str[0] = str_number[0];
+			duty_str[2] = str_number[1];
+			duty_str[1] = '.';
+			duty_str[3] = str_number[2];*/
+			NokiaLCD_send_string(duty_str);
     		break;
-    	case CAL:/*
-    		set_x_y(35,1);
-    		str_number[0] = (new_voltage / 10) + 48;
-			str_number[1] = ((uint8_t)new_voltage % 10) + 48;
-			str_number[2] = '.';
-			str_number[3] = ((uint8_t)(new_voltage * 10) % 10) + 48;
-			str_number[4] = ((uint8_t)(new_voltage * 100) % 10) + 48;
-    		PCD8544_send_string(str_number);*/
+    	case CAL:
     		if(GetKeyPressed() != NO_KEY_PRESSED){
-				set_x_y(10,4);
 				switch(GetKeyPressed()){
-				case UP:/*
-					new_voltage += 0.01;*/
+				case UP:
 					break;
-				case DOWN:/*
-					new_voltage -= 0.01;*/
+				case DOWN:
 					break;
-				case RIGHT:/*
-					set_x_y(10,4);
-					PCD8544_send_string("OFFSET");
-					_delay_ms(500);
-					adc_offset = MCP3202_read(ADC_VOLT_CH);*/
+				case RIGHT:
 					break;
 				case LEFT:
-					set_x_y(10,4);
-					PCD8544_send_string("OFFSET");
-					_delay_ms(500);
-					adc_offset = MCP3202_read(ADC_VOLT_CH);
-					set_x_y(10,4);
-					PCD8544_send_string("      ");
 					MCU_State = RUN;
 					break;
-				case OK:/*
-					set_x_y(10,4);
-					PCD8544_send_string("GAIN");
-					_delay_ms(500);
-					adc_gain = new_voltage / voltage;*/
+				case OK:
 					break;
 				}
 			}
@@ -137,52 +147,64 @@ int main(void)
 
 void progressBar(uint8_t x, uint8_t y)
 {
-    set_x_y(x, y);
+	NokiaLCD_goto_x_y(x, y);
     uint8_t length = 0;
     for(length = 0; length < 100; length++)
     {
-        PCD8544_send_data(1);
+    	NokiaLCD_send_data(1);
     }
 }
-/*
-void homeLayout(void)
-{
-    screenIndex = HOME_LAYOUT;
-    PCD8544_RAM_Clear();
-    set_x_y(0,0);
-    PCD8544_send_char('>');
-    set_x_y(7,0);
-    PCD8544_send_string("I = 1.00A");
-    set_x_y(7,1);
-    PCD8544_send_string("V = ");
-    adcRead = MCP3202_read(1);
-    itoa(adcRead, adcStr, 10);
-    set_x_y(40,1);
-    PCD8544_send_string(adcStr);
-    set_x_y(7,2);
-    PCD8544_send_string("P = 12.0W");
-    set_x_y(7,3);
-    sprintf(str_number, "Con = %03d", contrast);
-    PCD8544_send_string(str_number);
-    set_x_y(7,4);
-    PCD8544_send_string("Line 5");
-    set_x_y(7,5);
-    PCD8544_send_string("LCD setup");
+
+void adc_Read_Volt(void){
+		adcRead = MCP3202_read(ADC_VOLT_CH) - adc_offset;
+		voltage = ((adcRead * ADC_REF) / ADC_FULL_SCALE) * VOLTAGE_DIVIDER * adc_gain;
+
+		voltage *= 100;
+		if(voltage <= MAX_VOLTAGE){
+			sprintf(str_number, "%04d", (uint16_t)voltage);
+			volt_str[0] = str_number[0];
+			volt_str[1] = str_number[1];
+			volt_str[2] = '.';
+			volt_str[3] = str_number[2];
+			volt_str[4] = str_number[3];
+			NokiaLCD_goto_x_y(35,0);
+			NokiaLCD_send_string(volt_str);
+			NokiaLCD_send_char('V');
+		}
+		if(voltage > MAX_VOLTAGE){
+			NokiaLCD_goto_x_y(35,0);
+			NokiaLCD_send_string("OL    ");
+		}
 }
 
-void lcdSetupLayout(void)
-{
-    screenIndex = LCD_SETUP_LAYOUT;
-    PCD8544_RAM_Clear();
-    set_x_y(0,0);
-    PCD8544_send_char('>');
-    set_x_y(7,0);
-    PCD8544_send_string("VID_INV");
-    set_x_y(7,1);
-    PCD8544_send_string("VID_NORM");
-    set_x_y(7,2);
-    PCD8544_send_string("Contrast: +-");
-    set_x_y(7,3);
-    PCD8544_send_string("back");
+void adc_Read_Current(void){
+	/* Current measure */
+	adcRead = MCP3202_read(ADC_CURRENT_CH) - adc_offset;
+	current = ((adcRead * ADC_REF) / ADC_FULL_SCALE) * adc_gain;
+	current *= 100;
+	sprintf(str_number, "%04d", (uint16_t)current);
+	current_str[0] = str_number[0];
+	current_str[1] = str_number[1];
+	current_str[2] = '.';
+	current_str[3] = str_number[2];
+	current_str[4] = str_number[3];
+	NokiaLCD_goto_x_y(35,1);
+	NokiaLCD_send_string(current_str);
+	NokiaLCD_send_char('A');
 }
-*/
+
+void adc_Power_Calc(void){
+	/* Power Calc */
+	NokiaLCD_goto_x_y(35,3);
+	power = voltage * current;
+	//power *= 100;
+	sprintf(str_number, "%04d", (uint16_t)power);
+	power_str[0] = str_number[0];
+	power_str[2] = str_number[1];
+	power_str[1] = '.';
+	power_str[3] = str_number[2];
+	power_str[4] = str_number[3];
+	NokiaLCD_goto_x_y(35,3);
+	NokiaLCD_send_string(power_str);
+	NokiaLCD_send_char('W');
+}

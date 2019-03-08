@@ -152,7 +152,7 @@ const unsigned char Image [] = {
 };
 */
 
-void PCD8544_init()
+void NokiaLCD_init()
 {
     DDRD |= ((1 << PIND3) | (1 << PIND4)| ( 1 << PIND2)); // DC, RST and CE as digital output
     PORTD |= (1<<PIND3);                  // RST=1
@@ -162,25 +162,25 @@ void PCD8544_init()
     PORTD |= (1<<PIND3);                  // RST=1
 
 
-    PCD8544_send_command(function_set_ext);           // Function set : PD=0;V=0;H=1;
+    NokiaLCD_send_command(function_set_ext);           // Function set : PD=0;V=0;H=1;
     _delay_us(250);
-    PCD8544_send_command(set_vop);           // Set Vop
+    NokiaLCD_send_command(set_vop);           // Set Vop
     _delay_ms(1);
-    PCD8544_send_command(set_temp);           // Set Temp coefficient.
+    NokiaLCD_send_command(set_temp);           // Set Temp coefficient.
     _delay_ms(1);
-    PCD8544_send_command(LCD_bias_48);           // LCD bias mode 1:48.
+    NokiaLCD_send_command(LCD_bias_48);           // LCD bias mode 1:48.
     _delay_ms(1);
-    PCD8544_send_command(function_set_norm);           // Function set : PD=0;V=0;H=0;
+    NokiaLCD_send_command(function_set_norm);           // Function set : PD=0;V=0;H=0;
     _delay_ms(1);
-    PCD8544_send_command(display_norm);           // Display control normal
+    NokiaLCD_send_command(display_norm);           // Display control normal
     _delay_ms(1);
-    PCD8544_RAM_Clear();
+    NokiaLCD_Clear();
     _delay_ms(1);
-    PCD8544_send_command(LCD_CONTRAST);
+    NokiaLCD_send_command(LCD_CONTRAST);
     _delay_ms(1);
 }
 
-void PCD8544_send_data(char data)
+void NokiaLCD_send_data(char data)
 
 {
     PORTD |= (1<<PIND4);                // D/C=1  Data
@@ -190,7 +190,7 @@ void PCD8544_send_data(char data)
     _delay_ms(1);
 }
 
-void PCD8544_send_command(char data)
+void NokiaLCD_send_command(char data)
 
 {
     PORTD &= ~(1<<PIND4);                // D/C=0  Command
@@ -199,39 +199,39 @@ void PCD8544_send_command(char data)
     PORTD |= (1 << PIND2); // CE high
     _delay_ms(1);
 }
-void PCD8544_send_char(char character)
+void NokiaLCD_send_char(char character)
 {
     int i=0;
-    PCD8544_send_data(0x00);
+    NokiaLCD_send_data(0x00);
     for(i=0;i<5;i++)
     {
-        PCD8544_send_data(ASCII[character-0x20][i]);
+    	NokiaLCD_send_data(ASCII[character-0x20][i]);
     }
-    PCD8544_send_data(0x00);
+    NokiaLCD_send_data(0x00);
 }
 
-void PCD8544_send_string(char *characters)
+void NokiaLCD_send_string(char *characters)
 {
   while (*characters)
   {
-    PCD8544_send_char(*characters++);
+	  NokiaLCD_send_char(*characters++);
   }
 }
 
-void set_x_y(char x,char y)
+void NokiaLCD_goto_x_y(char x,char y)
 {
     x+=0x80;
     y+=0x40;
-    PCD8544_send_command(y);
-    PCD8544_send_command(x);
+    NokiaLCD_send_command(y);
+    NokiaLCD_send_command(x);
 }
 
-void PCD8544_RAM_Clear()
+void NokiaLCD_Clear()
 {
     int i;
     for(i=0;i<504;i++)
     {
-      PCD8544_send_data(0x00);
+    	NokiaLCD_send_data(0x00);
     }
 
 }
