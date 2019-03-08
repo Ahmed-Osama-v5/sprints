@@ -17,7 +17,7 @@
 
 void SPI_Init()
 {
-    SPCR = ((1 << SPE) | (1 << MSTR) | (1 << SPR0));  // Enable SPI Master mode.
+    SPCR = ((1 << SPE) | (1 << MSTR) | (1 << SPR1));  // Enable SPI Master mode @ 250 KHz.
     DDRB |= ((1 << MOSI) | (1 << SCK));   // Setting MOSI and SCK as digital outputs.
 }
 
