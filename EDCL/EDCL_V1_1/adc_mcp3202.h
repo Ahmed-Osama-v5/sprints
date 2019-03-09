@@ -8,8 +8,9 @@
 #ifndef INC_ADC_MCP3202_H_
 #define INC_ADC_MCP3202_H_
 
-
-int var;
+#define ADC_CE_PIN              7
+#define ADC_CE_DDR              DDRA
+#define ADC_CE_PORT             PORTA
 
 void MCP3202_Init(void);
 uint16_t MCP3202_read(uint8_t channel);

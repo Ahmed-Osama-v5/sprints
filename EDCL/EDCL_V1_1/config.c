@@ -32,8 +32,6 @@ void config_IO(void)
     FAN_CTRL_DDR |= (1 << FAN_CTRL_PIN); // set as digital output
     FAN_CTRL_PORT &= ~(1 << FAN_CTRL_PIN); // deactivate FAN
 
-    ADC_CE_DDR |= (1 << ADC_CE_PIN); // ADC_CE set as digital output
-
     DDRB |= (1 << PINB4); // not letting PB4(SS) floating lets SPI run normally
 }
 

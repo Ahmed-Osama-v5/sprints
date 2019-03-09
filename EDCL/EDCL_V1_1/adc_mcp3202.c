@@ -12,6 +12,7 @@
 
 void MCP3202_Init(void)
 {
+	ADC_CE_DDR |= (1 << ADC_CE_PIN); // ADC_CE set as digital output
     SPI_Init();
 }
 
@@ -19,7 +20,7 @@ uint16_t MCP3202_read(uint8_t channel)
 {
     uint8_t highByte = 0, lowByte = 0;
 
-    PORTA &= ~(1 << PINA7); // CE is LOW to start communication
+    ADC_CE_PORT &= ~(1 << ADC_CE_PIN); // CE is LOW to start communication
 
     SPI_Write(1);
     highByte = SPDR;
@@ -34,13 +35,14 @@ uint16_t MCP3202_read(uint8_t channel)
     SPI_Write(0);
     lowByte = SPDR;
 
-    PORTA |= (1 << PINA7); // CE is HIGH to stop communication
+    ADC_CE_PORT |= (1 << ADC_CE_PIN); // CE is HIGH to stop communication
 
     return((highByte << 8) | lowByte);
 }
 
 void MCP3208_Init(void)
 {
+	ADC_CE_DDR |= (1 << ADC_CE_PIN); // ADC_CE set as digital output
     SPI_Init();
 }
 
@@ -56,7 +58,7 @@ uint16_t MCP3208_read(uint8_t channel, uint8_t sngOrDif)
     tempHigh |= (0x04)|(tempADtype);     // 0x04 --> startBit
 
 
-    PORTA &= ~(1 << PINA7); // CE is LOW to start communication
+    ADC_CE_PORT &= ~(1 << ADC_CE_PIN); // CE is LOW to start communication
 
     SPDR = tempHigh;
     while(! (SPSR & (1 << SPIF)));
@@ -69,7 +71,7 @@ uint16_t MCP3208_read(uint8_t channel, uint8_t sngOrDif)
     while(! (SPSR & (1 << SPIF)));
     tempLow = SPDR;
 
-    PORTA |= (1 << PINA7); // CE is HIGH to stop communication
+    ADC_CE_PORT |= (1 << ADC_CE_PIN); // CE is HIGH to stop communication
 
     return(((tempHigh & 0x0f) << 8) | tempLow);
 }

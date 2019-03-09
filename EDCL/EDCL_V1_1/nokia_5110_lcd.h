@@ -8,6 +8,18 @@
 #ifndef INC_NOKIA_5110_LCD_H_
 #define INC_NOKIA_5110_LCD_H_
 
+#define LCD_CE_DDR		DDRD
+#define LCD_CE_PORT		PORTD
+#define LCD_CE_PIN		2
+
+#define LCD_DC_DDR		DDRD
+#define LCD_DC_PORT		PORTD
+#define LCD_DC_PIN		4
+
+#define LCD_RES_DDR		DDRD
+#define LCD_RES_PORT	PORTD
+#define LCD_RES_PIN		3
+
 #define video_inverse     0x0D
 #define function_set_norm 0x20
 #define function_set_ext  0x21

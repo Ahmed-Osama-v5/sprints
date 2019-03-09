@@ -58,13 +58,16 @@ void adc_Power_Calc(void);
 int main(void)
 {
 	State_t MCU_State = RUN;
-    var = 7;
+
+	/* Initialization */
     config_IO();
     UART_init(9600);
     MCP3202_Init();
     I2C_Master_Init();
-    PWM0_init();
     NokiaLCD_init();
+    PWM2_init();
+
+    /* Splash screen */
     NokiaLCD_goto_x_y(0,0);
     NokiaLCD_send_string(" Electronic");
     NokiaLCD_goto_x_y(0,1);
@@ -73,16 +76,14 @@ int main(void)
     NokiaLCD_send_string("Ver : 1.1");
     _delay_ms(2000);
     NokiaLCD_Clear();
+
+    /* Run screen */
     NokiaLCD_goto_x_y(0,0);
     NokiaLCD_send_string("V :");
     NokiaLCD_goto_x_y(0,1);
     NokiaLCD_send_string("I :");
     NokiaLCD_goto_x_y(0,2);
     NokiaLCD_send_string("D :");
-    //NokiaLCD_goto_x_y(0,3);
-    //NokiaLCD_send_string("P :");
-    //UART_Send_String("EDCL V1.0\nBy/ Ahmed Osama\n");
-    PWM2_init();
     PWM2_Start();
 
     while(1)

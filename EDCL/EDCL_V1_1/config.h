@@ -47,11 +47,6 @@
 #define FAN_CTRL_DDR            DDRB
 #define FAN_CTRL_PORT           PORTB
 
-#define ADC_CE_PIN              7
-#define ADC_CE_PINR             PINA
-#define ADC_CE_DDR              DDRA
-#define ADC_CE_PORT             PORTA
-
 
 void config_IO(void);
 

@@ -154,12 +154,15 @@ const unsigned char Image [] = {
 
 void NokiaLCD_init()
 {
-    DDRD |= ((1 << PIND3) | (1 << PIND4)| ( 1 << PIND2)); // DC, RST and CE as digital output
-    PORTD |= (1<<PIND3);                  // RST=1
+	LCD_CE_DDR |= (1 << LCD_CE_PIN);
+	LCD_RES_DDR |= (1 << LCD_RES_PIN);
+	LCD_DC_DDR |= (1 << LCD_DC_PIN);
+
+	LCD_RES_PORT |= (1 << LCD_RES_PIN);                  // RST=1
     _delay_ms(10);
-    PORTD &= ~(1<<PIND3);                 // RST=0
+    LCD_RES_PORT &= ~(1 << LCD_RES_PIN);                 // RST=0
     _delay_ms(50);
-    PORTD |= (1<<PIND3);                  // RST=1
+    LCD_RES_PORT |= (1 << LCD_RES_PIN);                  // RST=1
 
 
     NokiaLCD_send_command(function_set_ext);           // Function set : PD=0;V=0;H=1;
@@ -183,20 +186,20 @@ void NokiaLCD_init()
 void NokiaLCD_send_data(char data)
 
 {
-    PORTD |= (1<<PIND4);                // D/C=1  Data
-    PORTD &= ~(1 << PIND2); // CE low
+	LCD_DC_PORT |= (1 << LCD_DC_PIN);                // D/C=1  Data
+	LCD_CE_PORT &= ~(1 << LCD_CE_PIN); // CE low
     SPI_Write(data);
-    PORTD |= (1 << PIND2); // CE high
+    LCD_CE_PORT |= (1 << LCD_CE_PIN); // CE high
     _delay_ms(1);
 }
 
 void NokiaLCD_send_command(char data)
 
 {
-    PORTD &= ~(1<<PIND4);                // D/C=0  Command
-    PORTD &= ~(1 << PIND2); // CE low
+	LCD_DC_PORT &= ~(1 << LCD_DC_PIN);                // D/C=0  Command
+	LCD_CE_PORT &= ~(1 << LCD_CE_PIN); // CE low
     SPI_Write(data);
-    PORTD |= (1 << PIND2); // CE high
+    LCD_CE_PORT |= (1 << LCD_CE_PIN); // CE high
     _delay_ms(1);
 }
 void NokiaLCD_send_char(char character)
