@@ -28,7 +28,6 @@ typedef enum{RUN, CAL} State_t;
 #define ADC_VOLT_CH		1
 #define MAX_VOLTAGE		1200.0
 #define ADC_REF			5.0
-#define ADC_FULL_SCALE	4095.0
 #define VOLTAGE_DIVIDER	5.7143
 
 #define PWM_OFFSET	0.005
@@ -40,10 +39,11 @@ void progressBar(uint8_t x, uint8_t y);
 uint8_t cursor_index = 0;
 uint8_t contrast = LCD_CONTRAST;
 
+float ADC_FULL_SCALE = 4095.0;
 uint16_t adcRead = 0;
 uint8_t adc_offset = 0;
 float adc_gain = 1.0;
-float voltage = 0.0, current = 0.0, power = 0.0;
+float voltage = 0.0, current = 0.0, power = 0.0, temp_Cal = 0.0;
 char adcStr[5];
 char str_number[6], volt_str[6], current_str[6], power_str[6];
 
@@ -96,8 +96,10 @@ int main(void)
     		_delay_ms(2);
     		//adc_Power_Calc();
 			if(GetKeyPressed() != NO_KEY_PRESSED){
-				if(GetKeyPressed() == OK)
+				if(GetKeyPressed() == OK){
+					temp_Cal = voltage;
 					MCU_State = CAL;
+				}
 				if(GetKeyPressed() == UP){
 					if(duty >= MAX_DUTY)
 						duty = 0;
@@ -124,15 +126,34 @@ int main(void)
 			NokiaLCD_send_string(duty_str);
     		break;
     	case CAL:
+    		/* This method is done by feeding any voltage value
+    		 * and using (up/down) keys to adjust the value
+    		 * displayed on the screen to match feed voltage value
+    		 * then press (left) key and the MCU will calibrate ADC_FULL_SCALE
+    		 * and return to RUN state.
+    		 *  */
+    		sprintf(str_number, "%04d", (uint16_t)temp_Cal);
+			volt_str[0] = str_number[0];
+			volt_str[1] = str_number[1];
+			volt_str[2] = '.';
+			volt_str[3] = str_number[2];
+			volt_str[4] = str_number[3];
+			NokiaLCD_goto_x_y(35,0);
+			NokiaLCD_send_string(volt_str);
+			NokiaLCD_send_char('V');
     		if(GetKeyPressed() != NO_KEY_PRESSED){
 				switch(GetKeyPressed()){
 				case UP:
+					temp_Cal += 0.01;
 					break;
 				case DOWN:
+					temp_Cal -= 0.01;
 					break;
 				case RIGHT:
 					break;
 				case LEFT:
+					adcRead = MCP3202_read(ADC_VOLT_CH) - adc_offset;
+					ADC_FULL_SCALE = (adcRead * ADC_REF) / temp_Cal;
 					MCU_State = RUN;
 					break;
 				case OK:
