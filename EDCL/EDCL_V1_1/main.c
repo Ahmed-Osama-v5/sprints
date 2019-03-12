@@ -11,7 +11,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "adc_mcp3202.h"
-#include "nokia_5110_lcd.h"
 #include "uart.h"
 #include "i2c.h"
 #include "rtc.h"
@@ -19,6 +18,21 @@
 #include "pwm.h"
 #include "config.h"
 #include "keypad.h"
+
+//#define NOKIA_5110_LCD
+#define CHAR_LCD
+
+#ifndef CHAR_LCD
+	#ifdef NOKIA_5110_LCD
+	#include "nokia_5110_lcd.h"
+	#endif // NOKIA_5110_LCD
+#endif // CHAR_LCD
+
+#ifndef NOKIA_5110_LCD
+	#ifdef CHAR_LCD
+	#include "char_lcd.h"
+	#endif // CHAR_LCD
+#endif // NOKIA_5110_LCD
 
 typedef enum{RUN, CAL} State_t;
 
@@ -33,11 +47,15 @@ typedef enum{RUN, CAL} State_t;
 #define PWM_OFFSET	0.005
 #define MAX_DUTY	84
 
-
+#ifdef NOKIA_5110_LCD
 void progressBar(uint8_t x, uint8_t y);
+#endif // NOKIA_5110_LCD
 
+
+#ifdef NOKIA_5110_LCD
 uint8_t cursor_index = 0;
 uint8_t contrast = LCD_CONTRAST;
+#endif // NOKIA_5110_LCD
 
 float ADC_FULL_SCALE = 4095.0;
 uint16_t adcRead = 0;
@@ -64,10 +82,19 @@ int main(void)
     UART_init(9600);
     MCP3202_Init();
     I2C_Master_Init();
+
+	#ifdef NOKIA_5110_LCD
     NokiaLCD_init();
+	#endif // NOKIA_5110_LCD
+
+	#ifdef CHAR_LCD
+    LCD_init();
+	#endif // CHAR_LCD
+
     PWM2_init();
 
     /* Splash screen */
+	#ifdef NOKIA_5110_LCD
     NokiaLCD_goto_x_y(0,0);
     NokiaLCD_send_string(" Electronic");
     NokiaLCD_goto_x_y(0,1);
@@ -76,15 +103,28 @@ int main(void)
     NokiaLCD_send_string("Ver : 1.1");
     _delay_ms(2000);
     NokiaLCD_Clear();
+	#endif // NOKIA_5110_LCD
+
+    #ifdef CHAR_LCD
+
+	#endif // CHAR_LCD
 
     /* Run screen */
+	#ifdef NOKIA_5110_LCD
     NokiaLCD_goto_x_y(0,0);
     NokiaLCD_send_string("V :");
     NokiaLCD_goto_x_y(0,1);
     NokiaLCD_send_string("I :");
     NokiaLCD_goto_x_y(0,2);
     NokiaLCD_send_string("D :");
+	#endif // NOKIA_5110_LCD
+
+	#ifdef CHAR_LCD
+
+	#endif // CHAR_LCD
+
     PWM2_Start();
+
 
     while(1)
     {
@@ -115,7 +155,6 @@ int main(void)
 					PWM2_Set_Duty(duty);
 				}
 			}
-			NokiaLCD_goto_x_y(35,2);
 			//pwm_Voltage = (duty * 0.02) + PWM_OFFSET;
 			//pwm_Voltage *= 1000;
 			sprintf(duty_str, "%04d", /*(uint16_t)pwm_Voltage*/duty);
@@ -123,7 +162,15 @@ int main(void)
 			duty_str[2] = str_number[1];
 			duty_str[1] = '.';
 			duty_str[3] = str_number[2];*/
+			#ifdef NOKIA_5110_LCD
+			NokiaLCD_goto_x_y(35,2);
 			NokiaLCD_send_string(duty_str);
+			#endif // NOKIA_5110_LCD
+
+			#ifdef CHAR_LCD
+
+			#endif // CHAR_LCD
+
     		break;
     	case CAL:
     		/* This method is done by feeding any voltage value
@@ -138,9 +185,16 @@ int main(void)
 			volt_str[2] = '.';
 			volt_str[3] = str_number[2];
 			volt_str[4] = str_number[3];
+			#ifdef NOKIA_5110_LCD
 			NokiaLCD_goto_x_y(35,0);
 			NokiaLCD_send_string(volt_str);
 			NokiaLCD_send_char('V');
+			#endif // NOKIA_5110_LCD
+
+			#ifdef CHAR_LCD
+
+			#endif // CHAR_LCD
+
     		if(GetKeyPressed() != NO_KEY_PRESSED){
 				switch(GetKeyPressed()){
 				case UP:
@@ -169,12 +223,14 @@ int main(void)
 
 void progressBar(uint8_t x, uint8_t y)
 {
+	#ifdef NOKIA_5110_LCD
 	NokiaLCD_goto_x_y(x, y);
     uint8_t length = 0;
     for(length = 0; length < 100; length++)
     {
     	NokiaLCD_send_data(1);
     }
+	#endif // NOKIA_5110_LCD
 }
 
 void adc_Read_Volt(void){
@@ -189,13 +245,26 @@ void adc_Read_Volt(void){
 			volt_str[2] = '.';
 			volt_str[3] = str_number[2];
 			volt_str[4] = str_number[3];
+
+			#ifdef NOKIA_5110_LCD
 			NokiaLCD_goto_x_y(35,0);
 			NokiaLCD_send_string(volt_str);
 			NokiaLCD_send_char('V');
+			#endif // NOKIA_5110_LCD
+
+			#ifdef CHAR_LCD
+
+			#endif // CHAR_LCD
 		}
 		if(voltage > MAX_VOLTAGE){
+			#ifdef NOKIA_5110_LCD
 			NokiaLCD_goto_x_y(35,0);
 			NokiaLCD_send_string("OL    ");
+			#endif // NOKIA_5110_LCD
+
+			#ifdef CHAR_LCD
+
+			#endif // CHAR_LCD
 		}
 }
 
@@ -210,14 +279,20 @@ void adc_Read_Current(void){
 	current_str[2] = '.';
 	current_str[3] = str_number[2];
 	current_str[4] = str_number[3];
-	NokiaLCD_goto_x_y(35,1);
+
+	#ifdef NOKIA_5110_LCD
+    NokiaLCD_goto_x_y(35,1);
 	NokiaLCD_send_string(current_str);
 	NokiaLCD_send_char('A');
+	#endif // NOKIA_5110_LCD
+
+	#ifdef CHAR_LCD
+
+	#endif // CHAR_LCD
 }
 
 void adc_Power_Calc(void){
 	/* Power Calc */
-	NokiaLCD_goto_x_y(35,3);
 	power = voltage * current;
 	//power *= 100;
 	sprintf(str_number, "%04d", (uint16_t)power);
@@ -226,7 +301,14 @@ void adc_Power_Calc(void){
 	power_str[1] = '.';
 	power_str[3] = str_number[2];
 	power_str[4] = str_number[3];
-	NokiaLCD_goto_x_y(35,3);
+
+	#ifdef NOKIA_5110_LCD
+    NokiaLCD_goto_x_y(35,3);
 	NokiaLCD_send_string(power_str);
 	NokiaLCD_send_char('W');
+	#endif // NOKIA_5110_LCD
+
+	#ifdef CHAR_LCD
+
+	#endif // CHAR_LCD
 }
