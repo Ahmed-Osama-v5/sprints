@@ -32,27 +32,27 @@ static  uint8_t debouncePA1(uint8_t mask)
 	switch((KEYPAD_PIN & 0xF8))
 	{
 	case(LEFT_KEY):
-		if(debouncePA1(LEFT_KEY));
+		if(debouncePA1(LEFT_KEY)){}
 		new_ch = LEFT;
 		//*timeout = 0; // clears timeout counter
 	  break;
 	case(RIGHT_KEY):
-		if(debouncePA1(RIGHT_KEY));
+		if(debouncePA1(RIGHT_KEY)){}
 		new_ch = RIGHT ;
 		//*timeout = 0; // clears timeout counter
 	  break;
 	case(UP_KEY):
-		if(debouncePA1(UP_KEY));
+		if(debouncePA1(UP_KEY)){}
 		new_ch = UP ;
 		//*timeout = 0; // clears timeout counter
 	  break;
 	case(DOWN_KEY):
-	    if(debouncePA1(DOWN_KEY));
+	    if(debouncePA1(DOWN_KEY)){}
 		new_ch = DOWN;
 		//*timeout = 0; // clears timeout counter
 	  break;
 	case(OK_KEY):
-	    if(debouncePA1(OK_KEY));
+	    if(debouncePA1(OK_KEY)){}
 		new_ch = OK;
 		//*timeout = 0; // clears timeout counter
 	  break;

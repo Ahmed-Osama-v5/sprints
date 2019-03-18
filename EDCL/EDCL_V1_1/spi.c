@@ -15,9 +15,32 @@
 #include <stdint.h>
 #include "spi.h"
 
-void SPI_Init()
+void SPI_Master_Init(SPI_Mode_t mode)
 {
     SPCR = ((1 << SPE) | (1 << MSTR) | (1 << SPR1));  // Enable SPI Master mode @ 250 KHz.
+    switch(mode)
+    {
+    case MODE0:
+    	SPCR &= ~(1 << CPOL);
+    	SPCR &= ~(1 << CPHA);
+    	break;
+    case MODE1:
+    	SPCR &= ~(1 << CPOL);
+    	SPCR |= (1 << CPHA);
+        break;
+    case MODE2:
+    	SPCR |= (1 << CPOL);
+	    SPCR &= ~(1 << CPHA);
+        break;
+    case MODE3:
+    	SPCR |= (1 << CPOL);
+    	SPCR |= (1 << CPHA);
+        break;
+    default:
+    	SPCR &= ~(1 << CPOL);
+    	SPCR &= ~(1 << CPHA);
+        break;
+    }
     DDRB |= ((1 << MOSI) | (1 << SCK));   // Setting MOSI and SCK as digital outputs.
 }
 

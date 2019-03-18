@@ -13,7 +13,7 @@
 void MCP3202_Init(void)
 {
 	ADC_CE_DDR |= (1 << ADC_CE_PIN); // ADC_CE set as digital output
-    SPI_Init();
+	SPI_Master_Init(MODE0);
 }
 
 uint16_t MCP3202_read(uint8_t channel)
@@ -27,7 +27,7 @@ uint16_t MCP3202_read(uint8_t channel)
 
     if(channel == 0)
         SPI_Write(0xA0);
-    else
+    if(channel == 1)
         SPI_Write(0xE0);
 
     highByte = SPDR;
@@ -43,7 +43,7 @@ uint16_t MCP3202_read(uint8_t channel)
 void MCP3208_Init(void)
 {
 	ADC_CE_DDR |= (1 << ADC_CE_PIN); // ADC_CE set as digital output
-    SPI_Init();
+	SPI_Master_Init(MODE0);
 }
 
 uint16_t MCP3208_read(uint8_t channel, uint8_t sngOrDif)
