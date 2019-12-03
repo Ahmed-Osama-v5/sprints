@@ -5,13 +5,18 @@
  *      Author: Ahmed Osama
  */
 
-
-#include <avr/io.h>
+#include "registers.h"
+#include "gpio.h"
+#include "softwareDelay.h"
+#include "led.h"
 
 int main(){
 
-	while(1){
+	Led_Init(LED_0);
 
+	while(1){
+		Led_Toggle(LED_0);
+		SwDelay_ms(1000);
 	}
 	return 0;
 }
