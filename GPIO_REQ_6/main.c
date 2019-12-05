@@ -11,23 +11,28 @@
 #include "led.h"
 #include "pushButton.h"
 
+uint8 counter = 0;
+
 int main(){
 
-	Led_Init(LED_0);
 	Led_Init(LED_1);
-	pushButton_Init(BTN_0);
 	pushButton_Init(BTN_1);
 
 	while(1){
 		pushButton_Update();
-		if(g_pb_0_State == Pressed){
-			Led_Toggle(LED_0);
-			SwDelay_ms(200);
+		switch(g_pb_1_State){
+		case(Pressed):
+			counter++;
+			Led_On(LED_1);
+			break;
+		case(Released):
+			Led_Off(LED_1);
+			break;
+		default:
+			Led_Off(LED_1);
+			break;
 		}
-		if(g_pb_1_State == Pressed){
-			Led_Toggle(LED_1);
-			SwDelay_ms(200);
-		}
+		SwDelay_ms(1000);
 	}
 	return 0;
 }

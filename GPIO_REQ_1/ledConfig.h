@@ -5,8 +5,8 @@
  *      Author: Sprints
  */
 
-#ifndef LEDCONFIG_H_
-#define LEDCONFIG_H_
+#ifndef LEDCONFIG_GH_
+#define LEDCONFIG_GH_
 
 #include "gpio.h"
 
@@ -32,4 +32,4 @@
 #define LED_3_BIT	(BIT7)
 
 
-#endif /* LEDCONFIG_H_ */
+#endif /* LEDCONFIG_GH_ */

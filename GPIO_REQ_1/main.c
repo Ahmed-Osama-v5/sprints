@@ -20,13 +20,11 @@ int main(){
 
 	while(1){
 		pushButton_Update();
-		if(g_pb_0_State == Pressed){
+		if(pushButton_GetStatus(BTN_0) == Pressed){
 			Led_Toggle(LED_0);
-			SwDelay_ms(200);
 		}
-		if(g_pb_1_State == Pressed){
+		if(pushButton_GetStatus(BTN_1) == Pressed){
 			Led_Toggle(LED_1);
-			SwDelay_ms(200);
 		}
 	}
 	return 0;

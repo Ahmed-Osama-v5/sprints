@@ -9,8 +9,8 @@
 #define LED_H_
 
 #include "gpio.h"
-#include "std_types.h"
 #include "ledConfig.h"
+#include "std_types.h"
 
 typedef enum En_LedNumber_t{
 	LED_0,
