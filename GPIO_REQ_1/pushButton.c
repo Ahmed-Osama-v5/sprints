@@ -67,9 +67,9 @@ void pushButton_Update(void){
  *
  */
 En_buttonStatus_t pushButton_GetStatus(En_buttonId btn_id){
-	En_buttonStatus_t tmp = Released;
+	En_buttonStatus_t tmp;
 	pushButton_Update();
 	tmp = buttonStateArr[btn_id];
-	SwDelay_ms(200);
+	SwDelay_ms(75);
 	return tmp;
 }

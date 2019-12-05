@@ -25,11 +25,6 @@ typedef enum En_buttonStatus_t{
 
 }En_buttonStatus_t;
 
-extern En_buttonStatus_t g_pb_0_State;
-extern En_buttonStatus_t g_pb_1_State;
-extern En_buttonStatus_t g_pb_2_State;
-extern En_buttonStatus_t g_pb_3_State;
-
 /**
  * Description: Initialize the BTN_x Pin state (where x 0, 1, 2, 3) to Input
  * @param btn_id: The btn to be initialized and it takes
