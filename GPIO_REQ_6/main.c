@@ -11,7 +11,9 @@
 #include "led.h"
 #include "pushButton.h"
 
-uint8 counter = 0;
+uint8 gu8_counter = 0;
+uint8 gu8_onFlag = 0;
+uint8 gu8_value = 10;
 
 int main(){
 
@@ -19,20 +21,30 @@ int main(){
 	pushButton_Init(BTN_1);
 
 	while(1){
-		pushButton_Update();
-		switch(g_pb_1_State){
-		case(Pressed):
-			counter++;
+		if(pushButton_GetStatus(BTN_1) == Pressed){
 			Led_On(LED_1);
-			break;
-		case(Released):
-			Led_Off(LED_1);
-			break;
-		default:
-			Led_Off(LED_1);
-			break;
+			if(gu8_onFlag == 1){
+				gu8_counter = 0;
+				gu8_value = 20;
+			}
+			else
+				gu8_onFlag = 1;
 		}
-		SwDelay_ms(1000);
+		else{
+			if(!gu8_onFlag){
+				Led_Off(LED_1);
+				gu8_onFlag = 0;
+				gu8_value = 10;
+			}
+		}
+		if(gu8_onFlag){
+			if(gu8_counter < gu8_value)
+				gu8_counter++;
+			else{
+				gu8_onFlag = 0;
+				gu8_counter = 0;
+			}
+		}
 	}
 	return 0;
 }
