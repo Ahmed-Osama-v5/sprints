@@ -46,7 +46,6 @@ uint8 timer0Read(void){
  * Description:
  */
 void timer0Start(void){
-
 	TCCR0 |= gen_prescale;
 }
 
@@ -65,9 +64,9 @@ void timer0Delay_ms(uint16 delay){
 	// Tick interval = 4 uS @ 16 MHz DIV_BY_64
 	// 1 mS = 250 ticks.
 	uint16 i;
-	timer0Set(6); // Pre-load with 6 counts
 	timer0Start();
 	for(i=0;i<delay;i++){
+		timer0Set(6); // Pre-load with 6 counts
 		while(!(TIFR & (1 << 0)));
 		TIFR |= (1 << 0);
 	}
