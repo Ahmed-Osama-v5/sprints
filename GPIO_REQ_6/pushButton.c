@@ -10,7 +10,17 @@
 #include "pushButton.h"
 #include "softwareDelay.h"
 
+static uint8 gsu8_buttonGpioArr[BTN_MAX_NUM] = {0};
+static uint8 gsu8_buttonPinArr[BTN_MAX_NUM] = {0};
 static uint8 gsu8_buttonStateArr[BTN_MAX_NUM] = {0};
+
+static void pushButtonMapping(void){
+	gsu8_buttonGpioArr[0] = BTN_0_GPIO;
+	gsu8_buttonGpioArr[1] = BTN_1_GPIO;
+
+	gsu8_buttonPinArr[0] = BTN_0_BIT;
+	gsu8_buttonPinArr[1] = BTN_1_BIT;
+}
 
 /**
  * Description: Initialize the BTN_x Pin state (where x 0, 1, 2, 3) to Input
@@ -19,6 +29,7 @@ static uint8 gsu8_buttonStateArr[BTN_MAX_NUM] = {0};
  *
  */
 void pushButton_Init(En_buttonId btn_id){
+	pushButtonMapping();
 	switch(btn_id){
 	case(BTN_0):
 		gpioPinDirection(BTN_0_GPIO, BTN_0_BIT, INPUT);
@@ -44,21 +55,30 @@ void pushButton_Update(void){
 	for(i=0;i<BTN_MAX_NUM;i++){
 		switch (gsu8_buttonStateArr[i]) {
 			case (Pressed):
-				if(gpioPinRead())
+				if(! gpioPinRead(gsu8_buttonGpioArr[i], gsu8_buttonPinArr[i]))
+					gsu8_buttonStateArr[i] = Prereleased;
 				break;
 			case (Released):
-
+				if(gpioPinRead(gsu8_buttonGpioArr[i], gsu8_buttonPinArr[i]))
+					gsu8_buttonStateArr[i] = Prepressed;
 				break;
 			case (Prepressed):
-
+				if(gpioPinRead(gsu8_buttonGpioArr[i], gsu8_buttonPinArr[i]))
+					gsu8_buttonStateArr[i] = Prereleased;
+				if(! gpioPinRead(gsu8_buttonGpioArr[i], gsu8_buttonPinArr[i]))
+					gsu8_buttonStateArr[i] = Pressed;
 				break;
 			case (Prereleased):
-
+				if(gpioPinRead(gsu8_buttonGpioArr[i], gsu8_buttonPinArr[i]))
+					gsu8_buttonStateArr[i] = Released;
+				if(! gpioPinRead(gsu8_buttonGpioArr[i], gsu8_buttonPinArr[i]))
+					gsu8_buttonStateArr[i] = Prepressed;
 				break;
 			default:
 				break;
 		}
 	}
+	SwDelay_ms(150);
 	/*
 	if(gpioPinRead(BTN_0_GPIO, BTN_0_BIT)){
 		gsu8_buttonStateArr[BTN_0] = Pressed;
