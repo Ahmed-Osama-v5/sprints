@@ -10,7 +10,7 @@
 #include "pushButton.h"
 #include "softwareDelay.h"
 
-static uint8 gsu8_buttonStateArr[BTN_MAX_NUM] = {0};
+static uint8 buttonStateArr[BTN_MAX_NUM];
 
 /**
  * Description: Initialize the BTN_x Pin state (where x 0, 1, 2, 3) to Input
@@ -40,48 +40,26 @@ void pushButton_Init(En_buttonId btn_id){
  * @note : this function must be called in the system tick handler or in the super loop handler
  */
 void pushButton_Update(void){
-	uint8 i;
-	for(i=0;i<BTN_MAX_NUM;i++){
-		switch (gsu8_buttonStateArr[i]) {
-			case (Pressed):
-				if(gpioPinRead())
-				break;
-			case (Released):
-
-				break;
-			case (Prepressed):
-
-				break;
-			case (Prereleased):
-
-				break;
-			default:
-				break;
-		}
-	}
-	/*
 	if(gpioPinRead(BTN_0_GPIO, BTN_0_BIT)){
-		gsu8_buttonStateArr[BTN_0] = Pressed;
+		buttonStateArr[BTN_0] = Pressed;
 	}
 	else
-		gsu8_buttonStateArr[BTN_0] = Released;
+		buttonStateArr[BTN_0] = Released;
 	if(gpioPinRead(BTN_1_GPIO, BTN_1_BIT)){
-		gsu8_buttonStateArr[BTN_1] = Pressed;
+		buttonStateArr[BTN_1] = Pressed;
 	}
 	else
-		gsu8_buttonStateArr[BTN_1] = Released;
+		buttonStateArr[BTN_1] = Released;
 	if(gpioPinRead(BTN_2_GPIO, BTN_2_BIT)){
-		gsu8_buttonStateArr[BTN_2] = Pressed;
+		buttonStateArr[BTN_2] = Pressed;
 	}
 	else
-		gsu8_buttonStateArr[BTN_2] = Released;
+		buttonStateArr[BTN_2] = Released;
 	if(gpioPinRead(BTN_3_GPIO, BTN_3_BIT)){
-		gsu8_buttonStateArr[BTN_3] = Pressed;
+		buttonStateArr[BTN_3] = Pressed;
 	}
 	else
-		gsu8_buttonStateArr[BTN_3] = Released;
-	SwDelay_ms(250);
-	*/
+		buttonStateArr[BTN_3] = Released;
 }
 /**
  * Description: read BTN_x (where x 0, 1, 2, 3) state which is stored in the program
@@ -89,5 +67,9 @@ void pushButton_Update(void){
  *
  */
 En_buttonStatus_t pushButton_GetStatus(En_buttonId btn_id){
-	return gsu8_buttonStateArr[btn_id];
+	En_buttonStatus_t tmp = Released;
+	pushButton_Update();
+	tmp = buttonStateArr[btn_id];
+	SwDelay_ms(75);
+	return tmp;
 }
