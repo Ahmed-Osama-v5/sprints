@@ -13,7 +13,7 @@
 
 uint8 gu8_counter = 0;
 uint8 gu8_onFlag = 0;
-uint8 gu8_value = 10;
+uint8 gu8_value = 5;
 
 int main(){
 
@@ -21,11 +21,12 @@ int main(){
 	pushButton_Init(BTN_1);
 
 	while(1){
+		pushButton_Update();
 		if(pushButton_GetStatus(BTN_1) == Pressed){
 			Led_On(LED_1);
 			if(gu8_onFlag == 1){
 				gu8_counter = 0;
-				gu8_value = 20;
+				gu8_value = 10;
 			}
 			else
 				gu8_onFlag = 1;
@@ -34,7 +35,7 @@ int main(){
 			if(!gu8_onFlag){
 				Led_Off(LED_1);
 				gu8_onFlag = 0;
-				gu8_value = 10;
+				gu8_value = 5;
 			}
 		}
 		if(gu8_onFlag){
