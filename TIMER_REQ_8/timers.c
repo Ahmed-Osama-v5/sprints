@@ -10,6 +10,7 @@
 #include "timers.h"
 
 static En_timer0perscaler_t gen_prescale = T0_NO_CLOCK;
+static En_timer0Mode_t gen_mode;
 
 /*===========================Timer0 Control===============================*/
 /**
@@ -21,6 +22,7 @@ static En_timer0perscaler_t gen_prescale = T0_NO_CLOCK;
  */
 void timer0Init(En_timer0Mode_t mode,En_timer0OC_t OC0,En_timer0perscaler_t prescal, uint8 initialValue, uint8 outputCompare, uint8 interruptMask){
 	gen_prescale = prescal;
+	gen_mode = mode;
 	TCCR0 |= (mode | OC0);
 	TCNT0 = initialValue;
 	OCR0 = outputCompare;
@@ -64,13 +66,27 @@ void timer0Delay_ms(uint16 delay){
 	// Tick interval = 4 uS @ 16 MHz DIV_BY_64
 	// 1 mS = 250 ticks.
 	uint16 i;
-	timer0Start();
-	for(i=0;i<delay;i++){
-		timer0Set(6); // Pre-load with 6 counts
-		while(!(TIFR & (1 << 0)));
-		TIFR |= (1 << 0);
+	switch(gen_mode){
+	case (T0_NORMAL_MODE):
+		timer0Start();
+		for(i=0;i<delay;i++){
+			timer0Set(6); // Pre-load with 6 counts
+			while(!(TIFR & (1 << 0)));
+			TIFR |= (1 << 0);
+		}
+		timer0Stop();
+		break;
+	case (T0_COMP_MODE):
+		OCR0 = 249;
+		timer0Start();
+		for(i=0;i<delay;i++){
+			while(!(TIFR & (1 << 1)));
+			TIFR |= (1 << 1);
+		}
+		timer0Stop();
+		break;
 	}
-	timer0Stop();
+
 }
 
 /**
