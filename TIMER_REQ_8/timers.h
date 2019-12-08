@@ -51,7 +51,7 @@ typedef enum En_timer1Mode_t{
 
 }En_timer1Mode_t;
 typedef enum En_timer1OC_t{
-	T1_OC0_DIS=0,T1_OC1A_TOGGLE=0x4000,T1_OC1B_TOGGLE=0x1000,T1_OC1A_CLEAR=0x8000,T1_OC1B_CLEAR=0x2000,T1_OC1A_SET=0xC000,T1_OC1B_SET=0x3000
+	T1_OC1_DIS=0,T1_OC1A_TOGGLE=0x4000,T1_OC1B_TOGGLE=0x1000,T1_OC1A_CLEAR=0x8000,T1_OC1B_CLEAR=0x2000,T1_OC1A_SET=0xC000,T1_OC1B_SET=0x3000
 }En_timer1OC_t;
 
 typedef enum En_timer1perscaler_t{
@@ -71,7 +71,7 @@ typedef enum En_timer2Mode_t{
 }En_timer2Mode_t;
 
 typedef enum En_timer2OC_t{
-	T2_OC0_DIS=0,T2_OC0_TOGGLE=0x10,T2_OC0_CLEAR=0x20,T2_OC0_SET=0x30
+	T2_OC2_DIS=0,T2_OC2_TOGGLE=0x10,T2_OC2_CLEAR=0x20,T2_OC2_SET=0x30
 }En_timer2OC_t;
 
 typedef enum En_timer2perscaler_t{
@@ -96,7 +96,7 @@ typedef enum En_timer2Interrupt_t{
  * @param outputCompare
  * @param interruptMask
  */
-void timer0Init(En_timer0Mode_t mode,En_timer0OC_t OC0,En_timer0perscaler_t prescal, uint8 initialValue, uint8 outputCompare, uint8 interruptMask);
+void timer0Init(En_timer0Mode_t mode,En_timer0OC_t OC0,En_timer0perscaler_t prescal, uint8 initialValue, uint8 outputCompare, En_timer0Interrupt_t interruptMask);
 
 /**
  * Description:
@@ -149,31 +149,19 @@ void timer0SwPWM(uint8 dutyCycle,uint8 freq);
  * @param outputCompare
  * @param interruptMask
  */
-void timer1Init(En_timer1Mode_t mode,En_timer1OC_t OC,En_timer1perscaler_t prescal, uint16 initialValue, uint8 outputCompareLow, uint8 outputCompareHigh,uint16 inputCapture, uint8 interruptMask);
+void timer1Init(En_timer1Mode_t mode,En_timer1OC_t OC,En_timer1perscaler_t prescal, uint16 initialValue, uint16 outputCompareA, uint16 outputCompareB,uint16 inputCapture, En_timer1Interrupt_t interruptMask);
 
 /**
  * Description:
  * @param value
  */
-void timer1SetA(uint8 value);
-
-/**
- * Description:
- * @param value
- */
-void timer1SetB(uint8 value);
+void timer1Set(uint16 value);
 
 /**
  * Description:
  * @return
  */
-uint8 timer1ReadA(void);
-
-/**
- * Description:
- * @return
- */
-uint8 timer1ReadB(void);
+uint16 timer1Read(void);
 
 /**
  * Description:
@@ -190,6 +178,7 @@ void timer1Stop(void);
  * @param delay
  */
 void timer1Delay_ms(uint16 delay);
+
 
 /**
  * Description:
@@ -209,7 +198,7 @@ void timer1SwPWM(uint8 dutyCycle,uint8 freq);
  * @param outputCompare
  * @param interruptMask
  */
-void timer2Init(En_timer2Mode_t mode,En_timer2OC_t OC,En_timer2perscaler_t prescal, uint8 initialValue, uint8 outputCompare, uint8 assynchronous, uint8 interruptMask);
+void timer2Init(En_timer2Mode_t mode,En_timer2OC_t OC,En_timer2perscaler_t prescal, uint8 initialValue, uint8 outputCompare, uint8 assynchronous, En_timer2Interrupt_t interruptMask);
 /**
  * Description:
  * @param value
