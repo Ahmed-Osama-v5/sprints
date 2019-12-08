@@ -234,7 +234,7 @@ void timer1Delay_ms(uint16 delay){
 void timer1SwPWM(uint8 dutyCycle,uint8 freq){
 	/* Calculating frequency */
 	uint16 f = freq * 1000;
-	uint16 tcntMax = (16000000 / f);
+	uint16 tcntMax = (gen_T1_Freq / f);
 	uint16 initialValue = 65535 - tcntMax;
 	TCNT1 = initialValue;
 	//TCNT1L = (uint8)initialValue;
