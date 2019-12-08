@@ -51,6 +51,7 @@ void pushButton_Init(En_buttonId btn_id){
  * @note : this function must be called in the system tick handler or in the super loop handler
  */
 void pushButton_Update(void){
+	/*
 	uint8 i;
 	for(i=0;i<BTN_MAX_NUM;i++){
 		switch (gsu8_buttonStateArr[i]) {
@@ -79,7 +80,8 @@ void pushButton_Update(void){
 		}
 	}
 	SwDelay_ms(150);
-	/*
+	*/
+
 	if(gpioPinRead(BTN_0_GPIO, BTN_0_BIT)){
 		gsu8_buttonStateArr[BTN_0] = Pressed;
 	}
@@ -101,7 +103,7 @@ void pushButton_Update(void){
 	else
 		gsu8_buttonStateArr[BTN_3] = Released;
 	SwDelay_ms(250);
-	*/
+
 }
 /**
  * Description: read BTN_x (where x 0, 1, 2, 3) state which is stored in the program
