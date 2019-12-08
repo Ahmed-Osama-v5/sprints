@@ -233,12 +233,19 @@ void timer1Delay_ms(uint16 delay){
  */
 void timer1SwPWM(uint8 dutyCycle,uint8 freq){
 	/* Calculating frequency */
-	//uint16 f = freq * 1000;
-	uint16 tcntMax = (uint16)(gen_T1_Freq / freq);
-	TCNT1 = 65536 - tcntMax;
+	uint16 f = freq * 1000;
+	uint16 tcntMax = (16000000 / f);
+	uint16 initialValue = 65535 - tcntMax;
+	TCNT1 = initialValue;
+	//TCNT1L = (uint8)initialValue;
+	//TCNT1H = (uint8)(initialValue >> 8);
 
 	/* Calculating Duty */
-	OCR1A = (uint16)((65536 - tcntMax) * ((float)dutyCycle/100.0));
+	OCR1A = (uint16)(tcntMax * ((float)dutyCycle/100.0));
+	OCR1A += initialValue;
+
+	timer1Start();
+
 	//OCR1A = ((uint16)((65536 - TCNT1) * ((float)dutyCycle/100.0))) + TCNT1;
 	/* wait until compare match occurs */
 	while(!(TIFR & (1 << 4)));
