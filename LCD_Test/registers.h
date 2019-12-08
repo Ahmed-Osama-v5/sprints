@@ -21,8 +21,8 @@
  * PORTx registers
  */
 
-#define PORTA_DATA 	(*((reg_type8)(0x3A)))
-#define PORTA_DIR  	(*((reg_type8)(0x3B)))
+#define PORTA_DATA 	(*((reg_type8)(0x3B)))
+#define PORTA_DIR  	(*((reg_type8)(0x3A)))
 #define PORTA_PIN	(*((reg_type8)(0x39)))
 
 #define PORTB_DATA 	(*((reg_type8)(0x38)))
