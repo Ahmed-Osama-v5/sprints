@@ -13,6 +13,7 @@
 #include "pushButton.h"
 #include "timers.h"
 #include "char_lcd.h"
+//#include "interrupt.h"
 
 #define PWM
 //#define REQ8_6
@@ -23,18 +24,20 @@
 
 int main(){
 
-	LCD_init();
-	LCD_send_string("Test");
+	//sei();
 
-	gpioPinDirection(GPIOB, BIT4, OUTPUT);
+	gpioPinDirection(GPIOD, (BIT2 | BIT3| BIT6| BIT7| BIT5 | BIT4), OUTPUT);
+	gpioPinWrite(GPIOD, (BIT2 | BIT6), HIGH);
+	gpioPinWrite(GPIOD, (BIT3 | BIT7), LOW);
 	timer1Init(T1_NORMAL_MODE, T1_OC1_DIS, T1_PRESCALER_64, 60000, 60000, 60000, 60000, T1_POLLING);
 
 
 	while(1){
-		timer1SwPWM(50, 250);
+		timer1SwPWM(50, 50);
 	}
 	return 0;
 }
+
 
 #endif // PWM
 

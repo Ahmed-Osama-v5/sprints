@@ -248,12 +248,12 @@ void timer1SwPWM(uint8 dutyCycle,uint8 freq){
 	/* wait until compare match occurs */
 	while(!(TIFR & (1 << 4)));
 	TIFR |= (1 << 4);
-	gpioPinWrite(GPIOB, BIT4, LOW);
+	gpioPinWrite(GPIOD, (BIT5 | BIT4), LOW);
 
 	/* wait until overflow occurs */
 	while(!(TIFR & (1 << 2)));
 	TIFR |= (1 << 2);
-	gpioPinWrite(GPIOB, BIT4, HIGH);
+	gpioPinWrite(GPIOD, (BIT5 | BIT4), HIGH);
 }
 
 
