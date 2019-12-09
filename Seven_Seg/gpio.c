@@ -481,18 +481,23 @@ void gpioLowerNibbleDirection(uint8 port, uint8 direction){
 void gpioLowerNibbleWrite(uint8 port, uint8 value){
 	switch(port){
 	case (GPIOA):
+		PORTA_DATA &= ~((1 << 3) | (1 << 2) | (1 << 1) | (1 << 0));
 		PORTA_DATA |= (value & 0x0F);
 		break;
 	case (GPIOB):
+		PORTB_DATA &= ~((1 << 3) | (1 << 2) | (1 << 1) | (1 << 0));
 		PORTB_DATA |= (value & 0x0F);
 		break;
 	case (GPIOC):
+		PORTC_DATA &= ~((1 << 3) | (1 << 2) | (1 << 1) | (1 << 0));
 		PORTC_DATA |= (value & 0x0F);
 		break;
 	case (GPIOD):
+		PORTD_DATA &= ~((1 << 3) | (1 << 2) | (1 << 1) | (1 << 0));
 		PORTD_DATA |= (value & 0x0F);
 		break;
 	default: // PORTA
+		PORTA_DATA &= ~((1 << 3) | (1 << 2) | (1 << 1) | (1 << 0));
 		PORTA_DATA |= (value & 0x0F);
 		break;
 	}
