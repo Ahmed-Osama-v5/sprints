@@ -16,13 +16,17 @@
 #include "interrupt.h"
 #include "MotorDC.h"
 
+extern uint16 initialValue;
+extern uint16 ocr;
+
 uint8 gu8_speed = 1;
 uint16 gu16_counter = 0;
 
 int main(){
 
-	timer1Init(T1_NORMAL_MODE, T1_OC1_DIS, T1_PRESCALER_NO, 0, 0, 0, 0, 0);
+	timer1Init(T1_NORMAL_MODE, T1_OC1_DIS, T1_PRESCALER_NO, 0, 0, 0, 0, (T1_INTERRUPT_NORMAL | T1_INTERRUPT_CMP_1A));
 	timer1Start();
+	sei();
 
 	MotorDC_Init(MOT_1);
 	MotorDC_Init(MOT_2);
@@ -31,17 +35,17 @@ int main(){
 
 	for(gu8_speed=1;gu8_speed<99;gu8_speed++){
 		gu16_counter = 0;
-		while(gu16_counter < 100){
+		while(gu16_counter < 140){
 			gu16_counter++;
-			MotorDC_Speed_PollingWithT0(gu8_speed); // PWM @ 1 KHz with variable speed
+			timer1SwPWM(gu8_speed, 1); // PWM @ 1 KHz with variable speed
 		}
 	}
 
 	for(gu8_speed=99;gu8_speed>1;gu8_speed--){
 		gu16_counter = 0;
-		while(gu16_counter < 100){
+		while(gu16_counter < 140){
 			gu16_counter++;
-			MotorDC_Speed_PollingWithT0(gu8_speed); // PWM @ 1 KHz with variable speed
+			timer1SwPWM(gu8_speed, 1); // PWM @ 1 KHz with variable speed
 		}
 	}
 
@@ -53,15 +57,28 @@ int main(){
 
 	while(gu16_counter < 500){
 		gu16_counter++;
-		MotorDC_Speed_PollingWithT0(40); // PWM @ 1 KHz with variable speed
+		timer1SwPWM(30, 1); // PWM @ 1 KHz with variable speed
 	}
 
 	MotorDC_Dir(MOT_1, STOP);
 	MotorDC_Dir(MOT_2, STOP);
 	timer1Stop();
 
-	while(1){
 
+	while(1){
+		//timer1SwPWM(30, 1); // PWM @ 1 KHz with variable speed
 	}
 	return 0;
 }
+
+
+ISR(TIMER1_OVF_vect){
+	gpioPinWrite(GPIOD, (BIT5 | BIT4), HIGH);
+	TCNT1 = initialValue;
+}
+
+ISR(TIMER1_COMPA_vect){
+	gpioPinWrite(GPIOD, (BIT5 | BIT4), LOW);
+	OCR1A = ocr;
+}
+

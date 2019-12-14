@@ -15,6 +15,9 @@ static En_timer0Mode_t gen_T0_mode;
 static En_timer1perscaler_t gen_T1_prescale = T1_NO_CLOCK;
 static En_timer1Mode_t gen_T1_mode;
 
+uint16 initialValue;
+uint16 ocr;
+
 typedef enum En_timer1Freq_t{
 	FREQ_16_M = 16000000,
 	FREQ_2_M = 2000000,
@@ -235,25 +238,11 @@ void timer1SwPWM(uint8 dutyCycle,uint8 freq){
 	/* Calculating frequency */
 	uint16 f = freq * 1000;
 	uint16 tcntMax = (gen_T1_Freq / f);
-	uint16 initialValue = 65535 - tcntMax;
-	TCNT1 = initialValue;
+	initialValue = 65535 - tcntMax;
 
 	/* Calculating Duty */
-	OCR1A = (uint16)(tcntMax * ((float)dutyCycle/100.0));
-	OCR1A += initialValue;
-
-	timer1Start();
-
-	//OCR1A = ((uint16)((65536 - TCNT1) * ((float)dutyCycle/100.0))) + TCNT1;
-	/* wait until compare match occurs */
-	while(!(TIFR & (1 << 4)));
-	TIFR |= (1 << 4);
-	gpioPinWrite(GPIOD, (BIT5 | BIT4), LOW);
-
-	/* wait until overflow occurs */
-	while(!(TIFR & (1 << 2)));
-	TIFR |= (1 << 2);
-	gpioPinWrite(GPIOD, (BIT5 | BIT4), HIGH);
+	ocr = (uint16)(tcntMax * ((float)dutyCycle/100.0));
+	ocr += initialValue;
 }
 
 
