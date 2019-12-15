@@ -52,12 +52,13 @@ int main(){
 	MotorDC_Dir(MOT_1, STOP);
 	MotorDC_Dir(MOT_2, STOP);
 	SwDelay_ms(1000);
-	MotorDC_Dir(MOT_1, BACKWARD);
-	MotorDC_Dir(MOT_2, FORWARD);
+	MotorDC_Dir(MOT_1, FORWARD);
+	MotorDC_Dir(MOT_2, BACKWARD);
+	SwDelay_ms(100);
 
-	while(gu16_counter < 500){
+	while(gu16_counter < 1300){
 		gu16_counter++;
-		timer1SwPWM(30, 1); // PWM @ 1 KHz with variable speed
+		timer1SwPWM(50, 1); // PWM @ 1 KHz with variable speed
 	}
 
 	MotorDC_Dir(MOT_1, STOP);
