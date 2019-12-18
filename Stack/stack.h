@@ -8,12 +8,10 @@
 #ifndef STACK_H_
 #define STACK_H_
 
-#define MAX_STACK_SIZE 5
-
-typedef int StackEntry;
+typedef char StackEntry;
 
 typedef struct ST_stackInfo{
-        int top;
+		int top;
         StackEntry *entry;
 
     }ST_stackInfo;
@@ -28,12 +26,14 @@ void createStack(ST_stackInfo *info, int size);
 * Pre : Stack is initialized and not full.
 * Post: NONE.
 *****/
-void push(ST_stackInfo *info, int data);
+void push(ST_stackInfo *info, char data);
 
 /*****  POP.
 * Pre : Stack is initialized and not empty.
 * Post: NONE.
 *****/
-void pop(ST_stackInfo *info, int* data);
+void pop(ST_stackInfo *info, char* data);
+
+int Stack_Empty(ST_stackInfo *info);
 
 #endif /* STACK_H_ */

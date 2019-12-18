@@ -22,7 +22,7 @@ void createStack(ST_stackInfo *info, int size){
 * Pre : Stack is initialized and not full.
 * Post: NONE.
 *****/
-void push(ST_stackInfo *info, int data){
+void push(ST_stackInfo *info, char data){
 	info->entry[info->top++] = data;
 }
 
@@ -30,6 +30,11 @@ void push(ST_stackInfo *info, int data){
 * Pre : Stack is initialized and not empty.
 * Post: NONE.
 *****/
-void pop(ST_stackInfo *info, int* data){
+void pop(ST_stackInfo *info, char* data){
 	*data = info->entry[--info->top];
+}
+
+int Stack_Empty(ST_stackInfo *info)
+{
+    return !info->top;
 }
