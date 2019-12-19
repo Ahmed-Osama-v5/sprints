@@ -13,7 +13,8 @@
 //#define DATA_STR_AGILE_REQ_1
 //#define DATA_STR_AGILE_REQ_2
 //#define DATA_STR_AGILE_REQ_3
-#define DATA_STR_AGILE_REQ_4
+//#define DATA_STR_AGILE_REQ_4
+#define DATA_STR_AGILE_REQ_5
 
 #ifdef DATA_STR_AGILE_REQ_1
 
@@ -290,3 +291,70 @@ long long evaluate(char* expression){
 }
 
 #endif // DATA_STR_AGILE_REQ_4
+
+#ifdef DATA_STR_AGILE_REQ_5
+
+#include "linkedList.h"
+
+int main(void){
+	setvbuf(stdout, NULL, _IONBF, 0);
+	setvbuf(stderr, NULL, _IONBF, 0);
+
+	ST_node *node;
+	ST_list list;
+	createList(&list);
+	int data = 1;
+	unsigned char pos = 0;
+	if(insertToList(&list, pos, data))
+		printf("Inserted %d in position %d successfully\n", data, pos);
+	else
+		printf("Couldn't insert node to list\n");
+	pos++;
+	data = 7;
+	if(insertToList(&list, pos, data))
+		printf("Inserted %d in position %d successfully\n", data, pos);
+	else
+		printf("Couldn't insert node to list\n");
+	pos++;
+	data = 8;
+	if(insertToList(&list, pos, data))
+		printf("Inserted %d in position %d successfully\n", data, pos);
+	else
+		printf("Couldn't insert node to list\n");
+	pos++;
+	data = 6;
+	if(insertToList(&list, pos, data))
+		printf("Inserted %d in position %d successfully\n", data, pos);
+	else
+		printf("Couldn't insert node to list\n");
+	pos++;
+	data = 4;
+	if(insertToList(&list, pos, data))
+		printf("Inserted %d in position %d successfully\n", data, pos);
+	else
+		printf("Couldn't insert node to list\n");
+	pos++;
+	data = 9;
+	if(insertToList(&list, pos, data))
+		printf("Inserted %d in position %d successfully\n", data, pos);
+	else
+		printf("Couldn't insert node to list\n");
+
+	int i;
+	ST_node *tmp;
+	tmp = list.head;
+	for(i=0;i<list.listSize;i++){
+		printf("%d\n", tmp->data);
+		tmp = tmp->nextNode;
+	}
+	sortList(&list);
+	tmp = list.head;
+	for(i=0;i<list.listSize;i++){
+		printf("%d\n", tmp->data);
+		tmp = tmp->nextNode;
+	}
+
+	return 0;
+}
+
+#endif // DATA_STR_AGILE_REQ_5

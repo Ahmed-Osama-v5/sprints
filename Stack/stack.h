@@ -11,10 +11,9 @@
 typedef char StackEntry;
 
 typedef struct ST_stackInfo{
-		int top;
-        StackEntry *entry;
-
-    }ST_stackInfo;
+	int top;
+	StackEntry *entry;
+}ST_stackInfo;
 
 /*****  Create.
 * Pre : NONE.
