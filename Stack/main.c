@@ -11,8 +11,9 @@
 //#define DEBUG_
 
 //#define DATA_STR_AGILE_REQ_1
-#define DATA_STR_AGILE_REQ_2
+//#define DATA_STR_AGILE_REQ_2
 //#define DATA_STR_AGILE_REQ_3
+#define DATA_STR_AGILE_REQ_4
 
 #ifdef DATA_STR_AGILE_REQ_1
 
@@ -102,11 +103,11 @@ unsigned char checkForBalancedParantheses(char* expression){
 		}
 		else if((expression[i] == '}')){
 			if(stack.entry[stack.top-1] == '{'){
+			pop(&stack, &dummy);
 #ifdef DEBUG_
 			printf("Poped #%d> %c\n", i, expression[i]);
 			printf("POP_Top %c\n", stack.entry[stack.top-1]);
 #endif // DEBUG_
-				pop(&stack, &dummy);
 			}
 		}
 		i++;
@@ -152,3 +153,140 @@ int main(void){
 }
 
 #endif // DATA_STR_AGILE_REQ_3
+
+#ifdef DATA_STR_AGILE_REQ_4
+
+#include "stack.h"
+#include "queue.h"
+
+long long evaluate(char* expression);
+
+ST_stackInfo stack;
+ST_queueInfo queue;
+
+int main(void){
+	setvbuf(stdout, NULL, _IONBF, 0);
+	setvbuf(stderr, NULL, _IONBF, 0);
+
+	createStack(&stack, 10);
+	createQueue(&queue, 15);
+	char *val = "(1+2*1-2)/1";
+	printf("Result > %I64d\n", evaluate(val));
+
+	return 0;
+}
+
+long long evaluate(char* expression){
+	long long tmp = 0;
+	char markTmp = '+';
+	int dummy;
+	int i = 0;
+	while(expression[i] != '\0'){
+		if(expression[i] == '('){
+			push(&stack, expression[i]);
+#ifdef DEBUG_
+			printf("Pushed> %c\n", stack.entry[stack.top]);
+#endif // DEBUG_
+		}
+		else if((expression[i] == ')')){
+			// Perform operation on elements in the queue
+			while(! isQueueEmpty(&queue)){
+				dequeue(&queue, &dummy);
+#ifdef DEBUG_
+				printf("Dequeued> %c\n", (char)dummy);
+#endif // DEBUG_
+				if((dummy == '+') || (dummy == '-') || (dummy == '*') || (dummy == '/')){
+					markTmp = dummy;
+#ifdef DEBUG_
+				printf("markTmp> %c\n", (char)dummy);
+#endif // DEBUG_
+				}
+				else{
+					if(markTmp == '+'){
+#ifdef DEBUG_
+				printf("tmp(%I64d) + dummy(%d) = ", tmp, dummy-48);
+#endif // DEBUG_
+						tmp += (dummy-48);
+#ifdef DEBUG_
+				printf("%I64d\n", tmp);
+#endif // DEBUG_
+				}
+					else if(markTmp == '-'){
+						tmp -= (dummy-48);
+#ifdef DEBUG_
+				printf("tmp> %I64d\n", tmp);
+#endif // DEBUG_
+				}
+					else if(markTmp == '*'){
+						tmp *= (dummy-48);
+#ifdef DEBUG_
+				printf("tmp> %I64d\n", tmp);
+#endif // DEBUG_
+				}
+					else if(markTmp == '/'){
+						tmp /= (dummy-48);
+#ifdef DEBUG_
+				printf("tmp> %I64d\n", tmp);
+#endif // DEBUG_
+				}
+				}
+			}
+			// pop stack
+			pop(&stack, &dummy);
+#ifdef DEBUG_
+				printf("Popped> %c\n", (char)dummy);
+#endif // DEBUG_
+		}
+		else{
+			enqueue(&queue, expression[i]);
+#ifdef DEBUG_
+				printf("Enqueued> %c\n", expression[i]);
+#endif // DEBUG_
+		}
+		i++;
+	}
+	while(! isQueueEmpty(&queue)){
+		dequeue(&queue, &dummy);
+#ifdef DEBUG_
+		printf("Dequeued> %c\n", (char)dummy);
+#endif // DEBUG_
+		if((dummy == '+') || (dummy == '-') || (dummy == '*') || (dummy == '/')){
+			markTmp = dummy;
+#ifdef DEBUG_
+		printf("markTmp> %c\n", (char)dummy);
+#endif // DEBUG_
+		}
+		else{
+			if(markTmp == '+'){
+#ifdef DEBUG_
+		printf("tmp(%I64d) + dummy(%d) = ", tmp, dummy-48);
+#endif // DEBUG_
+				tmp += (dummy-48);
+#ifdef DEBUG_
+		printf("%I64d\n", tmp);
+#endif // DEBUG_
+			}
+			else if(markTmp == '-'){
+				tmp -= (dummy-48);
+#ifdef DEBUG_
+		printf("tmp> %I64d\n", tmp);
+#endif // DEBUG_
+			}
+			else if(markTmp == '*'){
+				tmp *= (dummy-48);
+#ifdef DEBUG_
+		printf("tmp> %I64d\n", tmp);
+#endif // DEBUG_
+			}
+			else if(markTmp == '/'){
+				tmp /= (dummy-48);
+#ifdef DEBUG_
+		printf("tmp> %I64d\n", tmp);
+#endif // DEBUG_
+			}
+		}
+	}
+	return tmp;
+}
+
+#endif // DATA_STR_AGILE_REQ_4
