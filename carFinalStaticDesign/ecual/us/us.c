@@ -27,16 +27,16 @@
 
 ERROR_STATUS Us_Init(void)
 {
-	DIO_Cfg_s ST_dio2;
-	ST_dio2.GPIO = GPIOB;
-	ST_dio2.dir = OUTPUT;
-	ST_dio2.pins = PIN3;
-	DIO_init(&ST_dio2);
+	DIO_Cfg_s str_Dio;
+	str_Dio.GPIO = GPIOB;
+	str_Dio.dir = OUTPUT;
+	str_Dio.pins = PIN3;
+	DIO_init(&str_Dio);
 
-	Icu_cfg_s ST_Icu = {0};
-	ST_Icu.ICU_Ch_No = ICU_CH2;
-	ST_Icu.ICU_Ch_Timer = ICU_TIMER_CH0;
-	if(Icu_Init(&ST_Icu) == E_OK)
+	Icu_cfg_s str_Icu = {0};
+	str_Icu.ICU_Ch_No = ICU_CH2;
+	str_Icu.ICU_Ch_Timer = ICU_TIMER_CH0;
+	if(Icu_Init(&str_Icu) == E_OK)
 	{
 
 	}

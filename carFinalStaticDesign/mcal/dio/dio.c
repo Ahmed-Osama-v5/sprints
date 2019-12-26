@@ -15,48 +15,53 @@
 */
 ERROR_STATUS DIO_init (DIO_Cfg_s *DIO_info)
 {
-	if(DIO_info->GPIO == GPIOA)
+	if(NULL != DIO_info)
 	{
-		if(DIO_info->dir == OUTPUT)
+		switch (DIO_info->GPIO)
 		{
-			PORTA_DIR |= DIO_info->pins;
-		}
-		else
-		{
-			PORTA_DIR &= ~DIO_info->pins;
-		}
-	}
-	else if(DIO_info->GPIO == GPIOB)
-	{
-		if(DIO_info->dir == OUTPUT)
-		{
-			PORTB_DIR |= DIO_info->pins;
-		}
-		else
-		{
-			PORTB_DIR &= ~DIO_info->pins;
-		}
-	}
-	else if(DIO_info->GPIO == GPIOC)
-	{
-		if(DIO_info->dir == OUTPUT)
-		{
-			PORTC_DIR |= DIO_info->pins;
-		}
-		else
-		{
-			PORTC_DIR &= ~DIO_info->pins;
-		}
-	}
-	else if(DIO_info->GPIO == GPIOD)
-	{
-		if(DIO_info->dir == OUTPUT)
-		{
-			PORTD_DIR |= DIO_info->pins;
-		}
-		else
-		{
-			PORTD_DIR &= ~DIO_info->pins;
+		case (GPIOA):
+			if(DIO_info->dir == OUTPUT)
+			{
+				PORTA_DIR |= DIO_info->pins;
+			}
+			else
+			{
+				PORTA_DIR &= ~DIO_info->pins;
+			}
+			break;
+		case (GPIOB):
+			if(DIO_info->dir == OUTPUT)
+			{
+				PORTB_DIR |= DIO_info->pins;
+			}
+			else
+			{
+				PORTB_DIR &= ~DIO_info->pins;
+			}
+			break;
+		case (GPIOC):
+			if(DIO_info->dir == OUTPUT)
+			{
+				PORTC_DIR |= DIO_info->pins;
+			}
+			else
+			{
+				PORTC_DIR &= ~DIO_info->pins;
+			}
+			break;
+		case (GPIOD):
+			if(DIO_info->dir == OUTPUT)
+			{
+				PORTD_DIR |= DIO_info->pins;
+			}
+			else
+			{
+				PORTD_DIR &= ~DIO_info->pins;
+			}
+			break;
+		default:
+			return E_NOK;
+			break;
 		}
 	}
 	else

@@ -16,7 +16,7 @@
 
 #define MOTOR_FREQUENCY		1000
 
-static uint8 gsu8_initState[MAX_MOTOR_NUMBER] = {NOT_INITIALIZED};
+static uint8 gu8_initState[MAX_MOTOR_NUMBER] = {NOT_INITIALIZED};
 
 /**
  * Func			: Motor_Init
@@ -63,7 +63,7 @@ static uint8 gsu8_initState[MAX_MOTOR_NUMBER] = {NOT_INITIALIZED};
 		 	ST_Pwm.channel = PWM_CH1A;
 		 	ST_Pwm.prescaler = PWM_PRESCALER_NO;
 		 	Pwm_Init(&ST_Pwm);
-			gsu8_initState[0] = INITIALIZED;
+		 	gu8_initState[0] = INITIALIZED;
 		 	break;
 		 case (MOTOR_2):
 			/* set IN3 as digital output */
@@ -93,7 +93,7 @@ static uint8 gsu8_initState[MAX_MOTOR_NUMBER] = {NOT_INITIALIZED};
 			ST_Pwm.channel = PWM_CH1B;
 			ST_Pwm.prescaler = PWM_PRESCALER_NO;
 			Pwm_Init(&ST_Pwm);
-			gsu8_initState[1] = INITIALIZED;
+			gu8_initState[1] = INITIALIZED;
 			break;
 		 default:
 			return E_NOK;
@@ -117,7 +117,7 @@ static uint8 gsu8_initState[MAX_MOTOR_NUMBER] = {NOT_INITIALIZED};
 */
 ERROR_STATUS Motor_Direction(uint8 Motor_Number, uint8 Motor_Direction)
 {
-	if(gsu8_initState[Motor_Number] == INITIALIZED)
+	if(gu8_initState[Motor_Number] == INITIALIZED)
 	{
 		switch(Motor_Number)
 		{
@@ -179,7 +179,7 @@ ERROR_STATUS Motor_Direction(uint8 Motor_Number, uint8 Motor_Direction)
 */
 ERROR_STATUS Motor_Start(uint8 Motor_Number, uint8 Mot_Speed)
 {
-	if(gsu8_initState[Motor_Number] == INITIALIZED)
+	if(gu8_initState[Motor_Number] == INITIALIZED)
 	{
 		switch(Motor_Number)
 		{
@@ -214,7 +214,7 @@ ERROR_STATUS Motor_Start(uint8 Motor_Number, uint8 Mot_Speed)
 */
 ERROR_STATUS Motor_SpeedUpdate(uint8 Motor_Number, uint8 Speed)
 {
-	if(gsu8_initState[Motor_Number] == INITIALIZED)
+	if(gu8_initState[Motor_Number] == INITIALIZED)
 	{
 		switch(Motor_Number)
 		{
@@ -247,7 +247,7 @@ ERROR_STATUS Motor_SpeedUpdate(uint8 Motor_Number, uint8 Speed)
 */
 ERROR_STATUS Motor_Stop(uint8 Motor_Number)
 {
-	if(gsu8_initState[Motor_Number] == INITIALIZED)
+	if(gu8_initState[Motor_Number] == INITIALIZED)
 	{
 		switch(Motor_Number)
 		{
@@ -285,7 +285,7 @@ ERROR_STATUS Motor_Stop(uint8 Motor_Number)
  */
  uint8 Motor_GetStatus(uint8 Motor_Number)
  {
-	 if(gsu8_initState[Motor_Number] == INITIALIZED)
+	 if(gu8_initState[Motor_Number] == INITIALIZED)
 	 {
 		 return 1;
 	 }

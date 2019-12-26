@@ -12,10 +12,12 @@
 #include "char_lcd.h"
 #include "softwareDelay.h"
 
+#define DEBUG_
+
 #define CAR_FORWARD_80	5
 #define CAR_FORWARD_30	6
 
-static uint8 gsu8_state = CAR_STOP;
+static uint8 gu8_state = CAR_STOP;
 
 /*
  * Fun----------: ERROR_STATUS Car_SM_Init(void);
@@ -31,7 +33,9 @@ ERROR_STATUS Car_SM_Init(void)
 {
 	Steering_Init();
 	Us_Init();
+#ifdef DEBUG_
 	LCD_init();
+#endif // DEBUG_
 	return E_OK;
 }
 
@@ -47,26 +51,48 @@ ERROR_STATUS Car_SM_Init(void)
 */
 ERROR_STATUS Car_SM_Update(void)
 {
-	uint16 distance = 0;
-	uint16 uSeconds = 0;
-	uint8 lcdBuffer[16];
+	uint16 u16_distance = 0;
+	uint16 u16_uSeconds = 0;
+	uint8 au8_lcdBuffer[16];
 
 	/* Trigger pulse */
 	Us_Trigger();
 
 	/* Convert uSeconds to distance in cm */
-	Us_GetDistance(&uSeconds);
-	distance = (uSeconds * 64) / 58;
-	sprintf(lcdBuffer, "%d CM  ", distance);
+	Us_GetDistance(&u16_uSeconds);
+	u16_distance = (u16_uSeconds * 64) / 58;
+
+#ifdef DEBUG_
+	sprintf(au8_lcdBuffer, "%d CM  ", u16_distance);
 	LCD_goto_xy(0, 0);
-	LCD_send_string(lcdBuffer);
+	LCD_send_string(au8_lcdBuffer);
 
+	if(gu8_state == CAR_FORWARD_30)
+	{
+		sprintf(au8_lcdBuffer, "FORWARD_30  ");
+	}
+	else if(gu8_state == CAR_FORWARD_80)
+	{
+		sprintf(au8_lcdBuffer, "FORWARD_80  ");
+	}
+	else if(gu8_state == CAR_BACKWARD)
+	{
+		sprintf(au8_lcdBuffer, "CAR_BACKWARD");
+	}
+	else if(gu8_state == CAR_RIGHT)
+	{
+		sprintf(au8_lcdBuffer, "CAR_RIGHT   ");
+	}
+	else
+	{
 
-	sprintf(lcdBuffer, "%d", gsu8_state);
+	}
 	LCD_goto_xy(0, 1);
-	LCD_send_string(lcdBuffer);
+	LCD_send_string(au8_lcdBuffer);
 
-	switch(gsu8_state)
+#endif // DEBUG_
+
+	switch(gu8_state)
 	{
 	case(CAR_STOP):
 		Steering_SteerCar(CAR_STOP, 50);
@@ -88,17 +114,17 @@ ERROR_STATUS Car_SM_Update(void)
 		break;
 	}
 
-	if(distance >= 50){
-		gsu8_state = CAR_FORWARD_80;
+	if(u16_distance >= 50){
+		gu8_state = CAR_FORWARD_80;
 	}
-	else if((distance > 30 )){
-		gsu8_state = CAR_FORWARD_30;
+	else if((u16_distance < 50 ) && (u16_distance > 30 )){
+		gu8_state = CAR_FORWARD_30;
 	}
-	else if((distance == 30 )){
-		gsu8_state = CAR_RIGHT;
+	else if((u16_distance == 30 )){
+		gu8_state = CAR_RIGHT;
 	}
 	else{
-		gsu8_state = CAR_BACKWARD;
+		gu8_state = CAR_BACKWARD;
 	}
 	return E_OK;
 }

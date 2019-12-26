@@ -19,7 +19,7 @@
 /*				 GLOBAL STATIC VARIABLES			        			*/
 /************************************************************************/
 
-static uint8 gsau8_initState[MAX_Int_CHANNELS] = {NOT_INITIALIZED, NOT_INITIALIZED, NOT_INITIALIZED};
+static uint8 gau8_initState[MAX_Int_CHANNELS] = {NOT_INITIALIZED, NOT_INITIALIZED, NOT_INITIALIZED};
 
 /**
  * Input: Pointer to callback function.
@@ -84,7 +84,7 @@ ERROR_STATUS ExternInt_Init(ExternInt_Cfg_s *ExternIntCfg)
 			{
 				return E_NOK;
 			}
-			gsau8_initState[ExternIntCfg->ExternInt_No] = INITIALIZED;
+			gau8_initState[ExternIntCfg->ExternInt_No] = INITIALIZED;
 			break;
 		case (EXTRN_INT_1):
 			/* Pass pointer to callback function */
@@ -124,7 +124,7 @@ ERROR_STATUS ExternInt_Init(ExternInt_Cfg_s *ExternIntCfg)
 			{
 				return E_NOK;
 			}
-			gsau8_initState[ExternIntCfg->ExternInt_No] = INITIALIZED;
+			gau8_initState[ExternIntCfg->ExternInt_No] = INITIALIZED;
 			break;
 		case (EXTRN_INT_2):
 			/* Pass pointer to callback function */
@@ -154,7 +154,7 @@ ERROR_STATUS ExternInt_Init(ExternInt_Cfg_s *ExternIntCfg)
 			{
 				return E_NOK;
 			}
-			gsau8_initState[ExternIntCfg->ExternInt_No] = INITIALIZED;
+			gau8_initState[ExternIntCfg->ExternInt_No] = INITIALIZED;
 			break;
 		default:
 			return E_NOK;
@@ -184,7 +184,7 @@ ERROR_STATUS ExternInt_SetEvent(uint8 ExternInt_No,uint8 InterruptEvent)
 	switch(ExternInt_No)
 	{
 	case (EXTRN_INT_0):
-		if(gsau8_initState[ExternInt_No] == INITIALIZED)
+		if(gau8_initState[ExternInt_No] == INITIALIZED)
 		{
 			if(InterruptEvent == LOW_LEVEL)
 			{
@@ -208,7 +208,6 @@ ERROR_STATUS ExternInt_SetEvent(uint8 ExternInt_No,uint8 InterruptEvent)
 			{
 				return E_NOK;
 			}
-			gsau8_initState[ExternInt_No] = INITIALIZED;
 		}
 		else
 		{
@@ -216,7 +215,7 @@ ERROR_STATUS ExternInt_SetEvent(uint8 ExternInt_No,uint8 InterruptEvent)
 		}
 		break;
 	case (EXTRN_INT_1):
-		if(gsau8_initState[ExternInt_No] == INITIALIZED)
+		if(gau8_initState[ExternInt_No] == INITIALIZED)
 		{
 			if(InterruptEvent == LOW_LEVEL)
 			{
@@ -240,7 +239,6 @@ ERROR_STATUS ExternInt_SetEvent(uint8 ExternInt_No,uint8 InterruptEvent)
 			{
 				return E_NOK;
 			}
-			gsau8_initState[ExternInt_No] = INITIALIZED;
 		}
 		else
 		{
@@ -248,7 +246,7 @@ ERROR_STATUS ExternInt_SetEvent(uint8 ExternInt_No,uint8 InterruptEvent)
 		}
 		break;
 	case (EXTRN_INT_2):
-		if(gsau8_initState[ExternInt_No] == INITIALIZED)
+		if(gau8_initState[ExternInt_No] == INITIALIZED)
 		{
 			if(InterruptEvent == FALLING_EDGE)
 			{
@@ -262,7 +260,6 @@ ERROR_STATUS ExternInt_SetEvent(uint8 ExternInt_No,uint8 InterruptEvent)
 			{
 				return E_NOK;
 			}
-			gsau8_initState[ExternInt_No] = INITIALIZED;
 		}
 		else
 		{
@@ -291,7 +288,7 @@ ERROR_STATUS ExternInt_GetStatus(uint8 ExternInt_No,uint8 *Status)
 	switch(ExternInt_No)
 	{
 	case (EXTRN_INT_0):
-		if(gsau8_initState[ExternInt_No] == INITIALIZED)
+		if(gau8_initState[ExternInt_No] == INITIALIZED)
 		{
 			*Status = GIFR & INTF0;
 		}
@@ -301,7 +298,7 @@ ERROR_STATUS ExternInt_GetStatus(uint8 ExternInt_No,uint8 *Status)
 		}
 		break;
 	case (EXTRN_INT_1):
-		if(gsau8_initState[ExternInt_No] == INITIALIZED)
+		if(gau8_initState[ExternInt_No] == INITIALIZED)
 		{
 			*Status = GIFR & INTF1;
 		}
@@ -311,7 +308,7 @@ ERROR_STATUS ExternInt_GetStatus(uint8 ExternInt_No,uint8 *Status)
 		}
 		break;
 	case (EXTRN_INT_2):
-		if(gsau8_initState[ExternInt_No] == INITIALIZED)
+		if(gau8_initState[ExternInt_No] == INITIALIZED)
 		{
 			*Status = GIFR & INTF2;
 		}
@@ -340,7 +337,7 @@ ERROR_STATUS ExternInt_Enable(uint8 ExternInt_No)
 	switch(ExternInt_No)
 	{
 	case (EXTRN_INT_0):
-		if(gsau8_initState[ExternInt_No] == INITIALIZED)
+		if(gau8_initState[ExternInt_No] == INITIALIZED)
 		{
 			GICR |= INT0;
 		}
@@ -350,7 +347,7 @@ ERROR_STATUS ExternInt_Enable(uint8 ExternInt_No)
 		}
 		break;
 	case (EXTRN_INT_1):
-		if(gsau8_initState[ExternInt_No] == INITIALIZED)
+		if(gau8_initState[ExternInt_No] == INITIALIZED)
 		{
 			GICR |= INT1;
 		}
@@ -360,7 +357,7 @@ ERROR_STATUS ExternInt_Enable(uint8 ExternInt_No)
 		}
 		break;
 	case (EXTRN_INT_2):
-		if(gsau8_initState[ExternInt_No] == INITIALIZED)
+		if(gau8_initState[ExternInt_No] == INITIALIZED)
 		{
 			GICR |= INT2;
 		}
@@ -389,7 +386,7 @@ ERROR_STATUS ExternInt_Disable(uint8 ExternInt_No)
 	switch(ExternInt_No)
 	{
 	case (EXTRN_INT_0):
-		if(gsau8_initState[ExternInt_No] == INITIALIZED)
+		if(gau8_initState[ExternInt_No] == INITIALIZED)
 		{
 			GICR &= ~INT0;
 		}
@@ -399,7 +396,7 @@ ERROR_STATUS ExternInt_Disable(uint8 ExternInt_No)
 		}
 		break;
 	case (EXTRN_INT_1):
-		if(gsau8_initState[ExternInt_No] == INITIALIZED)
+		if(gau8_initState[ExternInt_No] == INITIALIZED)
 		{
 			GICR &= ~INT1;
 		}
@@ -409,7 +406,7 @@ ERROR_STATUS ExternInt_Disable(uint8 ExternInt_No)
 		}
 		break;
 	case (EXTRN_INT_2):
-		if(gsau8_initState[ExternInt_No] == INITIALIZED)
+		if(gau8_initState[ExternInt_No] == INITIALIZED)
 		{
 			GICR &= ~INT2;
 		}
