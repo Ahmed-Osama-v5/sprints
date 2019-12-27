@@ -21,6 +21,8 @@ ERROR_STATUS Steering_Init(void)
 {
 	Motor_Init(MOTOR_1);
 	Motor_Init(MOTOR_2);
+	Motor_Start(MOTOR_1, 50);
+	Motor_Start(MOTOR_2, 50);
 	return E_OK;
 }
 

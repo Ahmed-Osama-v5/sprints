@@ -364,6 +364,11 @@ ERROR_STATUS Pwm_Update(uint8 channel,uint8 Duty,uint32 Frequncy)
 		/* Check if PWM channel is initialized or not */
 		if(gsau8_initState[channel] == INITIALIZED)
 		{
+			/* Calculating frequency */
+			/* Equation from datasheet of ATmega32 P.108 */
+			uint16 u16_F_Calculated = (F_CPU / (2 * gsau8_prescaler_calc_LUT[gsau8_preScaler[channel]] * Frequncy));
+			ICR1 = u16_F_Calculated;
+
 			/* Calculating duty ratio */
 			uint32 DutyRatio = (((uint32)Duty * (uint32)ICR1) / 100);
 			OCR1A = (uint16) DutyRatio;
@@ -377,6 +382,10 @@ ERROR_STATUS Pwm_Update(uint8 channel,uint8 Duty,uint32 Frequncy)
 		/* Check if PWM channel is initialized or not */
 		if(gsau8_initState[channel] == INITIALIZED)
 		{
+			/* Equation from datasheet of ATmega32 P.108 */
+			uint16 u16_F_Calculated = (F_CPU / (2 * gsau8_prescaler_calc_LUT[gsau8_preScaler[channel]] * Frequncy));
+			ICR1 = u16_F_Calculated;
+
 			/* Calculating duty ratio */
 			uint32 DutyRatio = (((uint32)Duty * (uint32)ICR1) / 100);
 			OCR1B = (uint16) DutyRatio;

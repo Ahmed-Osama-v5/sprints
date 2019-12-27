@@ -14,10 +14,15 @@
 
 #define DEBUG_
 
-#define CAR_FORWARD_80	5
-#define CAR_FORWARD_30	6
+#define CAR_FORWARD_80	(5)
+#define CAR_FORWARD_30	(6)
+
+#define FLAG_HIGH	(1)
+#define FLAG_LOW	(0)
 
 static uint8 gu8_state = CAR_STOP;
+static uint8 gu8_RampFlag = FLAG_LOW;
+static uint8 gu8_index = 0;
 
 /*
  * Fun----------: ERROR_STATUS Car_SM_Init(void);
@@ -31,8 +36,8 @@ static uint8 gu8_state = CAR_STOP;
 */
 ERROR_STATUS Car_SM_Init(void)
 {
-	Steering_Init();
 	Us_Init();
+	Steering_Init();
 #ifdef DEBUG_
 	LCD_init();
 #endif // DEBUG_
@@ -95,36 +100,116 @@ ERROR_STATUS Car_SM_Update(void)
 	switch(gu8_state)
 	{
 	case(CAR_STOP):
+		gu8_RampFlag = FLAG_LOW;
 		Steering_SteerCar(CAR_STOP, 50);
+		SwDelay_ms(300);
+		if(u16_distance > 30){
+			gu8_state = CAR_FORWARD_30;
+		}
+		else if(u16_distance == 30){
+			gu8_state = CAR_RIGHT;
+		}
+		else if(u16_distance < 30){
+			gu8_state = CAR_BACKWARD;
+		}
+		else
+		{
+			gu8_state = CAR_STOP;
+		}
 		break;
 	case(CAR_FORWARD_80):
-		Steering_SteerCar(CAR_FORWARD, 80);
+		if(u16_distance >= 50){
+			if(gu8_RampFlag == FLAG_LOW)
+			{
+				for(gu8_index=0;gu8_index<80;gu8_index++)
+				{
+					Steering_SteerCar(CAR_FORWARD, gu8_index);
+					SwDelay_ms(10);
+				}
+				gu8_RampFlag = FLAG_HIGH;
+			}
+			else
+			{
+				Steering_SteerCar(CAR_FORWARD, 80);
+			}
+		}
+		else
+		{
+			gu8_RampFlag = FLAG_LOW;
+			gu8_state = CAR_FORWARD_30;
+		}
 		break;
 	case(CAR_FORWARD_30):
-		Steering_SteerCar(CAR_FORWARD, 30);
+		if(u16_distance >= 50){
+			gu8_state = CAR_FORWARD_80;
+		}
+		else if((u16_distance < 50) && (u16_distance > 30)){
+			if(gu8_RampFlag == FLAG_LOW)
+			{
+				for(gu8_index=0;gu8_index<40;gu8_index++)
+				{
+					Steering_SteerCar(CAR_FORWARD, gu8_index);
+					SwDelay_ms(10);
+				}
+				gu8_RampFlag = FLAG_HIGH;
+			}
+			else
+			{
+				Steering_SteerCar(CAR_FORWARD, 40);
+			}
+		}
+		else
+		{
+			gu8_RampFlag = FLAG_LOW;
+			gu8_state = CAR_STOP;
+		}
 		break;
 	case(CAR_BACKWARD):
-		Steering_SteerCar(CAR_BACKWARD, 30);
+		if(u16_distance < 30){
+			if(gu8_RampFlag == FLAG_LOW)
+			{
+				for(gu8_index=0;gu8_index<32;gu8_index++)
+				{
+					Steering_SteerCar(CAR_BACKWARD, gu8_index);
+					SwDelay_ms(10);
+				}
+				gu8_RampFlag = FLAG_HIGH;
+			}
+			else
+			{
+				Steering_SteerCar(CAR_BACKWARD, 32);
+			}
+			SwDelay_ms(2000);
+			gu8_state = CAR_RIGHT;
+		}
+		else
+		{
+			gu8_RampFlag = FLAG_LOW;
+			gu8_state = CAR_STOP;
+		}
 		break;
 	case(CAR_RIGHT):
-		Steering_SteerCar(CAR_RIGHT, 35);
-		SwDelay_ms(1500);
+		Steering_SteerCar(CAR_STOP, gu8_index);
+		SwDelay_ms(800);
+		if(gu8_RampFlag == FLAG_LOW)
+		{
+			for(gu8_index=0;gu8_index<40;gu8_index++)
+			{
+				Steering_SteerCar(CAR_RIGHT, gu8_index);
+				SwDelay_ms(10);
+			}
+			gu8_RampFlag = FLAG_HIGH;
+		}
+		else
+		{
+			Steering_SteerCar(CAR_RIGHT, 40);
+		}
+		SwDelay_ms(2000);
+		gu8_RampFlag = FLAG_LOW;
+		gu8_state = CAR_STOP;
 		break;
 	default:
 		break;
-	}
-
-	if(u16_distance >= 50){
-		gu8_state = CAR_FORWARD_80;
-	}
-	else if((u16_distance < 50 ) && (u16_distance > 30 )){
-		gu8_state = CAR_FORWARD_30;
-	}
-	else if((u16_distance == 30 )){
-		gu8_state = CAR_RIGHT;
-	}
-	else{
-		gu8_state = CAR_BACKWARD;
 	}
 	return E_OK;
 }
