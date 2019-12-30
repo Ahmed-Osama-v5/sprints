@@ -13,6 +13,7 @@
 #include "spi.h"
 #include "timer.h"
 #include "pushButton.h"
+#include "char_lcd.h"
 
 #define NO_TRANSMISSION				0
 #define START_TRANSMISSION			1
@@ -70,6 +71,8 @@ int main(void)
 	/* Initialize UART */
 	UART_Init(&str_UART_s);
 
+	LCD_init();
+
 	/* Create instance of SPI configuration structure */
 	SPI_Cfg_s str_SPI_s = {0};
 
@@ -97,12 +100,15 @@ int main(void)
 	pushButton_Init(BTN_0);
 	pushButton_Init(BTN_1);
 
-	/* Initialize Debug LED */
 	DIO_Cfg_s str_DIO_s = {0};
+
+	/* Initialize Debug LED */
+	/*
 	str_DIO_s.GPIO = GPIOC;
 	str_DIO_s.dir = OUTPUT;
 	str_DIO_s.pins = PIN0;
 	DIO_init(&str_DIO_s);
+	*/
 
 	/* Initialize SPI SS */
 	str_DIO_s.GPIO = GPIOB;
@@ -149,20 +155,36 @@ int main(void)
 	}
 
 	Timer_Start(TIMER_CH0, 255);
-	uint8 u8_spi_ISR_Flag = NOT_TRIGGERED;
+	/* uint8 u8_spi_ISR_Flag = NOT_TRIGGERED; */
 	DIO_Write(GPIOB, PIN4, HIGH);
 
+	char lcd_buffer[5];
 	while(1)
 	{
+		LCD_goto_xy(0, 0);
+		sprintf(lcd_buffer, "%d  ", gu8_Seconds);
+		LCD_send_string(lcd_buffer);
 		pushButton_Update();
 		if(pushButton_GetStatus(BTN_0) == Pressed)
 		{
+			cli();
 			gu8_speed++;
+			sei();
+		}
+		else
+		{
+
 		}
 
 		if(pushButton_GetStatus(BTN_1) == Pressed)
 		{
+			cli();
 			gu8_speed--;
+			sei();
+		}
+		else
+		{
+
 		}
 
 		if(gu8_SPI_Transmission_Flag == START_TRANSMISSION)
@@ -170,33 +192,29 @@ int main(void)
 			DIO_Write(GPIOB, PIN4, LOW);
 			if(gu8_Time_Speed_Transmission_Flag == TIME_TRANSMISSION)
 			{
-				DIO_Write(GPIOC, PIN0, HIGH);
 				SPI_SendByte(gu8_Seconds);
-				/* Poll SPI ISR Flag */
-				while(u8_spi_ISR_Flag == NOT_TRIGGERED)
-				{
-					SPI_GetStatus(&u8_spi_ISR_Flag);
-				}
+//				/* Poll SPI ISR Flag */
+//				while(u8_spi_ISR_Flag == NOT_TRIGGERED)
+//				{
+//					SPI_GetStatus(&u8_spi_ISR_Flag);
+//				}
 				SPI_ClearFlag();
 				SwDelay_ms(1);
 
 				gu8_Time_Speed_Transmission_Flag = SPEED_TRANSMISSION;
-				DIO_Write(GPIOC, PIN0, LOW);
 			}
 			else
 			{
-				DIO_Write(GPIOC, PIN0, HIGH);
 				SPI_SendByte(gu8_speed);
-				/* Poll SPI ISR Flag */
-				while(u8_spi_ISR_Flag == NOT_TRIGGERED)
-				{
-					SPI_GetStatus(&u8_spi_ISR_Flag);
-				}
+//				/* Poll SPI ISR Flag */
+//				while(u8_spi_ISR_Flag == NOT_TRIGGERED)
+//				{
+//					SPI_GetStatus(&u8_spi_ISR_Flag);
+//				}
 				SPI_ClearFlag();
 				SwDelay_ms(1);
 				gu8_Time_Speed_Transmission_Flag = TIME_TRANSMISSION;
 				gu8_SPI_Transmission_Flag = NO_TRANSMISSION;
-				DIO_Write(GPIOC, PIN0, LOW);
 			}
 			DIO_Write(GPIOB, PIN4, HIGH);
 		}
