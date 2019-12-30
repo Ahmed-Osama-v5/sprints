@@ -5,6 +5,7 @@
  *      Author: Ahmed Osama
  */
 
+#include <stdio.h>
 #include "std_types.h"
 #include "interrupt.h"
 #include "dio.h"
@@ -193,11 +194,9 @@ int main(void)
 			if(gu8_Time_Speed_Transmission_Flag == TIME_TRANSMISSION)
 			{
 				SPI_SendByte(gu8_Seconds);
-//				/* Poll SPI ISR Flag */
-//				while(u8_spi_ISR_Flag == NOT_TRIGGERED)
-//				{
-//					SPI_GetStatus(&u8_spi_ISR_Flag);
-//				}
+				SPI_ClearFlag();
+				SwDelay_ms(1);
+				SPI_SendByte('t');
 				SPI_ClearFlag();
 				SwDelay_ms(1);
 
@@ -206,11 +205,9 @@ int main(void)
 			else
 			{
 				SPI_SendByte(gu8_speed);
-//				/* Poll SPI ISR Flag */
-//				while(u8_spi_ISR_Flag == NOT_TRIGGERED)
-//				{
-//					SPI_GetStatus(&u8_spi_ISR_Flag);
-//				}
+				SPI_ClearFlag();
+				SwDelay_ms(1);
+				SPI_SendByte('s');
 				SPI_ClearFlag();
 				SwDelay_ms(1);
 				gu8_Time_Speed_Transmission_Flag = TIME_TRANSMISSION;
