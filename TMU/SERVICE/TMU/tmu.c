@@ -8,7 +8,6 @@
 /*- INCLUDES ----------------------------------------------*/
 #include "tmu_lcfg.h"
 #include "tmu.h"
-#include "timer.h"
 
 /*- LOCAL MACROS ------------------------------------------*/
 
@@ -17,10 +16,10 @@
 /*- LOCAL FUNCTIONS PROTOTYPES ----------------------------*/
 
 /*- GLOBAL STATIC VARIABLES -------------------------------*/
-static uint8 u8_Tmu_InitStatus = NOT_INITIALIZED;
+static uint8 gsu8_TMUInitStatus = NOT_INITIALIZED;
 
 /*- GLOBAL EXTERN VARIABLES -------------------------------*/
-extern StrTmuConfig_t str_TmuConfig_s;
+extern gstrTMUConfig_t gstr_TMUConfig_s;
 
 /*- LOCAL FUNCTIONS IMPLEMENTATION ------------------------*/
 /**
@@ -30,7 +29,7 @@ extern StrTmuConfig_t str_TmuConfig_s;
 * Output: None
 * @return: void
 */
-static void Tmu_Timer_CBK(void);
+void TMU_TimerOvf_CBK(void);
 
 /*- APIs IMPLEMENTATION -----------------------------------*/
 /**
@@ -38,42 +37,42 @@ static void Tmu_Timer_CBK(void);
 * @param: void
 * Input : void
 * Output: None
-* @return: ERROR_STATUS ( E_OK if every thing is OK, E_NOK otherwise )
+* @return: sint8 status code with error code if one occurred
 */
-ERROR_STATUS Tmu_Init(void)
+sint8 TMU_Init(void)
 {
+  sint8 retVal = TMU_BASE_ERROR + SUCCESS;
+
   /* Create instance of Timer configuration structure and initialize it with zeros*/
   Timer_cfg_s str_Timer_Cfg_s = {0};
 
   /* Initialize corresponding timer */
-  if(str_TmuConfig_s.timerCh == TMU_TIMER_CH0)
+  if(gstr_TMUConfig_s.timerCh == TIMER_CH0)
   {
       str_Timer_Cfg_s.Timer_CH_NO = TIMER_CH0;
       str_Timer_Cfg_s.Timer_Prescaler = TIMER_PRESCALER_64;
-      #define TIM0
   }
-  else if(str_TmuConfig_s.timerCh == TMU_TIMER_CH1)
+  else if(gstr_TMUConfig_s.timerCh == TIMER_CH1)
   {
       str_Timer_Cfg_s.Timer_CH_NO = TIMER_CH1;
       str_Timer_Cfg_s.Timer_Prescaler = TIMER_PRESCALER_64; /* Needs to be changed */
-      #define TIM1
   }
-  else if(str_TmuConfig_s.timerCh == TMU_TIMER_CH2)
+  else if(gstr_TMUConfig_s.timerCh == TIMER_CH2)
   {
       str_Timer_Cfg_s.Timer_CH_NO = TIMER_CH2;
       str_Timer_Cfg_s.Timer_Prescaler = TIMER_PRESCALER_64;
-      #define TIM2
   }
   else
   {
-      return E_NOK;
+      retVal = TMU_BASE_ERROR + ERROR_NULL_POINTER;
   }
   str_Timer_Cfg_s.Timer_Mode = TIMER_MODE;
   str_Timer_Cfg_s.Timer_Polling_Or_Interrupt = TIMER_INTERRUPT_MODE;
-  str_Timer_Cfg_s.CBK_Ptr = Tmu_Timer_CBK;
+  str_Timer_Cfg_s.CBK_Ptr = TMU_TimerOvf_CBK;
   Timer_Init(&str_Timer_Cfg_s);
-  u8_Tmu_InitStatus = INITIALIZED;
-  return E_OK;
+  gsu8_TMUInitStatus = INITIALIZED;
+
+  return retVal;
 }
 
 /**
@@ -81,11 +80,14 @@ ERROR_STATUS Tmu_Init(void)
 * @param: void
 * Input : void
 * Output: None
-* @return: ERROR_STATUS ( E_OK if every thing is OK, E_NOK otherwise )
+* @return: sint8 status code with error code if one occurred
 */
-ERROR_STATUS Tmu_DeInit(void)
+sint8 TMU_DeInit(void)
 {
-  return E_OK;
+    /* Remember to make a Timer_DeInit function */
+    sint8 retVal = TMU_BASE_ERROR + SUCCESS;
+    gsu8_TMUInitStatus = NOT_INITIALIZED;
+    return retVal;
 }
 
 /**
@@ -93,11 +95,27 @@ ERROR_STATUS Tmu_DeInit(void)
 * @param: void
 * Input : void
 * Output: None
-* @return: ERROR_STATUS ( E_OK if every thing is OK, E_NOK otherwise )
+* @return: sint8 status code with error code if one occurred
 */
-ERROR_STATUS Tmu_Start(void)
+sint8 TMU_Start(void)
 {
-  return E_OK;
+    sint8 retVal = TMU_BASE_ERROR + SUCCESS;
+    if(gsu8_TMUInitStatus == NOT_INITIALIZED)
+    {
+        retVal = TMU_BASE_ERROR + ERROR_NOT_INITIALIZED;
+    }
+    else
+    {
+	/* Start and pre-load timer with 6 counts to get exactly 1 mS at every overflow */
+	#if defined TMU_TIMER_CH0
+	  Timer_Start(TIMER_CH0, 6);
+	#elif defined TMU_TIMER_CH1
+	  Timer_Start(TIMER_CH1, 6); /* Needs to be changed */
+	#elif defined TMU_TIMER_CH2
+	  Timer_Start(TIMER_CH2, 6);
+	#endif
+    }
+    return retVal;
 }
 
 /**
@@ -105,11 +123,27 @@ ERROR_STATUS Tmu_Start(void)
 * @param: void
 * Input : void
 * Output: None
-* @return: ERROR_STATUS ( E_OK if every thing is OK, E_NOK otherwise )
+* @return: sint8 status code with error code if one occurred
 */
-ERROR_STATUS Tmu_Stop(void)
+sint8 TMU_Stop(void)
 {
-  return E_OK;
+    sint8 retVal = TMU_BASE_ERROR + SUCCESS;
+    if(gsu8_TMUInitStatus == NOT_INITIALIZED)
+    {
+	retVal = TMU_BASE_ERROR + ERROR_NOT_INITIALIZED;
+    }
+    else
+    {
+    /* Stop timer */
+    #if defined TMU_TIMER_CH0
+      Timer_Stop(TIMER_CH0);
+    #elif defined TMU_TIMER_CH1
+      Timer_Stop(TIMER_CH1); /* Needs to be changed */
+    #elif defined TMU_TIMER_CH2
+      Timer_Stop(TIMER_CH2);
+    #endif
+    }
+    return retVal;
 }
 
 /**
@@ -117,11 +151,12 @@ ERROR_STATUS Tmu_Stop(void)
 * @param: void
 * Input : void
 * Output: None
-* @return: ERROR_STATUS ( E_OK if every thing is OK, E_NOK otherwise )
+* @return: sint8 status code with error code if one occurred
 */
-ERROR_STATUS Tmu_Dispatch(void)
+sint8 TMU_Dispatch(void)
 {
-  return E_OK;
+    sint8 retVal = TMU_BASE_ERROR + SUCCESS;
+    return retVal;
 }
 
 /**
@@ -131,14 +166,14 @@ ERROR_STATUS Tmu_Dispatch(void)
 * Output: None
 * @return: void
 */
-static void Tmu_Timer_CBK(void)
+void TMU_TimerOvf_CBK(void)
 {
-  /* Start and pre-load timer with 6 counts to get exactly 1 mS at every overflow*/
-#if defined (TIM0)
+  /* Start and pre-load timer with 6 counts to get exactly 1 mS at every overflow */
+#if defined TMU_TIMER_CH0
   Timer_Start(TIMER_CH0, 6);
-#elif defined (TIM1)
+#elif defined TMU_TIMER_CH1
   Timer_Start(TIMER_CH1, 6); /* Needs to be changed */
-#elif defined (TIM2)
+#elif defined TMU_TIMER_CH2
   Timer_Start(TIMER_CH2, 6);
 #endif
 }

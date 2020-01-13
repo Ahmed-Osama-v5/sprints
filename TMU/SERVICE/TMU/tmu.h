@@ -12,10 +12,14 @@
 #include "std_types.h"
 #include "tmu_cfg.h"
 #include "tmu_lcfg.h"
+#include "system_ErrorHandling.h"
+#include "retval.h"
 
 /*- CONSTANTS ----------------------------------------------*/
 
 /*- PRIMITIVE TYPES ----------------------------------------*/
+/* typedef for callback function */
+typedef void (*gptrFun_User_CBK) (void);
 
 /*- ENUMS --------------------------------------------------*/
 
@@ -30,44 +34,44 @@
 * @param:
 * Input : void
 * Output: None
-* @return: ERROR_STATUS ( E_OK if every thing is OK, E_NOK otherwise )
+* @return: sint8 status code with error code if one occurred
 */
-ERROR_STATUS Tmu_Init(void);
+sint8 TMU_Init(void);
 
 /**
 * @brief: TMU DeInitialization
 * @param:
 * Input : void
 * Output: None
-* @return: ERROR_STATUS ( E_OK if every thing is OK, E_NOK otherwise )
+* @return: sint8 status code with error code if one occurred
 */
-ERROR_STATUS Tmu_DeInit(void);
+sint8 TMU_DeInit(void);
 
 /**
 * @brief: TMU Start
 * @param:
 * Input : void
 * Output: None
-* @return: ERROR_STATUS ( E_OK if every thing is OK, E_NOK otherwise )
+* @return: sint8 status code with error code if one occurred
 */
-ERROR_STATUS Tmu_Start(void);
+sint8 TMU_Start(void);
 
 /**
 * @brief: TMU Stop
 * @param:
 * Input : void
 * Output: None
-* @return: ERROR_STATUS ( E_OK if every thing is OK, E_NOK otherwise )
+* @return: sint8 status code with error code if one occurred
 */
-ERROR_STATUS Tmu_Stop(void);
+sint8 TMU_Stop(void);
 
 /**
 * @brief: TMU Loops through task list and service each one as requested
 * @param:
 * Input : void
 * Output: None
-* @return: ERROR_STATUS ( E_OK if every thing is OK, E_NOK otherwise )
+* @return: sint8 status code with error code if one occurred
 */
-ERROR_STATUS Tmu_Dispatch(void);
+sint8 TMU_Dispatch(void);
 
 #endif /* SERVICE_TMU_TMU_H_ */

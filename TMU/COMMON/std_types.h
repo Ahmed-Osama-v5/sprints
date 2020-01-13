@@ -11,18 +11,18 @@
 /*- INCLUDES -----------------------------------------------*/
 
 /*- CONSTANTS ----------------------------------------------*/
-#define FALSE 		   0
-#define TRUE 		   1
+#define FALSE 		    0
+#define TRUE 		    1
 
-#define LOW  		   0
-#define HIGH 		   0xFF
+#define LOW  		    0
+#define HIGH 		    0xFF
 
-#define ERROR_STATUS	   uint8
-#define E_OK		   0
-#define E_NOK		   1
+#define ERROR_STATUS    uint8
+#define E_OK		    0
+#define E_NOK		    1
 
-#define NOT_INITIALIZED	   0
-#define INITIALIZED	   1
+#define NOT_INITIALIZED	0
+#define INITIALIZED	    1
 
 /*- PRIMITIVE TYPES ----------------------------------------*/
 #ifndef NULL
