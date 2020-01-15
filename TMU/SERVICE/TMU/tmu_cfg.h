@@ -14,6 +14,12 @@
 /*- CONSTANTS ----------------------------------------------*/
 #define   MAX_TASK_COUNT   (10)
 
+/* Define timer channels to be used with TMU */
+/* Uncomment the  one you want to use and comment the other two */
+#define TMU_TIMER_CH0
+/* #define TMU_TIMER_CH1 */
+/* #define TMU_TIMER_CH2 */
+
 /*- PRIMITIVE TYPES ----------------------------------------*/
 
 /*- ENUMS --------------------------------------------------*/
