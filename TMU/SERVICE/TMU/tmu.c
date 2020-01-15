@@ -156,7 +156,7 @@ sint8 TMU_Start(gptrTMU_DelayCompleteFun_User_CBK ptrFun_User_CBK, u16_Delay_t u
 	    gstrTMU_TCB_s[gu8_ArrayElementCount].ptrTMU_DelayComplete_UserFunc_CBK = ptrFun_User_CBK;
 	    gstrTMU_TCB_s[gu8_ArrayElementCount].u16_Delay = u16_Delay;
 	    gstrTMU_TCB_s[gu8_ArrayElementCount].u16_MilliSecond_Count = 0;
-	    gstrTMU_TCB_s[gu8_ArrayElementCount].u8_Periodicity = PERIODIC;
+	    gstrTMU_TCB_s[gu8_ArrayElementCount].u8_Periodicity = u8_Periodicity;
 
 	    /* Check if this is the first element in the array to start the timer */
 	    if(gu8_ArrayElementCount == 0)
@@ -275,7 +275,7 @@ sint8 TMU_Dispatcher(void)
     {
 	uint8 u8_i;
 	/* Loop through Tasks in the array and increment counters */
-	for(u8_i=0;u8_i<MAX_TASK_COUNT;u8_i++)
+	for(u8_i=0;u8_i<gu8_ArrayElementCount;u8_i++)
 	{
 	    if(NULL == gstrTMU_TCB_s[u8_i].ptrTMU_DelayComplete_UserFunc_CBK)
 	    {
@@ -288,7 +288,8 @@ sint8 TMU_Dispatcher(void)
 	    }
 	}
 
-	for(u8_i=0;u8_i<MAX_TASK_COUNT;u8_i++)
+	/* Loop through TCB array and handle each one */
+	for(u8_i=0;u8_i<gu8_ArrayElementCount;u8_i++)
 	{
 	    if(NULL == gstrTMU_TCB_s[u8_i].ptrTMU_DelayComplete_UserFunc_CBK)
 	    {
@@ -300,7 +301,7 @@ sint8 TMU_Dispatcher(void)
 	    }
 	    else
 	    {
-		/* Check if requested delay is reached or not */
+		/* Check if requested delay is reached */
 		if(gstrTMU_TCB_s[u8_i].u16_MilliSecond_Count == gstrTMU_TCB_s[u8_i].u16_Delay)
 		{
 		    /* Zero milliSecond counter */
@@ -308,10 +309,21 @@ sint8 TMU_Dispatcher(void)
 
 		    /* Execute corresponding callback function */
 		    gstrTMU_TCB_s[u8_i].ptrTMU_DelayComplete_UserFunc_CBK();
+
+		    /* Check if Task is one shot to remove it from TCB array */
+		    if(gstrTMU_TCB_s[u8_i].u8_Periodicity == ONE_SHOT)
+		    {
+			/* Remove Task from TCB array */
+			TMU_Stop(gstrTMU_TCB_s[u8_i].ptrTMU_DelayComplete_UserFunc_CBK);
+		    }
+		    else
+		    {
+			/* Do nothing */
+		    }
 		}
 		else
 		{
-
+		    /* Do nothing */
 		}
 	    }
 	}
