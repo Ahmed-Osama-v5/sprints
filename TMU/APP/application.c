@@ -152,13 +152,13 @@ int main(void)
   gsi8_TMU_retval = TMU_Start(LED0_DelayComplete, 100, PERIODIC);
 
   /* Append LED1_DelayComplete */
-  gsi8_TMU_retval = TMU_Start(LED1_DelayComplete, 200, ONE_SHOT);
+  gsi8_TMU_retval = TMU_Start(LED1_DelayComplete, 800, ONE_SHOT);
 
   /* Append LED2_DelayComplete */
   gsi8_TMU_retval = TMU_Start(LED2_DelayComplete, 400, PERIODIC);
 
   /* Append LED3_DelayComplete */
-  gsi8_TMU_retval = TMU_Start(LED3_DelayComplete, 800, ONE_SHOT);
+  gsi8_TMU_retval = TMU_Start(LED3_DelayComplete, 200, ONE_SHOT);
 
   while(1)
   {

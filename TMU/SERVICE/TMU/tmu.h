@@ -44,7 +44,6 @@ typedef struct
   u16_Delay_t u16_Delay;
   u16_Delay_t u16_MilliSecond_Count;
   uint8 u8_Periodicity;
-  uint8 u8_TaskID;
 }strTMU_TCB_t;
 
 /* Create array of instances of strTMU_TCB_t */

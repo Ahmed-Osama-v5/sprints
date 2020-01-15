@@ -53,7 +53,6 @@ sint8 TMU_Init(void)
 {
   sint8 i8_retVal = TMU_BASE_ERROR + SUCCESS;
 
-  /* TODO: init rest of struct members */
   /* Initialize TMU_TCB array with zeros */
   uint8 u8_i;
   for(u8_i=0;u8_i<MAX_TASK_COUNT;u8_i++)
@@ -61,6 +60,7 @@ sint8 TMU_Init(void)
       gstrTMU_TCB_s[u8_i].ptrTMU_DelayComplete_UserFunc_CBK = NULL;
       gstrTMU_TCB_s[u8_i].u16_Delay = 0;
       gstrTMU_TCB_s[u8_i].u16_MilliSecond_Count = 0;
+      gstrTMU_TCB_s[u8_i].u8_Periodicity = 0;
   }
 
   /* Create instance of Timer configuration structure and initialize it with zeros*/
@@ -102,7 +102,6 @@ sint8 TMU_DeInit(void)
     /* Remember to make a Timer_DeInit function */
     sint8 i8_retVal = TMU_BASE_ERROR + SUCCESS;
 
-    /* TODO: Fill rest of struct members */
     /* Fill TMU_TCB array with zeros */
     uint8 u8_i;
     for(u8_i=0;u8_i<MAX_TASK_COUNT;u8_i++)
@@ -110,6 +109,7 @@ sint8 TMU_DeInit(void)
 	gstrTMU_TCB_s[u8_i].ptrTMU_DelayComplete_UserFunc_CBK = NULL;
 	gstrTMU_TCB_s[u8_i].u16_Delay = 0;
 	gstrTMU_TCB_s[u8_i].u16_MilliSecond_Count = 0;
+	gstrTMU_TCB_s[u8_i].u8_Periodicity = 0;
     }
 
     /* TODO: */
@@ -150,9 +150,7 @@ sint8 TMU_Start(gptrTMU_DelayCompleteFun_User_CBK ptrFun_User_CBK, u16_Delay_t u
 	}
 	else
 	{
-	    /* Assign task id with array index */
-	    gstrTMU_TCB_s[gu8_ArrayElementCount].u8_TaskID = gu8_ArrayElementCount;
-	    /* Assign the rest of TCB struct members */
+	    /* Assign TCB struct members */
 	    gstrTMU_TCB_s[gu8_ArrayElementCount].ptrTMU_DelayComplete_UserFunc_CBK = ptrFun_User_CBK;
 	    gstrTMU_TCB_s[gu8_ArrayElementCount].u16_Delay = u16_Delay;
 	    gstrTMU_TCB_s[gu8_ArrayElementCount].u16_MilliSecond_Count = 0;
@@ -165,7 +163,7 @@ sint8 TMU_Start(gptrTMU_DelayCompleteFun_User_CBK ptrFun_User_CBK, u16_Delay_t u
 	      #if defined TMU_TIMER_CH0
 		Timer_Start(TIMER_CH0, 6);
 	      #elif defined TMU_TIMER_CH1
-		Timer_Start(TIMER_CH1, 6); /* Needs to be changed */
+		Timer_Start(TIMER_CH1, 65286);
 	      #elif defined TMU_TIMER_CH2
 		Timer_Start(TIMER_CH2, 6);
 	      #endif
@@ -214,7 +212,6 @@ sint8 TMU_Stop(gptrTMU_DelayCompleteFun_User_CBK ptrFun_User_CBK)
 		  {
 		      /* Restore default values */
 		      gstrTMU_TCB_s[gu8_ArrayElementCount-1].ptrTMU_DelayComplete_UserFunc_CBK = NULL;
-		      gstrTMU_TCB_s[gu8_ArrayElementCount-1].u8_TaskID = 0;
 		      gstrTMU_TCB_s[gu8_ArrayElementCount-1].u16_Delay = 0;
 		      gstrTMU_TCB_s[gu8_ArrayElementCount-1].u16_MilliSecond_Count = 0;
 		      gstrTMU_TCB_s[gu8_ArrayElementCount-1].u8_Periodicity = 0;
@@ -233,7 +230,6 @@ sint8 TMU_Stop(gptrTMU_DelayCompleteFun_User_CBK ptrFun_User_CBK)
 
 		      /* Restore default values for last element */
 		      gstrTMU_TCB_s[gu8_ArrayElementCount-1].ptrTMU_DelayComplete_UserFunc_CBK = NULL;
-		      gstrTMU_TCB_s[gu8_ArrayElementCount-1].u8_TaskID = 0;
 		      gstrTMU_TCB_s[gu8_ArrayElementCount-1].u16_Delay = 0;
 		      gstrTMU_TCB_s[gu8_ArrayElementCount-1].u16_MilliSecond_Count = 0;
 		      gstrTMU_TCB_s[gu8_ArrayElementCount-1].u8_Periodicity = 0;
@@ -302,7 +298,7 @@ sint8 TMU_Dispatcher(void)
 	    else
 	    {
 		/* Check if requested delay is reached */
-		if(gstrTMU_TCB_s[u8_i].u16_MilliSecond_Count == gstrTMU_TCB_s[u8_i].u16_Delay)
+		if(gstrTMU_TCB_s[u8_i].u16_MilliSecond_Count >= gstrTMU_TCB_s[u8_i].u16_Delay)
 		{
 		    /* Zero milliSecond counter */
 		    gstrTMU_TCB_s[u8_i].u16_MilliSecond_Count = 0;
@@ -350,16 +346,19 @@ static void TMU_TimerOvf_CBK(void)
   {
       /* Indicate timer overflow has occurred */
       gu8_TMU_TimerOvf_Flag = OVF_TRIGGERED;
+
+      /* Reset overflow counter */
+      gu8_OvfCounter = 0;
   }
   else
   {
       /* Do nothing */
   }
-  /* Start and pre-load timer with 6 counts to get exactly 1 mS at every overflow */
+  /* Start and pre-load timer to get exactly 1 mS at every overflow */
 #if defined TMU_TIMER_CH0
   Timer_Start(TIMER_CH0, 6);
 #elif defined TMU_TIMER_CH1
-  Timer_Start(TIMER_CH1, 6); /* Needs to be changed */
+  Timer_Start(TIMER_CH1, 65286);
 #elif defined TMU_TIMER_CH2
   Timer_Start(TIMER_CH2, 6);
 #endif
