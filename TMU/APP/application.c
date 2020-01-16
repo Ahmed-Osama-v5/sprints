@@ -7,6 +7,7 @@
 /*- INCLUDES ----------------------------------------------*/
 #include "std_types.h"
 #include "tmu.h"
+#include "BCM.h"
 #include "interrupt.h"
 #include "sleep.h"
 #include "dio.h"
@@ -88,6 +89,8 @@ void LED3_Toggle(void);
 */
 void LED3_DelayComplete(void);
 
+void TransmitComplete(void);
+
 /*- GLOBAL STATIC VARIABLES -------------------------------*/
 static sint8 gsi8_TMU_retval;
 static uint8 gu8_LED0_Delay_Flag = DELAY_NOT_COMPLETE;
@@ -95,10 +98,17 @@ static uint8 gu8_LED1_Delay_Flag = DELAY_NOT_COMPLETE;
 static uint8 gu8_LED2_Delay_Flag = DELAY_NOT_COMPLETE;
 static uint8 gu8_LED3_Delay_Flag = DELAY_NOT_COMPLETE;
 
+static sint8 gi8_BCM_retval;
+
 /*- GLOBAL EXTERN VARIABLES -------------------------------*/
+uint8 buffer[10];
+ptrBuffer ptrTx_Buffer = NULL;
 
 /*- LOCAL FUNCTIONS IMPLEMENTATION ------------------------*/
+void TransmitComplete(void)
+{
 
+}
 /*- APIs IMPLEMENTATION -----------------------------------*/
 int main(void)
 {
@@ -145,8 +155,22 @@ int main(void)
   /* Initialize TMU */
   gsi8_TMU_retval = TMU_Init();
 
+  buffer[0] = 'A';
+  buffer[1] = 'h';
+  buffer[2] = 'm';
+  buffer[3] = 'e';
+  buffer[4] = 'd';
+
+  ptrTx_Buffer = buffer;
+  gptr_BCM_TransmitComplete_User_CBK_t ptrTxComplete_CBK = TransmitComplete;
+
+  /* Initialize BCM */
+  gi8_BCM_retval = BCM_Init(ptrTxComplete_CBK);
+
   /* Enable interrupts */
   sei();
+
+  gi8_BCM_retval = BCM_Send(ptrTx_Buffer, 5);
 
   /* Append LED0_DelayComplete */
   gsi8_TMU_retval = TMU_Start(LED0_DelayComplete, 100, PERIODIC);
