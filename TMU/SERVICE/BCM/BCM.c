@@ -231,8 +231,8 @@ sint8 BCM_TxDispatcher(void)
 		if(gu8_BCM_TxBuffer_Index < gu16_TxSize)
 		{
 		    /* Send the byte which index is pointing at */
-		    UART_SendByte(gptr_TxBuffer[gu8_BCM_TxBuffer_Index]);
-		    gu8_BCM_TxChecksum += gptr_TxBuffer[gu8_BCM_TxBuffer_Index++];
+		    UART_SendByte(*gptr_TxBuffer);
+		    gu8_BCM_TxChecksum += *gptr_TxBuffer;
 
 		    /* Switch BCM_TxDispatcher_State to BCM_DISPATCHER_TRANSMIT_BYTE_COMPLETE */
 		    gu8_BCM_TxDispatcher_State = BCM_DISPATCHER_TRANSMIT_BYTE_COMPLETE;
@@ -284,6 +284,10 @@ sint8 BCM_TxDispatcher(void)
     	    {
     		/* Increment index */
     		gu8_BCM_TxBuffer_Index++;
+    		gptr_TxBuffer++;
+
+    		/* Switch BCM_TxDispatcher_State to BCM_DISPATCHER_TRANSMIT_BYTE */
+    	        gu8_BCM_TxDispatcher_State = BCM_DISPATCHER_TRANSMIT_BYTE;
     	    }
     	    else
     	    {
