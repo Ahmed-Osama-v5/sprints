@@ -1,3 +1,4 @@
 https://github.com/Ahmed-Osama-v5/sprints/tree/master/TMU
 
-/* Note: Please ignore main.c file I can't remove it from GitHub */
+/* Note 1: Added BCM to the same Project */
+/* NOTE 2: Still in development phase */

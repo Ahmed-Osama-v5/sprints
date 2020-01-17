@@ -189,6 +189,9 @@ int main(void)
       /* TMU_Dispatcher call here */
       TMU_Dispatcher();
 
+      /* BCM_TX dispatcher */
+      BCM_TxDispatcher();
+
       /* These tasks are gonna be called from the */
       LED0_Toggle();
       LED1_Toggle();

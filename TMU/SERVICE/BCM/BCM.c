@@ -189,6 +189,12 @@ sint8 BCM_TxDispatcher(void)
 	    /* Lock the TX buffer */
 	    gu8_BCM_TxBuffer_LockState = BCM_TX_BUFFER_LOCKED;
 
+	    /* Transmit BCM_ID */
+	    UART_SendByte(BCM_ID);
+
+	    /* Switch Tx state to sizeL */
+	    gu8_BCM_TxDispatcher_Trasmit_State = BCM_TX_DISPATCHER_SIZEL_TX;
+
 	    /* Switch state to BCM_DISPATCHER_TRANSMIT_BYTE */
 	    gu8_BCM_TxDispatcher_State = BCM_DISPATCHER_TRANSMIT_BYTE;
 	}
@@ -203,15 +209,7 @@ sint8 BCM_TxDispatcher(void)
 	    /* Reset BCM_TxC flag */
 	    gu8_BCM_TxC_Flag = BCM_TXC_FLAG_NOT_TRIGGERED;
 
-	    if(gu8_BCM_TxDispatcher_Trasmit_State == BCM_TX_DISPATCHER_ID_TX)
-	    {
-		/* Transmit BCM_ID */
-		UART_SendByte(BCM_ID);
-
-		/* Switch BCM_TxDispatcher_State to BCM_DISPATCHER_TRANSMIT_BYTE_COMPLETE */
-		gu8_BCM_TxDispatcher_State = BCM_DISPATCHER_TRANSMIT_BYTE_COMPLETE;
-	    }
-	    else if(gu8_BCM_TxDispatcher_Trasmit_State == BCM_TX_DISPATCHER_SIZEL_TX)
+	    if(gu8_BCM_TxDispatcher_Trasmit_State == BCM_TX_DISPATCHER_SIZEL_TX)
 	    {
 		/* Transmit SizeL */
 		UART_SendByte((uint8)gu16_TxSize);
@@ -233,8 +231,11 @@ sint8 BCM_TxDispatcher(void)
 		if(gu8_BCM_TxBuffer_Index < gu16_TxSize)
 		{
 		    /* Send the byte which index is pointing at */
-		    UART_SendByte((*gptr_TxBuffer + gu8_BCM_TxBuffer_Index));
-		    gu8_BCM_TxChecksum += (*gptr_TxBuffer + gu8_BCM_TxBuffer_Index);
+		    UART_SendByte(gptr_TxBuffer[gu8_BCM_TxBuffer_Index]);
+		    gu8_BCM_TxChecksum += gptr_TxBuffer[gu8_BCM_TxBuffer_Index++];
+
+		    /* Switch BCM_TxDispatcher_State to BCM_DISPATCHER_TRANSMIT_BYTE_COMPLETE */
+		    gu8_BCM_TxDispatcher_State = BCM_DISPATCHER_TRANSMIT_BYTE_COMPLETE;
 		}
 		else
 		{
@@ -245,6 +246,10 @@ sint8 BCM_TxDispatcher(void)
 		    gu8_BCM_TxDispatcher_State = BCM_DISPATCHER_TRANSMIT_BYTE_COMPLETE;
 		}
 	    }
+	}
+	else
+	{
+	    /* Do nothing */
 	}
 	break;
     case (BCM_DISPATCHER_TRANSMIT_BYTE_COMPLETE):
@@ -290,6 +295,9 @@ sint8 BCM_TxDispatcher(void)
 
     		/* Unlock the Tx buffer */
     		gu8_BCM_TxBuffer_LockState = BCM_TX_BUFFER_UNLOCKED;
+
+    		/* Indicate Send has finished */
+    		gu8_BCM_SendFlag = BCM_SEND_NOT_TRIGGERED;
 
 		/* Switch BCM_TxDispatcher_State to BCM_DISPATCHER_IDLE */
 		gu8_BCM_TxDispatcher_State = BCM_DISPATCHER_IDLE;
