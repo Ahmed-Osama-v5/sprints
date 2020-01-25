@@ -12,7 +12,7 @@
 #include "std_types.h"
 
 /*- CONSTANTS ----------------------------------------------*/
-#define   MAX_TASK_COUNT   (10)
+#define   MAX_TASK_COUNT   (30)
 
 /* Define timer channels to be used with TMU */
 /* Uncomment the  one you want to use and comment the other two */

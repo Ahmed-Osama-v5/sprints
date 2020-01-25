@@ -16,31 +16,21 @@
 #include "keypad_Cfg.h"
 
 /*- CONSTANTS ----------------------------------------------*/
-#define ZERO            (0)
-#define ONE             (1)
-#define TWO             (2)
-#define THREE           (3)
-#define FOUR            (4)
-#define FIVE            (5)
-#define SIX             (6)
-#define SEVEN           (7)
-#define EIGHT           (8)
-#define NINE            (9)
 
-//KEY_ZERO + KEY_ONE
+/* Values returned by keypad module */
+#define ONE             (1U)
+#define TWO             (2U)
+#define THREE           (3U)
+#define FOUR            (4U)
+#define FIVE            (5U)
+#define SIX             (6U)
+#define SEVEN           (7U)
+#define EIGHT           (8U)
+#define NINE            (9U)
 
-#define KEY_ZERO       	(0x00)
-#define KEY_ONE         (0x01)
-#define KEY_TWO         (0x02)
-#define KEY_THREE       (0x04)
-#define KEY_FOUR        (0x08)
-#define KEY_FIVE       	(0x10)
-#define KEY_SIX         (6)
-#define KEY_SEVEN       (7)
-#define KEY_EIGHT       (8)
-#define KEY_NINE        (9)
+#define NO_KEY_PRESSED	(0xFFU)
 
-#define NO_KEY_PRESSED	(0xFF)
+/*  */
 
 /*- PRIMITIVE TYPES ----------------------------------------*/
 
@@ -59,18 +49,11 @@
 sint8 KeyPad_init(void);
 
 /**
- * @brief scans keypad and stores pressed key in a global variable
- * @param void
- * @return Error code
- */
-sint8 KeyPad_update(void);
-
-/**
  * @brief read the value stored in a global variable
  *        and output pressed key through a pointer
  * @param ptr_key pointer to integer variable which store the pressed key number
- * @return Error code
+ * @return void
  */
-sint8 KeyPad_getPressedKey(ptrkey_t ptr_key);
+void KeyPad_getPressedKey(uint8 *ptr_key);
 
 #endif /* ECUAL_KEYPAD_KEYPAD_H_ */

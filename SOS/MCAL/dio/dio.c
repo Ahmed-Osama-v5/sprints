@@ -175,16 +175,44 @@ ERROR_STATUS DIO_Read (uint8 GPIO,uint8 pins, uint8 *data)
 	switch(GPIO)
 	{
 	case (GPIOA):
-		*data = (PORTA_PIN & pins);
+		if(PORTA_PIN & pins)
+		{
+			*data = HIGH;
+		}
+		else
+		{
+			*data = LOW;
+		}
 		break;
 	case (GPIOB):
-		*data = (PORTB_PIN & pins);
+		if(PORTB_PIN & pins)
+		{
+			*data = HIGH;
+		}
+		else
+		{
+			*data = LOW;
+		}
 		break;
 	case (GPIOC):
-		*data = (PORTC_PIN & pins);
+		if(PORTC_PIN & pins)
+		{
+			*data = HIGH;
+		}
+		else
+		{
+			*data = LOW;
+		}
 		break;
 	case (GPIOD):
-		*data = (PORTD_PIN & pins);
+		if(PORTD_PIN & pins)
+		{
+			*data = HIGH;
+		}
+		else
+		{
+			*data = LOW;
+		}
 		break;
 	default:
 		return E_NOK;
