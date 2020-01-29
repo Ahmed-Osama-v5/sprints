@@ -1,0 +1,1354 @@
+Archive member included because of file (symbol)
+
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mulsi3.o)
+                              ./MCAL/UART/UART.o (__mulsi3)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
+                              ./SERVICE/SOS/SOS.o (__udivmodhi4)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
+                              ./MCAL/UART/UART.o (__udivmodsi4)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+                              c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o (exit)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+                              ./SERVICE/SOS/SOS_PbCfg.o (__do_copy_data)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+                              ./SERVICE/SOS/SOS.o (__do_clear_bss)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(memcpy.o)
+                              ./SERVICE/RTOS/queue.o (memcpy)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(memset.o)
+                              ./SERVICE/RTOS/stream_buffer.o (memset)
+
+Allocating common symbols
+Common symbol       size              file
+
+lcdQueueBuffer      0x2               ./APP/Tasks/Tasks.o
+u32_Password        0x4               ./APP/Tasks/Tasks.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+text             0x00000000         0x00020000         xr
+data             0x00800060         0x0000ffa0         rw !x
+eeprom           0x00810000         0x00010000         rw !x
+fuse             0x00820000         0x00000400         rw !x
+lock             0x00830000         0x00000400         rw !x
+signature        0x00840000         0x00000400         rw !x
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
+LOAD ./SERVICE/SOS/SOS.o
+LOAD ./SERVICE/SOS/SOS_PbCfg.o
+LOAD ./SERVICE/RTOS/croutine.o
+LOAD ./SERVICE/RTOS/event_groups.o
+LOAD ./SERVICE/RTOS/heap_1.o
+LOAD ./SERVICE/RTOS/list.o
+LOAD ./SERVICE/RTOS/port.o
+LOAD ./SERVICE/RTOS/queue.o
+LOAD ./SERVICE/RTOS/stream_buffer.o
+LOAD ./SERVICE/RTOS/tasks.o
+LOAD ./SERVICE/RTOS/timers.o
+LOAD ./SERVICE/BCM/BCM.o
+LOAD ./SERVICE/BCM/BCM_PbCfg.o
+LOAD ./MCAL/UART/UART.o
+LOAD ./MCAL/Timers/Timer.o
+LOAD ./MCAL/Sleep/sleep.o
+LOAD ./MCAL/DIO/DIO.o
+LOAD ./ECUAL/pushButton/pushButton.o
+LOAD ./ECUAL/LCD/LCD.o
+LOAD ./ECUAL/KeyPad/KeyPad.o
+LOAD ./APP/Tasks/Tasks.o
+LOAD ./APP/main.o
+LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
+LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a
+LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
+
+.hash
+ *(.hash)
+
+.dynsym
+ *(.dynsym)
+
+.dynstr
+ *(.dynstr)
+
+.gnu.version
+ *(.gnu.version)
+
+.gnu.version_d
+ *(.gnu.version_d)
+
+.gnu.version_r
+ *(.gnu.version_r)
+
+.rel.init
+ *(.rel.init)
+
+.rela.init
+ *(.rela.init)
+
+.rel.text
+ *(.rel.text)
+ *(.rel.text.*)
+ *(.rel.gnu.linkonce.t*)
+
+.rela.text
+ *(.rela.text)
+ *(.rela.text.*)
+ *(.rela.gnu.linkonce.t*)
+
+.rel.fini
+ *(.rel.fini)
+
+.rela.fini
+ *(.rela.fini)
+
+.rel.rodata
+ *(.rel.rodata)
+ *(.rel.rodata.*)
+ *(.rel.gnu.linkonce.r*)
+
+.rela.rodata
+ *(.rela.rodata)
+ *(.rela.rodata.*)
+ *(.rela.gnu.linkonce.r*)
+
+.rel.data
+ *(.rel.data)
+ *(.rel.data.*)
+ *(.rel.gnu.linkonce.d*)
+
+.rela.data
+ *(.rela.data)
+ *(.rela.data.*)
+ *(.rela.gnu.linkonce.d*)
+
+.rel.ctors
+ *(.rel.ctors)
+
+.rela.ctors
+ *(.rela.ctors)
+
+.rel.dtors
+ *(.rel.dtors)
+
+.rela.dtors
+ *(.rela.dtors)
+
+.rel.got
+ *(.rel.got)
+
+.rela.got
+ *(.rela.got)
+
+.rel.bss
+ *(.rel.bss)
+
+.rela.bss
+ *(.rela.bss)
+
+.rel.plt
+ *(.rel.plt)
+
+.rela.plt
+ *(.rela.plt)
+
+.text           0x00000000     0x78e6
+ *(.vectors)
+ .vectors       0x00000000       0x54 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
+                0x00000000                __vectors
+                0x00000000                __vector_default
+ *(.vectors)
+ *(.progmem.gcc*)
+ *(.progmem*)
+                0x00000054                . = ALIGN (0x2)
+                0x00000054                __trampolines_start = .
+ *(.trampolines)
+ .trampolines   0x00000054        0x0 linker stubs
+ *(.trampolines*)
+                0x00000054                __trampolines_end = .
+ *(.jumptables)
+ *(.jumptables*)
+ *(.lowtext)
+ *(.lowtext*)
+                0x00000054                __ctors_start = .
+ *(.ctors)
+                0x00000054                __ctors_end = .
+                0x00000054                __dtors_start = .
+ *(.dtors)
+                0x00000054                __dtors_end = .
+ SORT(*)(.ctors)
+ SORT(*)(.dtors)
+ *(.init0)
+ .init0         0x00000054        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
+                0x00000054                __init
+ *(.init0)
+ *(.init1)
+ *(.init1)
+ *(.init2)
+ .init2         0x00000054        0xc c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
+ *(.init2)
+ *(.init3)
+ *(.init3)
+ *(.init4)
+ .init4         0x00000060       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+                0x00000060                __do_copy_data
+ .init4         0x00000076       0x10 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+                0x00000076                __do_clear_bss
+ *(.init4)
+ *(.init5)
+ *(.init5)
+ *(.init6)
+ *(.init6)
+ *(.init7)
+ *(.init7)
+ *(.init8)
+ *(.init8)
+ *(.init9)
+ .init9         0x00000086        0x8 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
+ *(.init9)
+ *(.text)
+ .text          0x0000008e        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
+                0x0000008e                __vector_1
+                0x0000008e                __vector_12
+                0x0000008e                __bad_interrupt
+                0x0000008e                __vector_6
+                0x0000008e                __vector_3
+                0x0000008e                __vector_17
+                0x0000008e                __vector_19
+                0x0000008e                __vector_4
+                0x0000008e                __vector_2
+                0x0000008e                __vector_8
+                0x0000008e                __vector_10
+                0x0000008e                __vector_16
+                0x0000008e                __vector_18
+                0x0000008e                __vector_20
+ .text          0x00000092        0x0 ./SERVICE/SOS/SOS.o
+ .text          0x00000092        0x0 ./SERVICE/SOS/SOS_PbCfg.o
+ .text          0x00000092        0x0 ./SERVICE/RTOS/croutine.o
+ .text          0x00000092        0x0 ./SERVICE/RTOS/event_groups.o
+ .text          0x00000092        0x0 ./SERVICE/RTOS/heap_1.o
+ .text          0x00000092        0x0 ./SERVICE/RTOS/list.o
+ .text          0x00000092        0x0 ./SERVICE/RTOS/port.o
+ .text          0x00000092        0x0 ./SERVICE/RTOS/queue.o
+ .text          0x00000092        0x0 ./SERVICE/RTOS/stream_buffer.o
+ .text          0x00000092        0x0 ./SERVICE/RTOS/tasks.o
+ .text          0x00000092        0x0 ./SERVICE/RTOS/timers.o
+ .text          0x00000092        0x0 ./SERVICE/BCM/BCM.o
+ .text          0x00000092        0x0 ./SERVICE/BCM/BCM_PbCfg.o
+ .text          0x00000092        0x0 ./MCAL/UART/UART.o
+ .text          0x00000092        0x0 ./MCAL/Timers/Timer.o
+ .text          0x00000092        0x0 ./MCAL/Sleep/sleep.o
+ .text          0x00000092        0x0 ./MCAL/DIO/DIO.o
+ .text          0x00000092        0x0 ./ECUAL/pushButton/pushButton.o
+ .text          0x00000092        0x0 ./ECUAL/LCD/LCD.o
+ .text          0x00000092        0x0 ./ECUAL/KeyPad/KeyPad.o
+ .text          0x00000092        0x0 ./APP/Tasks/Tasks.o
+ .text          0x00000092        0x0 ./APP/main.o
+ .text          0x00000092        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mulsi3.o)
+ .text          0x00000092        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
+ .text          0x00000092        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
+ .text          0x00000092        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .text          0x00000092        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .text          0x00000092        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .text          0x00000092        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(memcpy.o)
+ .text          0x00000092        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(memset.o)
+                0x00000092                . = ALIGN (0x2)
+ *(.text.*)
+ .text.SOS_Timer_OV_cbk
+                0x00000092       0x40 ./SERVICE/SOS/SOS.o
+ .text.SOS_Init
+                0x000000d2       0xda ./SERVICE/SOS/SOS.o
+                0x000000d2                SOS_Init
+ .text.SOS_CreateTask
+                0x000001ac       0xf2 ./SERVICE/SOS/SOS.o
+                0x000001ac                SOS_CreateTask
+ .text.SOS_DeleteTask
+                0x0000029e       0x8a ./SERVICE/SOS/SOS.o
+                0x0000029e                SOS_DeleteTask
+ .text.SOS_Run  0x00000328      0x116 ./SERVICE/SOS/SOS.o
+                0x00000328                SOS_Run
+ .text.xEventGroupCreate
+                0x0000043e       0x3e ./SERVICE/RTOS/event_groups.o
+                0x0000043e                xEventGroupCreate
+ .text.xEventGroupSync
+                0x0000047c      0x172 ./SERVICE/RTOS/event_groups.o
+                0x0000047c                xEventGroupSync
+ .text.xEventGroupWaitBits
+                0x000005ee      0x18c ./SERVICE/RTOS/event_groups.o
+                0x000005ee                xEventGroupWaitBits
+ .text.xEventGroupClearBits
+                0x0000077a       0x6c ./SERVICE/RTOS/event_groups.o
+                0x0000077a                xEventGroupClearBits
+ .text.xEventGroupGetBitsFromISR
+                0x000007e6       0x44 ./SERVICE/RTOS/event_groups.o
+                0x000007e6                xEventGroupGetBitsFromISR
+ .text.xEventGroupSetBits
+                0x0000082a      0x164 ./SERVICE/RTOS/event_groups.o
+                0x0000082a                xEventGroupSetBits
+ .text.vEventGroupDelete
+                0x0000098e       0x62 ./SERVICE/RTOS/event_groups.o
+                0x0000098e                vEventGroupDelete
+ .text.vEventGroupSetBitsCallback
+                0x000009f0       0x3a ./SERVICE/RTOS/event_groups.o
+                0x000009f0                vEventGroupSetBitsCallback
+ .text.vEventGroupClearBitsCallback
+                0x00000a2a       0x3a ./SERVICE/RTOS/event_groups.o
+                0x00000a2a                vEventGroupClearBitsCallback
+ .text.prvTestWaitCondition
+                0x00000a64       0x64 ./SERVICE/RTOS/event_groups.o
+ .text.pvPortMalloc
+                0x00000ac8       0xac ./SERVICE/RTOS/heap_1.o
+                0x00000ac8                pvPortMalloc
+ .text.vPortFree
+                0x00000b74       0x18 ./SERVICE/RTOS/heap_1.o
+                0x00000b74                vPortFree
+ .text.vPortInitialiseBlocks
+                0x00000b8c       0x16 ./SERVICE/RTOS/heap_1.o
+                0x00000b8c                vPortInitialiseBlocks
+ .text.xPortGetFreeHeapSize
+                0x00000ba2       0x1e ./SERVICE/RTOS/heap_1.o
+                0x00000ba2                xPortGetFreeHeapSize
+ .text.vListInitialise
+                0x00000bc0       0x54 ./SERVICE/RTOS/list.o
+                0x00000bc0                vListInitialise
+ .text.vListInitialiseItem
+                0x00000c14       0x20 ./SERVICE/RTOS/list.o
+                0x00000c14                vListInitialiseItem
+ .text.vListInsertEnd
+                0x00000c34       0x88 ./SERVICE/RTOS/list.o
+                0x00000c34                vListInsertEnd
+ .text.vListInsert
+                0x00000cbc       0xd8 ./SERVICE/RTOS/list.o
+                0x00000cbc                vListInsert
+ .text.uxListRemove
+                0x00000d94       0x98 ./SERVICE/RTOS/list.o
+                0x00000d94                uxListRemove
+ .text.pxPortInitialiseStack
+                0x00000e2c      0x306 ./SERVICE/RTOS/port.o
+                0x00000e2c                pxPortInitialiseStack
+ .text.xPortStartScheduler
+                0x00001132       0x6a ./SERVICE/RTOS/port.o
+                0x00001132                xPortStartScheduler
+ .text.vPortEndScheduler
+                0x0000119c        0xe ./SERVICE/RTOS/port.o
+                0x0000119c                vPortEndScheduler
+ .text.vPortYield
+                0x000011aa       0xb2 ./SERVICE/RTOS/port.o
+                0x000011aa                vPortYield
+ .text.vPortYieldFromTick
+                0x0000125c       0xba ./SERVICE/RTOS/port.o
+                0x0000125c                vPortYieldFromTick
+ .text.prvSetupTimerInterrupt
+                0x00001316       0xb8 ./SERVICE/RTOS/port.o
+ .text.__vector_7
+                0x000013ce       0x54 ./SERVICE/RTOS/port.o
+                0x000013ce                __vector_7
+ .text.xQueueGenericReset
+                0x00001422      0x104 ./SERVICE/RTOS/queue.o
+                0x00001422                xQueueGenericReset
+ .text.xQueueGenericCreate
+                0x00001526       0xa2 ./SERVICE/RTOS/queue.o
+                0x00001526                xQueueGenericCreate
+ .text.prvInitialiseNewQueue
+                0x000015c8       0x76 ./SERVICE/RTOS/queue.o
+ .text.xQueueGenericSend
+                0x0000163e      0x144 ./SERVICE/RTOS/queue.o
+                0x0000163e                xQueueGenericSend
+ .text.xQueueGenericSendFromISR
+                0x00001782       0xb0 ./SERVICE/RTOS/queue.o
+                0x00001782                xQueueGenericSendFromISR
+ .text.xQueueGiveFromISR
+                0x00001832       0xa2 ./SERVICE/RTOS/queue.o
+                0x00001832                xQueueGiveFromISR
+ .text.xQueueReceive
+                0x000018d4      0x14e ./SERVICE/RTOS/queue.o
+                0x000018d4                xQueueReceive
+ .text.xQueueSemaphoreTake
+                0x00001a22      0x13c ./SERVICE/RTOS/queue.o
+                0x00001a22                xQueueSemaphoreTake
+ .text.xQueuePeek
+                0x00001b5e      0x15c ./SERVICE/RTOS/queue.o
+                0x00001b5e                xQueuePeek
+ .text.xQueueReceiveFromISR
+                0x00001cba       0xae ./SERVICE/RTOS/queue.o
+                0x00001cba                xQueueReceiveFromISR
+ .text.xQueuePeekFromISR
+                0x00001d68       0x72 ./SERVICE/RTOS/queue.o
+                0x00001d68                xQueuePeekFromISR
+ .text.uxQueueMessagesWaiting
+                0x00001dda       0x30 ./SERVICE/RTOS/queue.o
+                0x00001dda                uxQueueMessagesWaiting
+ .text.uxQueueSpacesAvailable
+                0x00001e0a       0x4a ./SERVICE/RTOS/queue.o
+                0x00001e0a                uxQueueSpacesAvailable
+ .text.uxQueueMessagesWaitingFromISR
+                0x00001e54       0x34 ./SERVICE/RTOS/queue.o
+                0x00001e54                uxQueueMessagesWaitingFromISR
+ .text.vQueueDelete
+                0x00001e88       0x2e ./SERVICE/RTOS/queue.o
+                0x00001e88                vQueueDelete
+ .text.prvCopyDataToQueue
+                0x00001eb6      0x14c ./SERVICE/RTOS/queue.o
+ .text.prvCopyDataFromQueue
+                0x00002002       0x8e ./SERVICE/RTOS/queue.o
+ .text.prvUnlockQueue
+                0x00002090       0xa6 ./SERVICE/RTOS/queue.o
+ .text.prvIsQueueEmpty
+                0x00002136       0x3a ./SERVICE/RTOS/queue.o
+ .text.xQueueIsQueueEmptyFromISR
+                0x00002170       0x3e ./SERVICE/RTOS/queue.o
+                0x00002170                xQueueIsQueueEmptyFromISR
+ .text.prvIsQueueFull
+                0x000021ae       0x40 ./SERVICE/RTOS/queue.o
+ .text.xQueueIsQueueFullFromISR
+                0x000021ee       0x44 ./SERVICE/RTOS/queue.o
+                0x000021ee                xQueueIsQueueFullFromISR
+ .text.xStreamBufferGenericCreate
+                0x00002232       0x98 ./SERVICE/RTOS/stream_buffer.o
+                0x00002232                xStreamBufferGenericCreate
+ .text.vStreamBufferDelete
+                0x000022ca       0x52 ./SERVICE/RTOS/stream_buffer.o
+                0x000022ca                vStreamBufferDelete
+ .text.xStreamBufferReset
+                0x0000231c       0x84 ./SERVICE/RTOS/stream_buffer.o
+                0x0000231c                xStreamBufferReset
+ .text.xStreamBufferSetTriggerLevel
+                0x000023a0       0x6e ./SERVICE/RTOS/stream_buffer.o
+                0x000023a0                xStreamBufferSetTriggerLevel
+ .text.xStreamBufferSpacesAvailable
+                0x0000240e       0x8c ./SERVICE/RTOS/stream_buffer.o
+                0x0000240e                xStreamBufferSpacesAvailable
+ .text.xStreamBufferBytesAvailable
+                0x0000249a       0x3c ./SERVICE/RTOS/stream_buffer.o
+                0x0000249a                xStreamBufferBytesAvailable
+ .text.xStreamBufferSend
+                0x000024d6      0x190 ./SERVICE/RTOS/stream_buffer.o
+                0x000024d6                xStreamBufferSend
+ .text.xStreamBufferSendFromISR
+                0x00002666       0xfa ./SERVICE/RTOS/stream_buffer.o
+                0x00002666                xStreamBufferSendFromISR
+ .text.prvWriteMessageToBuffer
+                0x00002760       0xe4 ./SERVICE/RTOS/stream_buffer.o
+ .text.xStreamBufferReceive
+                0x00002844      0x174 ./SERVICE/RTOS/stream_buffer.o
+                0x00002844                xStreamBufferReceive
+ .text.xStreamBufferNextMessageLengthBytes
+                0x000029b8       0xa4 ./SERVICE/RTOS/stream_buffer.o
+                0x000029b8                xStreamBufferNextMessageLengthBytes
+ .text.xStreamBufferReceiveFromISR
+                0x00002a5c       0xf0 ./SERVICE/RTOS/stream_buffer.o
+                0x00002a5c                xStreamBufferReceiveFromISR
+ .text.prvReadMessageFromBuffer
+                0x00002b4c       0xd8 ./SERVICE/RTOS/stream_buffer.o
+ .text.xStreamBufferIsEmpty
+                0x00002c24       0x5a ./SERVICE/RTOS/stream_buffer.o
+                0x00002c24                xStreamBufferIsEmpty
+ .text.xStreamBufferIsFull
+                0x00002c7e       0x70 ./SERVICE/RTOS/stream_buffer.o
+                0x00002c7e                xStreamBufferIsFull
+ .text.xStreamBufferSendCompletedFromISR
+                0x00002cee       0x86 ./SERVICE/RTOS/stream_buffer.o
+                0x00002cee                xStreamBufferSendCompletedFromISR
+ .text.xStreamBufferReceiveCompletedFromISR
+                0x00002d74       0x86 ./SERVICE/RTOS/stream_buffer.o
+                0x00002d74                xStreamBufferReceiveCompletedFromISR
+ .text.prvWriteBytesToBuffer
+                0x00002dfa      0x11a ./SERVICE/RTOS/stream_buffer.o
+ .text.prvReadBytesFromBuffer
+                0x00002f14      0x15a ./SERVICE/RTOS/stream_buffer.o
+ .text.prvBytesInBuffer
+                0x0000306e       0x74 ./SERVICE/RTOS/stream_buffer.o
+ .text.prvInitialiseNewStreamBuffer
+                0x000030e2       0x78 ./SERVICE/RTOS/stream_buffer.o
+ .text.xTaskCreate
+                0x0000315a       0xf0 ./SERVICE/RTOS/tasks.o
+                0x0000315a                xTaskCreate
+ .text.prvInitialiseNewTask
+                0x0000324a      0x178 ./SERVICE/RTOS/tasks.o
+ .text.prvAddNewTaskToReadyList
+                0x000033c2       0xe6 ./SERVICE/RTOS/tasks.o
+ .text.vTaskDelayUntil
+                0x000034a8       0xe4 ./SERVICE/RTOS/tasks.o
+                0x000034a8                vTaskDelayUntil
+ .text.vTaskDelay
+                0x0000358c       0x44 ./SERVICE/RTOS/tasks.o
+                0x0000358c                vTaskDelay
+ .text.vTaskSuspend
+                0x000035d0       0xe8 ./SERVICE/RTOS/tasks.o
+                0x000035d0                vTaskSuspend
+ .text.prvTaskIsTaskSuspended
+                0x000036b8       0x5e ./SERVICE/RTOS/tasks.o
+ .text.vTaskResume
+                0x00003716       0xbe ./SERVICE/RTOS/tasks.o
+                0x00003716                vTaskResume
+ .text.xTaskResumeFromISR
+                0x000037d4       0xcc ./SERVICE/RTOS/tasks.o
+                0x000037d4                xTaskResumeFromISR
+ .text.vTaskStartScheduler
+                0x000038a0       0x64 ./SERVICE/RTOS/tasks.o
+                0x000038a0                vTaskStartScheduler
+ .text.vTaskEndScheduler
+                0x00003904       0x18 ./SERVICE/RTOS/tasks.o
+                0x00003904                vTaskEndScheduler
+ .text.vTaskSuspendAll
+                0x0000391c       0x18 ./SERVICE/RTOS/tasks.o
+                0x0000391c                vTaskSuspendAll
+ .text.xTaskResumeAll
+                0x00003934      0x11e ./SERVICE/RTOS/tasks.o
+                0x00003934                xTaskResumeAll
+ .text.xTaskGetTickCount
+                0x00003a52       0x2e ./SERVICE/RTOS/tasks.o
+                0x00003a52                xTaskGetTickCount
+ .text.xTaskGetTickCountFromISR
+                0x00003a80       0x2a ./SERVICE/RTOS/tasks.o
+                0x00003a80                xTaskGetTickCountFromISR
+ .text.uxTaskGetNumberOfTasks
+                0x00003aaa       0x12 ./SERVICE/RTOS/tasks.o
+                0x00003aaa                uxTaskGetNumberOfTasks
+ .text.pcTaskGetName
+                0x00003abc       0x50 ./SERVICE/RTOS/tasks.o
+                0x00003abc                pcTaskGetName
+ .text.xTaskIncrementTick
+                0x00003b0c      0x172 ./SERVICE/RTOS/tasks.o
+                0x00003b0c                xTaskIncrementTick
+ .text.vTaskSwitchContext
+                0x00003c7e       0xda ./SERVICE/RTOS/tasks.o
+                0x00003c7e                vTaskSwitchContext
+ .text.vTaskPlaceOnEventList
+                0x00003d58       0x44 ./SERVICE/RTOS/tasks.o
+                0x00003d58                vTaskPlaceOnEventList
+ .text.vTaskPlaceOnUnorderedEventList
+                0x00003d9c       0x60 ./SERVICE/RTOS/tasks.o
+                0x00003d9c                vTaskPlaceOnUnorderedEventList
+ .text.xTaskRemoveFromEventList
+                0x00003dfc       0xd6 ./SERVICE/RTOS/tasks.o
+                0x00003dfc                xTaskRemoveFromEventList
+ .text.vTaskRemoveFromUnorderedEventList
+                0x00003ed2       0xba ./SERVICE/RTOS/tasks.o
+                0x00003ed2                vTaskRemoveFromUnorderedEventList
+ .text.vTaskSetTimeOutState
+                0x00003f8c       0x3c ./SERVICE/RTOS/tasks.o
+                0x00003f8c                vTaskSetTimeOutState
+ .text.vTaskInternalSetTimeOutState
+                0x00003fc8       0x32 ./SERVICE/RTOS/tasks.o
+                0x00003fc8                vTaskInternalSetTimeOutState
+ .text.xTaskCheckForTimeOut
+                0x00003ffa       0xda ./SERVICE/RTOS/tasks.o
+                0x00003ffa                xTaskCheckForTimeOut
+ .text.vTaskMissedYield
+                0x000040d4       0x14 ./SERVICE/RTOS/tasks.o
+                0x000040d4                vTaskMissedYield
+ .text.prvIdleTask
+                0x000040e8       0x18 ./SERVICE/RTOS/tasks.o
+ .text.prvInitialiseTaskLists
+                0x00004100       0x7a ./SERVICE/RTOS/tasks.o
+ .text.prvCheckTasksWaitingTermination
+                0x0000417a        0xe ./SERVICE/RTOS/tasks.o
+ .text.prvResetNextTaskUnblockTime
+                0x00004188       0x56 ./SERVICE/RTOS/tasks.o
+ .text.xTaskGetCurrentTaskHandle
+                0x000041de       0x24 ./SERVICE/RTOS/tasks.o
+                0x000041de                xTaskGetCurrentTaskHandle
+ .text.uxTaskResetEventItemValue
+                0x00004202       0x4e ./SERVICE/RTOS/tasks.o
+                0x00004202                uxTaskResetEventItemValue
+ .text.ulTaskNotifyTake
+                0x00004250       0xee ./SERVICE/RTOS/tasks.o
+                0x00004250                ulTaskNotifyTake
+ .text.xTaskNotifyWait
+                0x0000433e      0x138 ./SERVICE/RTOS/tasks.o
+                0x0000433e                xTaskNotifyWait
+ .text.xTaskGenericNotify
+                0x00004476      0x1aa ./SERVICE/RTOS/tasks.o
+                0x00004476                xTaskGenericNotify
+ .text.xTaskGenericNotifyFromISR
+                0x00004620      0x1f0 ./SERVICE/RTOS/tasks.o
+                0x00004620                xTaskGenericNotifyFromISR
+ .text.vTaskNotifyGiveFromISR
+                0x00004810      0x10c ./SERVICE/RTOS/tasks.o
+                0x00004810                vTaskNotifyGiveFromISR
+ .text.xTaskNotifyStateClear
+                0x0000491c       0x74 ./SERVICE/RTOS/tasks.o
+                0x0000491c                xTaskNotifyStateClear
+ .text.prvAddCurrentTaskToDelayedList
+                0x00004990       0xf8 ./SERVICE/RTOS/tasks.o
+ .text.UART_TX_cbk
+                0x00004a88       0x3c ./SERVICE/BCM/BCM.o
+ .text.UART_RX_cbk
+                0x00004ac4       0x6a ./SERVICE/BCM/BCM.o
+ .text.BCM_Init
+                0x00004b2e       0x88 ./SERVICE/BCM/BCM.o
+                0x00004b2e                BCM_Init
+ .text.BCM_DeInit
+                0x00004bb6       0x18 ./SERVICE/BCM/BCM.o
+                0x00004bb6                BCM_DeInit
+ .text.BCM_Send
+                0x00004bce      0x196 ./SERVICE/BCM/BCM.o
+                0x00004bce                BCM_Send
+ .text.BCM_TxDispatcher
+                0x00004d64      0x2e2 ./SERVICE/BCM/BCM.o
+                0x00004d64                BCM_TxDispatcher
+ .text.BCM_Setup_Receive
+                0x00005046      0x168 ./SERVICE/BCM/BCM.o
+                0x00005046                BCM_Setup_Receive
+ .text.BCM_RxDispatcher
+                0x000051ae      0x2b6 ./SERVICE/BCM/BCM.o
+                0x000051ae                BCM_RxDispatcher
+ .text.BCM_RxUnlock
+                0x00005464       0x74 ./SERVICE/BCM/BCM.o
+                0x00005464                BCM_RxUnlock
+ .text.UART_Init
+                0x000054d8      0x512 ./MCAL/UART/UART.o
+                0x000054d8                UART_Init
+ .text.UART_Deinit
+                0x000059ea       0x2a ./MCAL/UART/UART.o
+                0x000059ea                UART_Deinit
+ .text.UART_SendByte
+                0x00005a14       0xde ./MCAL/UART/UART.o
+                0x00005a14                UART_SendByte
+ .text.UART_ReceiveByte
+                0x00005af2       0xe6 ./MCAL/UART/UART.o
+                0x00005af2                UART_ReceiveByte
+ .text.__vector_14
+                0x00005bd8       0x66 ./MCAL/UART/UART.o
+                0x00005bd8                __vector_14
+ .text.__vector_15
+                0x00005c3e       0x66 ./MCAL/UART/UART.o
+                0x00005c3e                __vector_15
+ .text.__vector_13
+                0x00005ca4       0x66 ./MCAL/UART/UART.o
+                0x00005ca4                __vector_13
+ .text.Timer_Init
+                0x00005d0a      0x334 ./MCAL/Timers/Timer.o
+                0x00005d0a                Timer_Init
+ .text.Timer_Start
+                0x0000603e      0x180 ./MCAL/Timers/Timer.o
+                0x0000603e                Timer_Start
+ .text.Timer_Stop
+                0x000061be       0xbe ./MCAL/Timers/Timer.o
+                0x000061be                Timer_Stop
+ .text.Timer_GetStatus
+                0x0000627c      0x11e ./MCAL/Timers/Timer.o
+                0x0000627c                Timer_GetStatus
+ .text.Timer_GetValue
+                0x0000639a       0xc8 ./MCAL/Timers/Timer.o
+                0x0000639a                Timer_GetValue
+ .text.__vector_11
+                0x00006462       0x74 ./MCAL/Timers/Timer.o
+                0x00006462                __vector_11
+ .text.__vector_9
+                0x000064d6       0x76 ./MCAL/Timers/Timer.o
+                0x000064d6                __vector_9
+ .text.__vector_5
+                0x0000654c       0x74 ./MCAL/Timers/Timer.o
+                0x0000654c                __vector_5
+ .text.CPU_Sleep
+                0x000065c0      0x160 ./MCAL/Sleep/sleep.o
+                0x000065c0                CPU_Sleep
+ .text.DIO_init
+                0x00006720      0x14a ./MCAL/DIO/DIO.o
+                0x00006720                DIO_init
+ .text.DIO_Write
+                0x0000686a      0x102 ./MCAL/DIO/DIO.o
+                0x0000686a                DIO_Write
+ .text.DIO_Read
+                0x0000696c       0xcc ./MCAL/DIO/DIO.o
+                0x0000696c                DIO_Read
+ .text.DIO_Toggle
+                0x00006a38       0xb2 ./MCAL/DIO/DIO.o
+                0x00006a38                DIO_Toggle
+ .text.pushButton_Init
+                0x00006aea       0xf6 ./ECUAL/pushButton/pushButton.o
+                0x00006aea                pushButton_Init
+ .text.pushButton_Update
+                0x00006be0      0x154 ./ECUAL/pushButton/pushButton.o
+                0x00006be0                pushButton_Update
+ .text.pushButton_GetStatus
+                0x00006d34       0x64 ./ECUAL/pushButton/pushButton.o
+                0x00006d34                pushButton_GetStatus
+ .text.delay    0x00006d98       0x32 ./ECUAL/LCD/LCD.o
+ .text.LCD_EN_pulse
+                0x00006dca       0x2a ./ECUAL/LCD/LCD.o
+                0x00006dca                LCD_EN_pulse
+ .text.LCD_config_pins
+                0x00006df4       0x8e ./ECUAL/LCD/LCD.o
+                0x00006df4                LCD_config_pins
+ .text.LCD_send_nibble
+                0x00006e82       0xc6 ./ECUAL/LCD/LCD.o
+                0x00006e82                LCD_send_nibble
+ .text.LCD_send_char
+                0x00006f48       0x3e ./ECUAL/LCD/LCD.o
+                0x00006f48                LCD_send_char
+ .text.LCD_send_command
+                0x00006f86       0x3e ./ECUAL/LCD/LCD.o
+                0x00006f86                LCD_send_command
+ .text.LCD_init
+                0x00006fc4       0x54 ./ECUAL/LCD/LCD.o
+                0x00006fc4                LCD_init
+ .text.LCD_clear
+                0x00007018       0x14 ./ECUAL/LCD/LCD.o
+                0x00007018                LCD_clear
+ .text.LCD_send_string
+                0x0000702c       0x3a ./ECUAL/LCD/LCD.o
+                0x0000702c                LCD_send_string
+ .text.LCD_goto_xy
+                0x00007066       0x8e ./ECUAL/LCD/LCD.o
+                0x00007066                LCD_goto_xy
+ .text.Keypad_Init
+                0x000070f4       0xb4 ./ECUAL/KeyPad/KeyPad.o
+                0x000070f4                Keypad_Init
+ .text.Keypad_Update
+                0x000071a8       0xd4 ./ECUAL/KeyPad/KeyPad.o
+                0x000071a8                Keypad_Update
+ .text.Keypad_GetPressedKey
+                0x0000727c       0x66 ./ECUAL/KeyPad/KeyPad.o
+                0x0000727c                Keypad_GetPressedKey
+ .text.vDIO_Init
+                0x000072e2       0x6a ./APP/Tasks/Tasks.o
+                0x000072e2                vDIO_Init
+ .text.vDio_InitCreation
+                0x0000734c       0x48 ./APP/Tasks/Tasks.o
+                0x0000734c                vDio_InitCreation
+ .text.vLCD_Init
+                0x00007394       0x1c ./APP/Tasks/Tasks.o
+                0x00007394                vLCD_Init
+ .text.vLCD_InitCreation
+                0x000073b0       0x5a ./APP/Tasks/Tasks.o
+                0x000073b0                vLCD_InitCreation
+ .text.vLCD_Print
+                0x0000740a      0x1e2 ./APP/Tasks/Tasks.o
+                0x0000740a                vLCD_Print
+ .text.vLCD_PrintCreation
+                0x000075ec       0x48 ./APP/Tasks/Tasks.o
+                0x000075ec                vLCD_PrintCreation
+ .text.vToggleLED
+                0x00007634       0x20 ./APP/Tasks/Tasks.o
+                0x00007634                vToggleLED
+ .text.vToggleLEDCreation
+                0x00007654       0x48 ./APP/Tasks/Tasks.o
+                0x00007654                vToggleLEDCreation
+ .text.vKeyPad_Init
+                0x0000769c       0x1c ./APP/Tasks/Tasks.o
+                0x0000769c                vKeyPad_Init
+ .text.vKeypad_InitCreation
+                0x000076b8       0x48 ./APP/Tasks/Tasks.o
+                0x000076b8                vKeypad_InitCreation
+ .text.vKeyPad_Update
+                0x00007700       0x1c ./APP/Tasks/Tasks.o
+                0x00007700                vKeyPad_Update
+ .text.vKeyPad_UpdateCreation
+                0x0000771c       0x48 ./APP/Tasks/Tasks.o
+                0x0000771c                vKeyPad_UpdateCreation
+ .text.vKeyPad_GetPressedKey
+                0x00007764       0x42 ./APP/Tasks/Tasks.o
+                0x00007764                vKeyPad_GetPressedKey
+ .text.vKeyPad_GetPressedKeyCreation
+                0x000077a6       0x48 ./APP/Tasks/Tasks.o
+                0x000077a6                vKeyPad_GetPressedKeyCreation
+ .text.main     0x000077ee       0x2a ./APP/main.o
+                0x000077ee                main
+ .text.libgcc   0x00007818       0x3e c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mulsi3.o)
+                0x00007818                __mulsi3
+ .text.libgcc   0x00007856       0x28 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
+                0x00007856                __udivmodhi4
+ .text.libgcc   0x0000787e       0x44 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
+                0x0000787e                __udivmodsi4
+ .text.libgcc   0x000078c2        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .text.libgcc   0x000078c2        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc   0x000078c2        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .text.avr-libc
+                0x000078c2       0x12 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(memcpy.o)
+                0x000078c2                memcpy
+ .text.avr-libc
+                0x000078d4        0xe c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(memset.o)
+                0x000078d4                memset
+                0x000078e2                . = ALIGN (0x2)
+ *(.fini9)
+ .fini9         0x000078e2        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+                0x000078e2                exit
+                0x000078e2                _exit
+ *(.fini9)
+ *(.fini8)
+ *(.fini8)
+ *(.fini7)
+ *(.fini7)
+ *(.fini6)
+ *(.fini6)
+ *(.fini5)
+ *(.fini5)
+ *(.fini4)
+ *(.fini4)
+ *(.fini3)
+ *(.fini3)
+ *(.fini2)
+ *(.fini2)
+ *(.fini1)
+ *(.fini1)
+ *(.fini0)
+ .fini0         0x000078e2        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ *(.fini0)
+                0x000078e6                _etext = .
+
+.data           0x00800060       0xaa load address 0x000078e6
+                0x00800060                PROVIDE (__data_start, .)
+ *(.data)
+ .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
+ .data          0x00800060        0x0 ./SERVICE/SOS/SOS.o
+ .data          0x00800060        0x0 ./SERVICE/SOS/SOS_PbCfg.o
+ .data          0x00800060        0x0 ./SERVICE/RTOS/croutine.o
+ .data          0x00800060        0x0 ./SERVICE/RTOS/event_groups.o
+ .data          0x00800060        0x0 ./SERVICE/RTOS/heap_1.o
+ .data          0x00800060        0x0 ./SERVICE/RTOS/list.o
+ .data          0x00800060        0x0 ./SERVICE/RTOS/port.o
+ .data          0x00800060        0x0 ./SERVICE/RTOS/queue.o
+ .data          0x00800060        0x0 ./SERVICE/RTOS/stream_buffer.o
+ .data          0x00800060        0x5 ./SERVICE/RTOS/tasks.o
+ .data          0x00800065        0x0 ./SERVICE/RTOS/timers.o
+ .data          0x00800065        0x0 ./SERVICE/BCM/BCM.o
+ .data          0x00800065        0x0 ./SERVICE/BCM/BCM_PbCfg.o
+ .data          0x00800065        0x0 ./MCAL/UART/UART.o
+ .data          0x00800065        0x0 ./MCAL/Timers/Timer.o
+ .data          0x00800065        0x0 ./MCAL/Sleep/sleep.o
+ .data          0x00800065        0x0 ./MCAL/DIO/DIO.o
+ .data          0x00800065        0x0 ./ECUAL/pushButton/pushButton.o
+ .data          0x00800065        0x0 ./ECUAL/LCD/LCD.o
+ .data          0x00800065        0x0 ./ECUAL/KeyPad/KeyPad.o
+ .data          0x00800065       0x56 ./APP/Tasks/Tasks.o
+ .data          0x008000bb        0x0 ./APP/main.o
+ .data          0x008000bb        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mulsi3.o)
+ .data          0x008000bb        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
+ .data          0x008000bb        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
+ .data          0x008000bb        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .data          0x008000bb        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .data          0x008000bb        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .data          0x008000bb        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(memcpy.o)
+ .data          0x008000bb        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(memset.o)
+ *(.data*)
+ *(.rodata)
+ *(.rodata*)
+ .rodata.str_SOS_Init_Cfg
+                0x008000bb        0x2 ./SERVICE/SOS/SOS_PbCfg.o
+                0x008000bb                str_SOS_Init_Cfg
+ .rodata.C.2.1292
+                0x008000bd       0x10 ./SERVICE/BCM/BCM.o
+ .rodata.gau8_UART_DesiredOperation
+                0x008000cd        0x3 ./MCAL/UART/UART.o
+ .rodata.gau8_UART_Speed
+                0x008000d0        0x2 ./MCAL/UART/UART.o
+ .rodata.gau8_UART_StopBit
+                0x008000d2        0x2 ./MCAL/UART/UART.o
+ .rodata.gau8_UART_ParityBit
+                0x008000d4        0x4 ./MCAL/UART/UART.o
+ .rodata.gau8_UART_DataSize
+                0x008000d8        0x8 ./MCAL/UART/UART.o
+ .rodata.C.2.1288
+                0x008000e0        0x3 ./MCAL/UART/UART.o
+ .rodata.C.1.1287
+                0x008000e3        0x3 ./MCAL/UART/UART.o
+ .rodata.gau8_Timer0Prescaler
+                0x008000e6        0x8 ./MCAL/Timers/Timer.o
+ .rodata.gau8_Timer1Prescaler
+                0x008000ee        0x8 ./MCAL/Timers/Timer.o
+ .rodata.gau8_Timer2Prescaler
+                0x008000f6        0x8 ./MCAL/Timers/Timer.o
+ .rodata.gau8_Keys
+                0x008000fe        0x9 ./ECUAL/KeyPad/KeyPad.o
+ .rodata.C.0.1725
+                0x00800107        0x3 ./APP/Tasks/Tasks.o
+ *(.gnu.linkonce.d*)
+                0x0080010a                . = ALIGN (0x2)
+                0x0080010a                _edata = .
+                0x0080010a                PROVIDE (__data_end, .)
+
+.bss            0x0080010a      0x6eb
+                0x0080010a                PROVIDE (__bss_start, .)
+ *(.bss)
+ .bss           0x0080010a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
+ .bss           0x0080010a        0x0 ./SERVICE/SOS/SOS.o
+ .bss           0x0080010a        0x0 ./SERVICE/SOS/SOS_PbCfg.o
+ .bss           0x0080010a        0x0 ./SERVICE/RTOS/croutine.o
+ .bss           0x0080010a        0x0 ./SERVICE/RTOS/event_groups.o
+ .bss           0x0080010a        0x0 ./SERVICE/RTOS/heap_1.o
+ .bss           0x0080010a        0x0 ./SERVICE/RTOS/list.o
+ .bss           0x0080010a        0x0 ./SERVICE/RTOS/port.o
+ .bss           0x0080010a        0x0 ./SERVICE/RTOS/queue.o
+ .bss           0x0080010a        0x0 ./SERVICE/RTOS/stream_buffer.o
+ .bss           0x0080010a        0x0 ./SERVICE/RTOS/tasks.o
+ .bss           0x0080010a        0x0 ./SERVICE/RTOS/timers.o
+ .bss           0x0080010a        0x0 ./SERVICE/BCM/BCM.o
+ .bss           0x0080010a        0x0 ./SERVICE/BCM/BCM_PbCfg.o
+ .bss           0x0080010a        0x0 ./MCAL/UART/UART.o
+ .bss           0x0080010a        0x0 ./MCAL/Timers/Timer.o
+ .bss           0x0080010a        0x0 ./MCAL/Sleep/sleep.o
+ .bss           0x0080010a        0x0 ./MCAL/DIO/DIO.o
+ .bss           0x0080010a        0x0 ./ECUAL/pushButton/pushButton.o
+ .bss           0x0080010a        0x0 ./ECUAL/LCD/LCD.o
+ .bss           0x0080010a        0x0 ./ECUAL/KeyPad/KeyPad.o
+ .bss           0x0080010a        0x0 ./APP/Tasks/Tasks.o
+ .bss           0x0080010a        0x0 ./APP/main.o
+ .bss           0x0080010a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mulsi3.o)
+ .bss           0x0080010a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
+ .bss           0x0080010a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
+ .bss           0x0080010a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .bss           0x0080010a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .bss           0x0080010a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .bss           0x0080010a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(memcpy.o)
+ .bss           0x0080010a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(memset.o)
+ *(.bss*)
+ .bss.gu8_MS_Counter.1254
+                0x0080010a        0x1 ./SERVICE/SOS/SOS.o
+ .bss.gu8_Flag  0x0080010b        0x1 ./SERVICE/SOS/SOS.o
+ .bss.gu8_MaxPriority
+                0x0080010c        0x1 ./SERVICE/SOS/SOS.o
+ .bss.gu8_SOS_Status
+                0x0080010d        0x1 ./SERVICE/SOS/SOS.o
+ .bss.gu16_SysTickCounter
+                0x0080010e        0x2 ./SERVICE/SOS/SOS.o
+ .bss.gastr_SOS_TaskList
+                0x00800110       0x64 ./SERVICE/SOS/SOS.o
+ .bss.xNextFreeByte
+                0x00800174        0x2 ./SERVICE/RTOS/heap_1.o
+ .bss.pucAlignedHeap.1651
+                0x00800176        0x2 ./SERVICE/RTOS/heap_1.o
+ .bss.ucHeap    0x00800178      0x5dc ./SERVICE/RTOS/heap_1.o
+ .bss.pxCurrentTCB
+                0x00800754        0x2 ./SERVICE/RTOS/tasks.o
+                0x00800754                pxCurrentTCB
+ .bss.uxCurrentNumberOfTasks
+                0x00800756        0x1 ./SERVICE/RTOS/tasks.o
+ .bss.xTickCount
+                0x00800757        0x2 ./SERVICE/RTOS/tasks.o
+ .bss.uxTopReadyPriority
+                0x00800759        0x1 ./SERVICE/RTOS/tasks.o
+ .bss.xSchedulerRunning
+                0x0080075a        0x1 ./SERVICE/RTOS/tasks.o
+ .bss.uxPendedTicks
+                0x0080075b        0x1 ./SERVICE/RTOS/tasks.o
+ .bss.xYieldPending
+                0x0080075c        0x1 ./SERVICE/RTOS/tasks.o
+ .bss.xNumOfOverflows
+                0x0080075d        0x1 ./SERVICE/RTOS/tasks.o
+ .bss.uxTaskNumber
+                0x0080075e        0x1 ./SERVICE/RTOS/tasks.o
+ .bss.xNextTaskUnblockTime
+                0x0080075f        0x2 ./SERVICE/RTOS/tasks.o
+ .bss.xIdleTaskHandle
+                0x00800761        0x2 ./SERVICE/RTOS/tasks.o
+ .bss.uxSchedulerSuspended
+                0x00800763        0x1 ./SERVICE/RTOS/tasks.o
+ .bss.pxReadyTasksLists
+                0x00800764       0x24 ./SERVICE/RTOS/tasks.o
+ .bss.xDelayedTaskList1
+                0x00800788        0x9 ./SERVICE/RTOS/tasks.o
+ .bss.xDelayedTaskList2
+                0x00800791        0x9 ./SERVICE/RTOS/tasks.o
+ .bss.pxDelayedTaskList
+                0x0080079a        0x2 ./SERVICE/RTOS/tasks.o
+ .bss.pxOverflowDelayedTaskList
+                0x0080079c        0x2 ./SERVICE/RTOS/tasks.o
+ .bss.xPendingReadyList
+                0x0080079e        0x9 ./SERVICE/RTOS/tasks.o
+ .bss.xSuspendedTaskList
+                0x008007a7        0x9 ./SERVICE/RTOS/tasks.o
+ .bss.gu8_TxCbkStatusFlag
+                0x008007b0        0x1 ./SERVICE/BCM/BCM.o
+ .bss.gu8_RxCbkStatusFlag
+                0x008007b1        0x1 ./SERVICE/BCM/BCM.o
+ .bss.gu8_BCM_Status
+                0x008007b2        0x1 ./SERVICE/BCM/BCM.o
+ .bss.u8_SizeSentFlag.1348
+                0x008007b3        0x1 ./SERVICE/BCM/BCM.o
+ .bss.u16_ReceivedSize.1446
+                0x008007b4        0x2 ./SERVICE/BCM/BCM.o
+ .bss.u8_SizeSentFlag.1445
+                0x008007b6        0x1 ./SERVICE/BCM/BCM.o
+ .bss.gastr_BCM_PacketFormat
+                0x008007b7       0x12 ./SERVICE/BCM/BCM.o
+ .bss.gu8_UART_Status
+                0x008007c9        0x1 ./MCAL/UART/UART.o
+ .bss.gu8_UART_Interrupt
+                0x008007ca        0x1 ./MCAL/UART/UART.o
+ .bss.UART_Transmit_Cbk_ptr
+                0x008007cb        0x2 ./MCAL/UART/UART.o
+ .bss.UART_Resceive_Cbk_ptr
+                0x008007cd        0x2 ./MCAL/UART/UART.o
+ .bss.UART_DataRegisterEmpty_Cbk_ptr
+                0x008007cf        0x2 ./MCAL/UART/UART.o
+ .bss.gu8_TimerPrescaler
+                0x008007d1        0x3 ./MCAL/Timers/Timer.o
+ .bss.gau8_TimerStatus
+                0x008007d4        0x3 ./MCAL/Timers/Timer.o
+ .bss.gau16_TimerPreload
+                0x008007d7        0x6 ./MCAL/Timers/Timer.o
+ .bss.Timer_OV_Cbk_ptr
+                0x008007dd        0x6 ./MCAL/Timers/Timer.o
+ .bss.buttonNo  0x008007e3        0x1 ./ECUAL/pushButton/pushButton.o
+ .bss.avrbuttons
+                0x008007e4        0x8 ./ECUAL/pushButton/pushButton.o
+ .bss.u8_PreviousKey.1286
+                0x008007ec        0x1 ./ECUAL/KeyPad/KeyPad.o
+ .bss.gu8_PressedKey
+                0x008007ed        0x1 ./ECUAL/KeyPad/KeyPad.o
+ .bss.gu8_KeyPadStatus
+                0x008007ee        0x1 ./ECUAL/KeyPad/KeyPad.o
+ *(COMMON)
+ COMMON         0x008007ef        0x6 ./APP/Tasks/Tasks.o
+                0x008007ef                lcdQueueBuffer
+                0x008007f1                u32_Password
+                0x008007f5                PROVIDE (__bss_end, .)
+                0x000078e6                __data_load_start = LOADADDR (.data)
+                0x00007990                __data_load_end = (__data_load_start + SIZEOF (.data))
+
+.noinit         0x008007f5        0x0
+                0x008007f5                PROVIDE (__noinit_start, .)
+ *(.noinit*)
+                0x008007f5                PROVIDE (__noinit_end, .)
+                0x008007f5                _end = .
+                0x008007f5                PROVIDE (__heap_start, .)
+
+.eeprom         0x00810000        0x0
+ *(.eeprom*)
+                0x00810000                __eeprom_end = .
+
+.fuse
+ *(.fuse)
+ *(.lfuse)
+ *(.hfuse)
+ *(.efuse)
+
+.lock
+ *(.lock*)
+
+.signature
+ *(.signature*)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment
+ *(.comment)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x00000000      0x720
+ *(.debug_aranges)
+ .debug_aranges
+                0x00000000       0x40 ./SERVICE/SOS/SOS.o
+ .debug_aranges
+                0x00000040       0x68 ./SERVICE/RTOS/event_groups.o
+ .debug_aranges
+                0x000000a8       0x38 ./SERVICE/RTOS/heap_1.o
+ .debug_aranges
+                0x000000e0       0x40 ./SERVICE/RTOS/list.o
+ .debug_aranges
+                0x00000120       0x50 ./SERVICE/RTOS/port.o
+ .debug_aranges
+                0x00000170       0xc8 ./SERVICE/RTOS/queue.o
+ .debug_aranges
+                0x00000238       0xc0 ./SERVICE/RTOS/stream_buffer.o
+ .debug_aranges
+                0x000002f8      0x158 ./SERVICE/RTOS/tasks.o
+ .debug_aranges
+                0x00000450       0x60 ./SERVICE/BCM/BCM.o
+ .debug_aranges
+                0x000004b0       0x50 ./MCAL/UART/UART.o
+ .debug_aranges
+                0x00000500       0x58 ./MCAL/Timers/Timer.o
+ .debug_aranges
+                0x00000558       0x20 ./MCAL/Sleep/sleep.o
+ .debug_aranges
+                0x00000578       0x38 ./MCAL/DIO/DIO.o
+ .debug_aranges
+                0x000005b0       0x30 ./ECUAL/pushButton/pushButton.o
+ .debug_aranges
+                0x000005e0       0x68 ./ECUAL/LCD/LCD.o
+ .debug_aranges
+                0x00000648       0x30 ./ECUAL/KeyPad/KeyPad.o
+ .debug_aranges
+                0x00000678       0x88 ./APP/Tasks/Tasks.o
+ .debug_aranges
+                0x00000700       0x20 ./APP/main.o
+
+.debug_pubnames
+                0x00000000      0xe6a
+ *(.debug_pubnames)
+ .debug_pubnames
+                0x00000000       0x51 ./SERVICE/SOS/SOS.o
+ .debug_pubnames
+                0x00000051       0x27 ./SERVICE/SOS/SOS_PbCfg.o
+ .debug_pubnames
+                0x00000078       0xf8 ./SERVICE/RTOS/event_groups.o
+ .debug_pubnames
+                0x00000170       0x64 ./SERVICE/RTOS/heap_1.o
+ .debug_pubnames
+                0x000001d4       0x72 ./SERVICE/RTOS/list.o
+ .debug_pubnames
+                0x00000246       0x8f ./SERVICE/RTOS/port.o
+ .debug_pubnames
+                0x000002d5      0x196 ./SERVICE/RTOS/queue.o
+ .debug_pubnames
+                0x0000046b      0x1d6 ./SERVICE/RTOS/stream_buffer.o
+ .debug_pubnames
+                0x00000641      0x328 ./SERVICE/RTOS/tasks.o
+ .debug_pubnames
+                0x00000969       0x8c ./SERVICE/BCM/BCM.o
+ .debug_pubnames
+                0x000009f5       0x87 ./MCAL/UART/UART.o
+ .debug_pubnames
+                0x00000a7c       0x95 ./MCAL/Timers/Timer.o
+ .debug_pubnames
+                0x00000b11       0x20 ./MCAL/Sleep/sleep.o
+ .debug_pubnames
+                0x00000b31       0x49 ./MCAL/DIO/DIO.o
+ .debug_pubnames
+                0x00000b7a       0x55 ./ECUAL/pushButton/pushButton.o
+ .debug_pubnames
+                0x00000bcf       0xb1 ./ECUAL/LCD/LCD.o
+ .debug_pubnames
+                0x00000c80       0x4d ./ECUAL/KeyPad/KeyPad.o
+ .debug_pubnames
+                0x00000ccd      0x15e ./APP/Tasks/Tasks.o
+ .debug_pubnames
+                0x00000e2b       0x3f ./APP/main.o
+
+.debug_info     0x00000000     0x55f8
+ *(.debug_info)
+ .debug_info    0x00000000      0x368 ./SERVICE/SOS/SOS.o
+ .debug_info    0x00000368       0xb8 ./SERVICE/SOS/SOS_PbCfg.o
+ .debug_info    0x00000420       0x73 ./SERVICE/RTOS/croutine.o
+ .debug_info    0x00000493      0x659 ./SERVICE/RTOS/event_groups.o
+ .debug_info    0x00000aec      0x164 ./SERVICE/RTOS/heap_1.o
+ .debug_info    0x00000c50      0x2b8 ./SERVICE/RTOS/list.o
+ .debug_info    0x00000f08      0x1db ./SERVICE/RTOS/port.o
+ .debug_info    0x000010e3      0xc85 ./SERVICE/RTOS/queue.o
+ .debug_info    0x00001d68      0xb37 ./SERVICE/RTOS/stream_buffer.o
+ .debug_info    0x0000289f     0x10b1 ./SERVICE/RTOS/tasks.o
+ .debug_info    0x00003950       0x73 ./SERVICE/RTOS/timers.o
+ .debug_info    0x000039c3      0x475 ./SERVICE/BCM/BCM.o
+ .debug_info    0x00003e38       0x69 ./SERVICE/BCM/BCM_PbCfg.o
+ .debug_info    0x00003ea1      0x420 ./MCAL/UART/UART.o
+ .debug_info    0x000042c1      0x4c5 ./MCAL/Timers/Timer.o
+ .debug_info    0x00004786       0xc8 ./MCAL/Sleep/sleep.o
+ .debug_info    0x0000484e      0x1fb ./MCAL/DIO/DIO.o
+ .debug_info    0x00004a49      0x254 ./ECUAL/pushButton/pushButton.o
+ .debug_info    0x00004c9d      0x240 ./ECUAL/LCD/LCD.o
+ .debug_info    0x00004edd      0x252 ./ECUAL/KeyPad/KeyPad.o
+ .debug_info    0x0000512f      0x3f4 ./APP/Tasks/Tasks.o
+ .debug_info    0x00005523       0xd5 ./APP/main.o
+ *(.gnu.linkonce.wi.*)
+
+.debug_abbrev   0x00000000     0x1384
+ *(.debug_abbrev)
+ .debug_abbrev  0x00000000      0x128 ./SERVICE/SOS/SOS.o
+ .debug_abbrev  0x00000128       0x71 ./SERVICE/SOS/SOS_PbCfg.o
+ .debug_abbrev  0x00000199       0x35 ./SERVICE/RTOS/croutine.o
+ .debug_abbrev  0x000001ce      0x123 ./SERVICE/RTOS/event_groups.o
+ .debug_abbrev  0x000002f1       0xef ./SERVICE/RTOS/heap_1.o
+ .debug_abbrev  0x000003e0       0xcc ./SERVICE/RTOS/list.o
+ .debug_abbrev  0x000004ac       0xeb ./SERVICE/RTOS/port.o
+ .debug_abbrev  0x00000597      0x16b ./SERVICE/RTOS/queue.o
+ .debug_abbrev  0x00000702      0x15e ./SERVICE/RTOS/stream_buffer.o
+ .debug_abbrev  0x00000860      0x1b6 ./SERVICE/RTOS/tasks.o
+ .debug_abbrev  0x00000a16       0x35 ./SERVICE/RTOS/timers.o
+ .debug_abbrev  0x00000a4b      0x103 ./SERVICE/BCM/BCM.o
+ .debug_abbrev  0x00000b4e       0x2c ./SERVICE/BCM/BCM_PbCfg.o
+ .debug_abbrev  0x00000b7a      0x133 ./MCAL/UART/UART.o
+ .debug_abbrev  0x00000cad      0x126 ./MCAL/Timers/Timer.o
+ .debug_abbrev  0x00000dd3       0x75 ./MCAL/Sleep/sleep.o
+ .debug_abbrev  0x00000e48       0xdd ./MCAL/DIO/DIO.o
+ .debug_abbrev  0x00000f25      0x101 ./ECUAL/pushButton/pushButton.o
+ .debug_abbrev  0x00001026       0xf4 ./ECUAL/LCD/LCD.o
+ .debug_abbrev  0x0000111a       0xde ./ECUAL/KeyPad/KeyPad.o
+ .debug_abbrev  0x000011f8      0x10e ./APP/Tasks/Tasks.o
+ .debug_abbrev  0x00001306       0x7e ./APP/main.o
+
+.debug_line     0x00000000     0x78be
+ *(.debug_line)
+ .debug_line    0x00000000      0x46d ./SERVICE/SOS/SOS.o
+ .debug_line    0x0000046d      0x1e4 ./SERVICE/SOS/SOS_PbCfg.o
+ .debug_line    0x00000651      0x23d ./SERVICE/RTOS/croutine.o
+ .debug_line    0x0000088e      0x743 ./SERVICE/RTOS/event_groups.o
+ .debug_line    0x00000fd1      0x2f9 ./SERVICE/RTOS/heap_1.o
+ .debug_line    0x000012ca      0x3a7 ./SERVICE/RTOS/list.o
+ .debug_line    0x00001671      0x65f ./SERVICE/RTOS/port.o
+ .debug_line    0x00001cd0      0xdd2 ./SERVICE/RTOS/queue.o
+ .debug_line    0x00002aa2      0xb19 ./SERVICE/RTOS/stream_buffer.o
+ .debug_line    0x000035bb     0x1224 ./SERVICE/RTOS/tasks.o
+ .debug_line    0x000047df      0x250 ./SERVICE/RTOS/timers.o
+ .debug_line    0x00004a2f      0x680 ./SERVICE/BCM/BCM.o
+ .debug_line    0x000050af       0xd6 ./SERVICE/BCM/BCM_PbCfg.o
+ .debug_line    0x00005185      0x5a4 ./MCAL/UART/UART.o
+ .debug_line    0x00005729      0x676 ./MCAL/Timers/Timer.o
+ .debug_line    0x00005d9f      0x190 ./MCAL/Sleep/sleep.o
+ .debug_line    0x00005f2f      0x2c6 ./MCAL/DIO/DIO.o
+ .debug_line    0x000061f5      0x370 ./ECUAL/pushButton/pushButton.o
+ .debug_line    0x00006565      0x507 ./ECUAL/LCD/LCD.o
+ .debug_line    0x00006a6c      0x341 ./ECUAL/KeyPad/KeyPad.o
+ .debug_line    0x00006dad      0x719 ./APP/Tasks/Tasks.o
+ .debug_line    0x000074c6      0x3f8 ./APP/main.o
+
+.debug_frame    0x00000000      0xc00
+ *(.debug_frame)
+ .debug_frame   0x00000000       0x60 ./SERVICE/SOS/SOS.o
+ .debug_frame   0x00000060       0xb0 ./SERVICE/RTOS/event_groups.o
+ .debug_frame   0x00000110       0x50 ./SERVICE/RTOS/heap_1.o
+ .debug_frame   0x00000160       0x60 ./SERVICE/RTOS/list.o
+ .debug_frame   0x000001c0       0x80 ./SERVICE/RTOS/port.o
+ .debug_frame   0x00000240      0x170 ./SERVICE/RTOS/queue.o
+ .debug_frame   0x000003b0      0x160 ./SERVICE/RTOS/stream_buffer.o
+ .debug_frame   0x00000510      0x290 ./SERVICE/RTOS/tasks.o
+ .debug_frame   0x000007a0       0xa0 ./SERVICE/BCM/BCM.o
+ .debug_frame   0x00000840       0x80 ./MCAL/UART/UART.o
+ .debug_frame   0x000008c0       0x90 ./MCAL/Timers/Timer.o
+ .debug_frame   0x00000950       0x20 ./MCAL/Sleep/sleep.o
+ .debug_frame   0x00000970       0x50 ./MCAL/DIO/DIO.o
+ .debug_frame   0x000009c0       0x40 ./ECUAL/pushButton/pushButton.o
+ .debug_frame   0x00000a00       0xb0 ./ECUAL/LCD/LCD.o
+ .debug_frame   0x00000ab0       0x40 ./ECUAL/KeyPad/KeyPad.o
+ .debug_frame   0x00000af0       0xf0 ./APP/Tasks/Tasks.o
+ .debug_frame   0x00000be0       0x20 ./APP/main.o
+
+.debug_str      0x00000000     0x259d
+ *(.debug_str)
+ .debug_str     0x00000000      0x266 ./SERVICE/SOS/SOS.o
+                                0x2cb (size before relaxing)
+ .debug_str     0x00000266       0x1b ./SERVICE/SOS/SOS_PbCfg.o
+                                0x100 (size before relaxing)
+ .debug_str     0x00000281       0x1b ./SERVICE/RTOS/croutine.o
+                                 0xc7 (size before relaxing)
+ .debug_str     0x0000029c      0x33b ./SERVICE/RTOS/event_groups.o
+                                0x42f (size before relaxing)
+ .debug_str     0x000005d7       0xa3 ./SERVICE/RTOS/heap_1.o
+                                0x14f (size before relaxing)
+ .debug_str     0x0000067a       0xa4 ./SERVICE/RTOS/list.o
+                                0x206 (size before relaxing)
+ .debug_str     0x0000071e       0xfd ./SERVICE/RTOS/port.o
+                                0x1ce (size before relaxing)
+ .debug_str     0x0000081b      0x413 ./SERVICE/RTOS/queue.o
+                                0x5e3 (size before relaxing)
+ .debug_str     0x00000c2e      0x465 ./SERVICE/RTOS/stream_buffer.o
+                                0x616 (size before relaxing)
+ .debug_str     0x00001093      0x78f ./SERVICE/RTOS/tasks.o
+                                0xa60 (size before relaxing)
+ .debug_str     0x00001822       0x19 ./SERVICE/RTOS/timers.o
+                                 0xc5 (size before relaxing)
+ .debug_str     0x0000183b      0x276 ./SERVICE/BCM/BCM.o
+                                0x399 (size before relaxing)
+ .debug_str     0x00001ab1       0x1b ./SERVICE/BCM/BCM_PbCfg.o
+                                 0xc2 (size before relaxing)
+ .debug_str     0x00001acc      0x1eb ./MCAL/UART/UART.o
+                                0x35d (size before relaxing)
+ .debug_str     0x00001cb7      0x3ec ./MCAL/Timers/Timer.o
+                                0x516 (size before relaxing)
+ .debug_str     0x000020a3       0x35 ./MCAL/Sleep/sleep.o
+                                0x11b (size before relaxing)
+ .debug_str     0x000020d8       0x4d ./MCAL/DIO/DIO.o
+                                0x123 (size before relaxing)
+ .debug_str     0x00002125      0x109 ./ECUAL/pushButton/pushButton.o
+                                0x1d2 (size before relaxing)
+ .debug_str     0x0000222e       0xb0 ./ECUAL/LCD/LCD.o
+                                0x182 (size before relaxing)
+ .debug_str     0x000022de       0xd8 ./ECUAL/KeyPad/KeyPad.o
+                                0x1bc (size before relaxing)
+ .debug_str     0x000023b6      0x1d4 ./APP/Tasks/Tasks.o
+                                0x2f8 (size before relaxing)
+ .debug_str     0x0000258a       0x13 ./APP/main.o
+                                0x100 (size before relaxing)
+
+.debug_loc
+ *(.debug_loc)
+
+.debug_macinfo  0x00000000    0x61db1
+ *(.debug_macinfo)
+ .debug_macinfo
+                0x00000000     0x229f ./SERVICE/SOS/SOS.o
+ .debug_macinfo
+                0x0000229f     0x219b ./SERVICE/SOS/SOS_PbCfg.o
+ .debug_macinfo
+                0x0000443a     0x6993 ./SERVICE/RTOS/croutine.o
+ .debug_macinfo
+                0x0000adcd     0x7057 ./SERVICE/RTOS/event_groups.o
+ .debug_macinfo
+                0x00011e24     0x6635 ./SERVICE/RTOS/heap_1.o
+ .debug_macinfo
+                0x00018459     0x5ed8 ./SERVICE/RTOS/list.o
+ .debug_macinfo
+                0x0001e331     0x6da7 ./SERVICE/RTOS/port.o
+ .debug_macinfo
+                0x000250d8     0x7131 ./SERVICE/RTOS/queue.o
+ .debug_macinfo
+                0x0002c209     0x6e64 ./SERVICE/RTOS/stream_buffer.o
+ .debug_macinfo
+                0x0003306d     0x7706 ./SERVICE/RTOS/tasks.o
+ .debug_macinfo
+                0x0003a773     0x7522 ./SERVICE/RTOS/timers.o
+ .debug_macinfo
+                0x00041c95     0x222c ./SERVICE/BCM/BCM.o
+ .debug_macinfo
+                0x00043ec1      0xf41 ./SERVICE/BCM/BCM_PbCfg.o
+ .debug_macinfo
+                0x00044e02     0x25db ./MCAL/UART/UART.o
+ .debug_macinfo
+                0x000473dd     0x216a ./MCAL/Timers/Timer.o
+ .debug_macinfo
+                0x00049547     0x1885 ./MCAL/Sleep/sleep.o
+ .debug_macinfo
+                0x0004adcc     0x1d4d ./MCAL/DIO/DIO.o
+ .debug_macinfo
+                0x0004cb19     0x2bef ./ECUAL/pushButton/pushButton.o
+ .debug_macinfo
+                0x0004f708     0x2013 ./ECUAL/LCD/LCD.o
+ .debug_macinfo
+                0x0005171b     0x1f2c ./ECUAL/KeyPad/KeyPad.o
+ .debug_macinfo
+                0x00053647     0x73b5 ./APP/Tasks/Tasks.o
+ .debug_macinfo
+                0x0005a9fc     0x73b5 ./APP/main.o
+OUTPUT(FreeRTOS.elf elf32-avr)
+LOAD linker stubs
+
+.debug_ranges   0x00000000      0x690
+ .debug_ranges  0x00000000       0x38 ./SERVICE/SOS/SOS.o
+ .debug_ranges  0x00000038       0x60 ./SERVICE/RTOS/event_groups.o
+ .debug_ranges  0x00000098       0x30 ./SERVICE/RTOS/heap_1.o
+ .debug_ranges  0x000000c8       0x38 ./SERVICE/RTOS/list.o
+ .debug_ranges  0x00000100       0x48 ./SERVICE/RTOS/port.o
+ .debug_ranges  0x00000148       0xc0 ./SERVICE/RTOS/queue.o
+ .debug_ranges  0x00000208       0xb8 ./SERVICE/RTOS/stream_buffer.o
+ .debug_ranges  0x000002c0      0x150 ./SERVICE/RTOS/tasks.o
+ .debug_ranges  0x00000410       0x58 ./SERVICE/BCM/BCM.o
+ .debug_ranges  0x00000468       0x48 ./MCAL/UART/UART.o
+ .debug_ranges  0x000004b0       0x50 ./MCAL/Timers/Timer.o
+ .debug_ranges  0x00000500       0x18 ./MCAL/Sleep/sleep.o
+ .debug_ranges  0x00000518       0x30 ./MCAL/DIO/DIO.o
+ .debug_ranges  0x00000548       0x28 ./ECUAL/pushButton/pushButton.o
+ .debug_ranges  0x00000570       0x60 ./ECUAL/LCD/LCD.o
+ .debug_ranges  0x000005d0       0x28 ./ECUAL/KeyPad/KeyPad.o
+ .debug_ranges  0x000005f8       0x80 ./APP/Tasks/Tasks.o
+ .debug_ranges  0x00000678       0x18 ./APP/main.o
