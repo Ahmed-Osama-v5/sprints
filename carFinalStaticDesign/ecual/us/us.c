@@ -73,7 +73,6 @@ ERROR_STATUS Us_Trigger(void)
 
 
 
-
 /**************************************************************************************************
  * Function Name    : Us_GetDistance.                                                             *
  * Input Parameters : pointer to uint16 that will return the distance on it.                      *                                                                                              *                                                                                                *
